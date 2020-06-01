@@ -4,7 +4,7 @@ public class MarkoliaMain {
 
 	public static void main(String[] args) {
 
-		MarkoliaView theView = new MarkoliaView();
+		MarkoliaView1 theView = new MarkoliaView1();
 
 		// CalculatorModel theModel = new CalculatorModel();
 
