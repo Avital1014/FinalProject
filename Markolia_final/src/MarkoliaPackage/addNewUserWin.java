@@ -28,7 +28,7 @@ public class addNewUserWin extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the frame.change
 	 */
 	public addNewUserWin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
