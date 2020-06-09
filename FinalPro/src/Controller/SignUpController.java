@@ -3,31 +3,32 @@ package Controller;
 import javax.swing.JOptionPane;
 
 import Model.MarkoliaModel;
+import Model.Model;
 import Model.SingUpModel;
 import View.MarkoliaView;
-import View.SignUpView;
+import View.SignUpVieww;
 
 public class SignUpController extends MarkoliaController{
 
-	private MarkoliaModel model;
+	private Model model = new Model();
 	private MarkoliaView view;
 
-	public SignUpController(MarkoliaModel model, MarkoliaView view){
+	public SignUpController(Model model, MarkoliaView view){
 		this.view = view;
 		this.model = model;
 		
 	}
+	
 
-	@Override
-	public void createNewUSer() {
-		
-		System.out.println("sdfsahgsdf");
-		JOptionPane.showMessageDialog(null, "done.");
-		model.createNewUSer() ;
-		
+	public SignUpController() {
+		super();
 	}
 
 
+public void createNewUserFromController() {
+		System.out.println("Hello, this is controller");
+	model.createNewUserInModel();
+}
 
 
 

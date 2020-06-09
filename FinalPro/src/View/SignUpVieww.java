@@ -1,41 +1,35 @@
 package View;
 
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import Controller.MarkoliaController;
 import Controller.SignUpController;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.lang.ModuleLayer.Controller;
 import java.awt.event.ActionEvent;
 
-public class SignUpView extends JFrame implements MarkoliaView, Runnable{
+public class SignUpVieww extends JFrame implements Runnable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private MarkoliaController signUpController;
+	private SignUpController signUpController = new SignUpController();
 	private JPanel contentPane;
-	private JTextField nameTextField;
-
+	private JTextField nameTextField;	
 	
-	@Override
-	public void setController(MarkoliaController controller) {
-		
-		//JOptionPane.showMessageDialog(null, "start");
-		this.signUpController=controller;
-		
+	public SignUpVieww(SignUpController signUpController) throws HeadlessException {
+		super();
+		this.signUpController = signUpController;
 	}
+
 	/**
 	 * Launch the application.
 	 */
@@ -43,7 +37,7 @@ public class SignUpView extends JFrame implements MarkoliaView, Runnable{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SignUpView frame = new SignUpView();
+					SignUpVieww frame = new SignUpVieww();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,23 +56,25 @@ public class SignUpView extends JFrame implements MarkoliaView, Runnable{
 	/**
 	 * Create the frame.
 	 */
-	public SignUpView() {
+	public SignUpVieww() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		
-		JLabel lblNewLabel = new JLabel("Name");
-		
+		setContentPane(contentPane);		
+		JLabel lblNewLabel = new JLabel("Name");		
+		nameTextField = new JTextField();
+		nameTextField.setColumns(10);
+		JLabel lblEmail = new JLabel("Email");		
 		nameTextField = new JTextField();
 		nameTextField.setColumns(10);
 		
 		JButton createButton = new JButton("Create");
 		createButton.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
-				
-			start();
+				Thread t1 = new Thread(new SignUpVieww());
+				t1.start();
 				}
 
 		});
@@ -112,33 +108,16 @@ public class SignUpView extends JFrame implements MarkoliaView, Runnable{
 	}
 	
 
-	@Override
+
 	public void start() {
-		//JOptionPane.showMessageDialog(null, "start");
-		new Thread(this).start();
-		
+		signUpController.createNewUserFromController();
 	}
 
 	@Override
 	public void run() {
-		//JOptionPane.showMessageDialog(null, "run");
-		
-		
-		signUpController.createNewUSer();
-		
-		
-		//JOptionPane.showMessageDialog(null, "I am happy.");
-		
-		
+		signUpController.createNewUserFromController();		
 	}
-
-
-
-
-
-	
-
-	
+		
 
 
 

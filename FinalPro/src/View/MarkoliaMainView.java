@@ -86,7 +86,7 @@ public class MarkoliaMainView extends JFrame implements MarkoliaView {
 		JButton signUp = new JButton("Sign Up");
 		signUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SignUpView signUpView = new SignUpView();
+				SignUpVieww signUpView = new SignUpVieww();
 				signUpView.setVisible(true);
 			}
 		});
