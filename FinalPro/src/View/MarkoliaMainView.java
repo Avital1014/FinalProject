@@ -127,4 +127,20 @@ public class MarkoliaMainView extends JFrame implements MarkoliaView {
 	}
 
 
+
+	@Override
+	public void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void setController(SignUpController controller) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	}
