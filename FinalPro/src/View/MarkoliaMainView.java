@@ -47,7 +47,7 @@ public class MarkoliaMainView extends JFrame implements MarkoliaView {
 
 	 
 	 
-	public static void main(String[] args) {
+	public void main1(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
