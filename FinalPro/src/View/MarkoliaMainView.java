@@ -6,11 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Controller.Controller;
+
 //import com.hit.controller.Controller;
 
 import Controller.MarkoliaController;
-import Controller.SignUpController;
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -30,7 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 
-public class MarkoliaMainView extends JFrame implements MarkoliaView {
+public class MarkoliaMainView extends JFrame{
 	/**
 	 * 
 	 */
@@ -39,14 +39,8 @@ public class MarkoliaMainView extends JFrame implements MarkoliaView {
 	 /**
 	 * Launch the application.
 	 */
-	 
-		@Override
-		public void setController(MarkoliaController controller) {
-			
-		}
+	Controller general_Controller;
 
-	 
-	 
 	public void main1(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -86,7 +80,7 @@ public class MarkoliaMainView extends JFrame implements MarkoliaView {
 		JButton signUp = new JButton("Sign Up");
 		signUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SignUpVieww signUpView = new SignUpVieww();
+				SignUpView signUpView = new SignUpView();
 				signUpView.setVisible(true);
 			}
 		});
@@ -120,26 +114,14 @@ public class MarkoliaMainView extends JFrame implements MarkoliaView {
 		}
 	}
 
-	@Override
-	public void start() {
+public void start() {
 	
-		
-	}
+}
 
 
-
-	@Override
-	public void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void setController(SignUpController controller) {
-		// TODO Auto-generated method stub
-		
+	
+	public void setController(Controller general_Controller) {
+		this.general_Controller = general_Controller;
 	}
 
 

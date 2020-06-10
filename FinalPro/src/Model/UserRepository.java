@@ -7,7 +7,7 @@ public interface UserRepository {
 
 	void addNewUser(MarkoliaUser user)throws Exception;
 	
-	MarkoliaUser findUser(int user_id) throws Exception ;
+	MarkoliaUser findUser(String user_id) throws Exception ;
 	
 	Set<MarkoliaUser> findAllUsers();
 	
