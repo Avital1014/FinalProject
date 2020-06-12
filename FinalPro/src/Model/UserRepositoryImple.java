@@ -1,29 +1,32 @@
 package Model;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+
+
 import java.lang.Exception;
-
-
 
 public class UserRepositoryImple implements UserRepository {
 
 	
 	
 	private final String fILENAME= "Users";
-	private Set<MarkoliaUser> users; //Wont return duplicate names
+	private Set<MarkoliaUser> users = new HashSet<MarkoliaUser>() ; //Wont return duplicate names
 	
 	@SuppressWarnings("unchecked")
 	public UserRepositoryImple() {
 		super();
 		try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fILENAME))){
 			try {
-				this.users= (Set<MarkoliaUser>)objectInputStream.readObject();
+				users = (Set<MarkoliaUser>)objectInputStream.readObject();
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -33,20 +36,7 @@ public class UserRepositoryImple implements UserRepository {
 				e.printStackTrace();
 			}
 	}
-	
-/*	 @SuppressWarnings("unchecked")
-	public UserRepositoryImple() throws IOException, ClassNotFoundException {
-		 try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fILENAME))){
-				this.users= (Set<MarkoliaUser>)objectInputStream.readObject();
-			
-				}catch (IOException e) {
-					e.printStackTrace();
-				}
-		 catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-*/	
+		
 	 
 
 	@Override
@@ -55,31 +45,34 @@ public class UserRepositoryImple implements UserRepository {
 			System.out.println("create");
 			throw new Exception("User must have a value");
 		}
-		if ( this.users.contains(user)) {
+		if ( users.contains(user)) {
 			throw new Exception("This User already exists");
 		}
-		this.users.add(user);
-		try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(fILENAME))) {
+		users.add(user);
+		try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(fILENAME, true))) {
+			System.out.println("file open in add user");
+			System.out.println("sizeof users " + users.size());
 			objectOutputStream.writeObject(users);
+			objectOutputStream.close();
 		}
 		
 	}
 
 	@Override
-	public MarkoliaUser findUser(String user_id) throws Exception {
+	public boolean findUser(String user_id) throws Exception {
 		
-		if(this.users.contains(new MarkoliaUser(user_id))) {
+		if(users.contains(new MarkoliaUser(user_id))) {
 			for(MarkoliaUser user: users) {
 				System.out.println(user.getUser_id());
 				if(user.getUser_id()==user_id)
 			//		System.out.println("user found");
-					return user;
+					return true;
 			}
 		}
 		else {
 			throw new Exception("User not found");
 		}
-		return null; 
+		return true; 
 		
 		
 		
@@ -94,6 +87,13 @@ public class UserRepositoryImple implements UserRepository {
 
 	@Override
 	public Set<MarkoliaUser> findByname(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String toString(MarkoliaUser user) {
 		// TODO Auto-generated method stub
 		return null;
 	}

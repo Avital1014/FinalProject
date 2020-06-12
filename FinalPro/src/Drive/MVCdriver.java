@@ -25,16 +25,17 @@ public class MVCdriver {
 	public static void main(String [] args) throws IOException {
 		
 		
-		Set<MarkoliaUser> Users = (Set<MarkoliaUser>) new HashSet<MarkoliaUser>();
+		//Set<MarkoliaUser> Users = (Set<MarkoliaUser>) new HashSet<MarkoliaUser>();
 		String file = "Users";
 		
 		
-		try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(file))) {
-		objectOutputStream.writeObject(Users);
-		} catch (java.io.IOException e) {
-			e.printStackTrace();
+		try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(file, true))) {
+			System.out.println("open file in the main");
+			objectOutputStream.close();
+			
+			
+			
 		}
-		
 		/**configuration for General   */
 		Model general_Model = new Model();
 		MarkoliaMainView general_View = new MarkoliaMainView();
@@ -59,3 +60,6 @@ public class MVCdriver {
 		}*/
 }
 }
+
+
+//}

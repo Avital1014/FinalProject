@@ -1,5 +1,9 @@
 package Controller;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.util.Set;
+
 import Model.MarkoliaUser;
 import Model.Model;
 import Model.UserRepository;
@@ -23,20 +27,17 @@ public class Controller {
 	}
 
 
-
-	public void createNewUser(String name, String id, String Email, String passString) {
-		System.out.println("this is controller");
-		System.out.println(name);
-		MarkoliaUser userToCreate = new MarkoliaUser(name, id, Email, passString);
+	public void createNewUser(String name, String id, String Email, String passString) throws Exception {	
+		
+		MarkoliaUser userToCreate = new MarkoliaUser(name, id, Email, passString);			
+		//if(userRep.findUser(id)) {
 		try {
-			System.out.println(name);
 			userRep.addNewUser(userToCreate);
-			//userRep.findUser("206022337");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		
 		}
-
 	}
 	
 }
+

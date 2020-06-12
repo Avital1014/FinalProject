@@ -26,7 +26,7 @@ public class SignUpView extends JFrame implements Runnable{
 	private Controller controller = new Controller();
 	private JPanel contentPane;
 	private JTextField nameTextField;	
-	private JTextField emailTextField;
+	private JTextField nameField;
 	private JTextField IDtextField;
 	private JTextField psswordTextField;
 	private JTextField passwordAgainTextField;
@@ -69,31 +69,30 @@ public class SignUpView extends JFrame implements Runnable{
 		JLabel lblNewLabel = new JLabel("Full Name");		
 		nameTextField = new JTextField();
 		nameTextField.setColumns(10);
-		JLabel lblEmail = new JLabel("Email");		
-		emailTextField = new JTextField();
-		emailTextField.setColumns(10);
+		nameField = new JTextField();
+		nameField.setColumns(10);
 		
 		JButton createButton = new JButton("Create");
 		createButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-		//		System.out.println(getemailTextField());
-		//		System.out.println(getNameTextField() + getemailTextField() + getPsswordTextField() + getEmailText2() +getIDtextField());
-			//	String tempString = getNameTextField();
-			//	System.out.println(tempString);
-				//controller.createNewUser(getNameTextField(), getIDtextField(), getEmailText2(), getPsswordTextField());
-				//run(getNameTextField(), getIDtextField(), getEmailText2(), getPsswordTextField());
-				
-				String nameString1 = getNameTextField();
-				String nameString = getNameTextField();
+				String nameString = getNameField();
+				//System.out.println(nameString);
 				String iDString = getIDtextField();
+				//System.out.println(iDString);
 				String EmaString = getEmailText2();
+				//System.out.println(EmaString);
 				String passwordString = getPsswordTextField();
-					
-				
-				Thread t1 = new Thread(new SignUpView());
-				t1.start();
+				//System.out.println(passwordString);	
+				try {
+					controller.createNewUser(nameString, iDString, EmaString, passwordString);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				//Thread t1 = new Thread(new SignUpView());
+				//t1.start();
 				}
 
 		});
@@ -136,7 +135,7 @@ public class SignUpView extends JFrame implements Runnable{
 											.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 												.addComponent(emailText2, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 												.addGroup(gl_contentPane.createSequentialGroup()
-													.addComponent(emailTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+													.addComponent(nameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 													.addGap(47)
 													.addComponent(lblNewLabel_4)
 													.addGap(18)
@@ -159,7 +158,7 @@ public class SignUpView extends JFrame implements Runnable{
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(emailTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(nameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_4)
 						.addComponent(passwordAgainTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
@@ -183,16 +182,21 @@ public class SignUpView extends JFrame implements Runnable{
 	
 
 
-	public void start() {
+	public void start() throws Exception {
 		
-		controller.createNewUser(getNameTextField(), getIDtextField(), getEmailText2(), getPsswordTextField());
+		controller.createNewUser(getNameField(), getIDtextField(), getEmailText2(), getPsswordTextField());
 	}
 
 	
 	public void run() {
 			
 		//System.out.println(name);
-		controller.createNewUser(getNameTextField(), getIDtextField(), getEmailText2(), getPsswordTextField());
+		try {
+			controller.createNewUser(getNameField(), getIDtextField(), getEmailText2(), getPsswordTextField());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 	}
 
@@ -201,8 +205,8 @@ public class SignUpView extends JFrame implements Runnable{
 	}
 
 
-	public String getemailTextField() {
-		return emailTextField.getText();
+	public String getnameField() {
+		return nameField.getText();
 	}
 
 
@@ -221,6 +225,10 @@ public class SignUpView extends JFrame implements Runnable{
 
 	public String getIDtextField() {
 		return IDtextField.getText();
+	}
+
+	public String getNameField() {
+		return nameField.getText();
 	}
 
 
