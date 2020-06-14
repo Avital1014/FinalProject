@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface UserRepository {
+	
 
 	void addNewUser(MarkoliaUser user)throws Exception;
 	

@@ -21,21 +21,33 @@ public class UserRepositoryImple implements UserRepository {
 	private final String fILENAME= "Users";
 	private Set<MarkoliaUser> users = new HashSet<MarkoliaUser>() ; //Wont return duplicate names
 	
+	
 	@SuppressWarnings("unchecked")
 	public UserRepositoryImple() {
-		super();
-		try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fILENAME))){
-			try {
-				users = (Set<MarkoliaUser>)objectInputStream.readObject();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
+		try {
+			System.out.println("into class");
+			@SuppressWarnings("resource")
+			ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fILENAME));
+			this.users = (Set<MarkoliaUser>) objectInputStream.readObject();
+			System.out.println("size = "+users.size());
+			//System.out.println("into class");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
+	
+	/*
+	@SuppressWarnings("unchecked")
+	public UserRepositoryImple() throws IOException, ClassNotFoundException {
+		try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fILENAME))) {
+				this.users = (Set<MarkoliaUser>) objectInputStream.readObject();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}*/
 		
 	 
 
@@ -48,12 +60,13 @@ public class UserRepositoryImple implements UserRepository {
 		if ( users.contains(user)) {
 			throw new Exception("This User already exists");
 		}
-		users.add(user);
-		try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(fILENAME, true))) {
-			System.out.println("file open in add user");
-			System.out.println("sizeof users " + users.size());
+		this.users.add(user);
+		//try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(fILENAME, true))) {
+		try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(fILENAME))) {	
+			//System.out.println("file open in add user");
+			//System.out.println("sizeof users " + users.size());
 			objectOutputStream.writeObject(users);
-			objectOutputStream.close();
+			//objectOutputStream.close();
 		}
 		
 	}
@@ -97,6 +110,10 @@ public class UserRepositoryImple implements UserRepository {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+	
 
 
 
