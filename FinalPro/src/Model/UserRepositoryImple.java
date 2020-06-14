@@ -25,50 +25,32 @@ public class UserRepositoryImple implements UserRepository {
 	@SuppressWarnings("unchecked")
 	public UserRepositoryImple() {
 		try {
-			System.out.println("into class");
+			//System.out.println("into class");
 			@SuppressWarnings("resource")
 			ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fILENAME));
 			this.users = (Set<MarkoliaUser>) objectInputStream.readObject();
-			System.out.println("size = "+users.size());
-			//System.out.println("into class");
+			//System.out.println("size = "+users.size());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
 	
-	/*
-	@SuppressWarnings("unchecked")
-	public UserRepositoryImple() throws IOException, ClassNotFoundException {
-		try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fILENAME))) {
-				this.users = (Set<MarkoliaUser>) objectInputStream.readObject();
-		}catch (IOException e) {
-			e.printStackTrace();
-		}catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-	}*/
-		
-	 
 
 	@Override
-	public void addNewUser(MarkoliaUser user) throws Exception {
-		if (user == null) {
-			System.out.println("create");
-			throw new Exception("User must have a value");
+	public boolean addNewUser(MarkoliaUser user) throws Exception {
+		int flag = 0;
+		if (user == null) {			
+			throw new Exception("User must have a value");		
 		}
 		if ( users.contains(user)) {
 			throw new Exception("This User already exists");
 		}
-		this.users.add(user);
-		//try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(fILENAME, true))) {
+		this.users.add(user);		
 		try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(fILENAME))) {	
-			//System.out.println("file open in add user");
-			//System.out.println("sizeof users " + users.size());
 			objectOutputStream.writeObject(users);
-			//objectOutputStream.close();
+			
 		}
-		
+		return true;	
 	}
 
 	@Override
@@ -86,9 +68,6 @@ public class UserRepositoryImple implements UserRepository {
 			throw new Exception("User not found");
 		}
 		return true; 
-		
-		
-		
 		
 	}
 

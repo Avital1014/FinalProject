@@ -6,7 +6,7 @@ import java.util.Set;
 public interface UserRepository {
 	
 
-	void addNewUser(MarkoliaUser user)throws Exception;
+	boolean addNewUser(MarkoliaUser user)throws Exception;
 	
 	boolean findUser(String user_id) throws Exception ;
 	

@@ -30,7 +30,7 @@ public class MVCdriver {
 		
 		
 		//try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(fILENAME))) {
-			System.out.println("open file in the main");
+		//	System.out.println("open file in the main");
 //		}catch (IOException e) {
 	//		e.printStackTrace();
 		//}
