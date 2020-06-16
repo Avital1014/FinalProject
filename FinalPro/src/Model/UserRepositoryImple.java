@@ -42,7 +42,7 @@ public class UserRepositoryImple implements UserRepository {
 		if (user == null) {			
 			throw new Exception("User must have a value");		
 		}
-		if ( users.contains(user)) {
+		if ( users.contains(user.getUser_id())) {
 			throw new Exception("This User already exists");
 		}
 		this.users.add(user);		

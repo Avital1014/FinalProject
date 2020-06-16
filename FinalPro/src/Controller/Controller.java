@@ -38,17 +38,17 @@ public class Controller {
 		String passwordAgainString = signUpview.getPasswordAgainTextField();
 		boolean addUserResult = false;
 			
-		if (nameString.isEmpty()){signUpview.PrintErrorMessage("Please Enter name");}
+	//	if (nameString.isEmpty()){signUpview.PrintErrorMessage("Please Enter name");}
 		
-		if (idString.isEmpty()) {signUpview.PrintErrorMessage("Please Enter ID");}
+	//	if (idString.isEmpty()) {signUpview.PrintErrorMessage("Please Enter ID");}
 		
-		if (emailString.isEmpty()) {signUpview.PrintErrorMessage("Please Enter Email");}
+	//	if (emailString.isEmpty()) {signUpview.PrintErrorMessage("Please Enter Email");}
 		
-		if (passwordString.isEmpty()) {signUpview.PrintErrorMessage("Please Enter Password");}
+	//	if (passwordString.isEmpty()) {signUpview.PrintErrorMessage("Please Enter Password");}
 		
-		if (passwordAgainString.isEmpty()) {signUpview.PrintErrorMessage("Please Re-Insert your Password");}
+	//	if (passwordAgainString.isEmpty()) {signUpview.PrintErrorMessage("Please Re-Insert your Password");}
 		
-		if(!(passwordString.equals(passwordAgainString))){signUpview.PrintErrorMessage("Passwords Do not match!");}
+	//	if(!(passwordString.equals(passwordAgainString))){signUpview.PrintErrorMessage("Passwords Do not match!");}
 		
 		MarkoliaUser userTocreate = new MarkoliaUser(nameString, idString, emailString, passwordString);
 		

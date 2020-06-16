@@ -6,6 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+
+
+import com.sun.source.tree.Tree;
+
+import javax.swing.JOptionPane;
 import Controller.Controller;
 import Controller.Controller;
 import javax.swing.JLabel;
@@ -20,6 +25,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
+import java.awt.Color;
 
 public class SignUpView extends JFrame implements Runnable{
 	/**
@@ -76,67 +82,70 @@ public class SignUpView extends JFrame implements Runnable{
 		nameTextField.setColumns(10);
 		nameField = new JTextField();
 		nameField.setColumns(10);
+		JLabel validLabel = new JLabel("");
+		JLabel validIDLabel = new JLabel("");
+		JLabel valiedEailLabel = new JLabel("");
+		JLabel verifyPass = new JLabel("");
 		
 		JButton createButton = new JButton("Create");
 		createButton.addActionListener(new ActionListener() {
 			
+			
+
 			public void actionPerformed(ActionEvent e) {
+			
 				String nameString = null;
 				String iDString= null;
 				String EmaString= null;
 				String passwordString= null;
 				String secoundPassword= null;								
-			
-				/*
+				boolean temp;
+				
 				try {
-					if (nameTextField.getText().isEmpty())
-						PrintErrorMessage("sdfgsdfgsdfg");
+					nameString = nameField.getText();
+					if(nameString.isEmpty()) {
+						validLabel.setText("Required field");
+
+					}						
 				} catch (Exception e2) {
 					// TODO: handle exception
 				}
 				
-				if(nameTextField.getText().isEmpty()) 
-				JOptionPane.showMessageDialog(null, "Please Enter a name");				
-				else {
-					 nameString = getNameField();}
-				*/
-				
-				/*
-				//System.out.println(nameString);
-				if(IDtextField.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Please Enter ID");	
-				}else {
-				iDString = getIDtextField();}
-				//System.out.println(iDString);
-				if(emailText2.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Please Enter Email");	
-				}else {
-					EmaString = getEmailText2();
-				}				
-				//System.out.println(EmaString);
-				if(passwordField.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Please Enter Password");}
-				else if(passwordField.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Please Re-Insert your Password");}
-					else {
-						passwordString = getPsswordTextField();
-						secoundPassword = getPasswordAgainTextField();
-						if(!passwordString.equals(secoundPassword))
-						JOptionPane.showMessageDialog(null, "Passwords do not match");
-					}
-				
-		
-				passwordString = getPsswordTextField();
-				*/	
 				try {
-				//	if (!(nameTextField.getText().isEmpty()) && !(IDtextField.getText().isEmpty()) && !(emailText2.getText().isEmpty()) && !(psswordTextField.getText().isEmpty())) {
-					boolean flag = controller.createNewUser();
-					//	boolean flag = controller.createNewUser(nameString, iDString, EmaString, passwordString);
+					iDString = IDtextField.getText();
+					if(iDString.isEmpty()) {
+						 validIDLabel.setText("Required field"); 
+					}
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+				try {
+					EmaString = emailText2.getText();
+					if(EmaString.isEmpty()) {
+						valiedEailLabel.setText("Required field");
+					}
+						
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+				
+				try {
+					passwordString = passwordField.getText();
+					secoundPassword = passwordField_1.getText();
+					if(!(passwordString.equals(secoundPassword))) {
+						verifyPass.setText("Your Password Does NOT Match!");
+					}
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+				
+				
+				
+				try {
+		        
+					boolean flag = controller.createNewUser();				
 						if(flag) 
-							JOptionPane.showMessageDialog(null, "User registered successfully");
-					//}
-					else
-						System.out.println("asdfasdf");
+							JOptionPane.showMessageDialog(null, "User registered successfully");										
 				} catch (Exception e1) {
 					
 					e1.printStackTrace();
@@ -150,6 +159,7 @@ public class SignUpView extends JFrame implements Runnable{
 		
 		IDtextField = new JTextField();
 		IDtextField.setColumns(10);
+		
 		
 		JLabel lblNewLabel_2 = new JLabel("Email");
 		
@@ -192,6 +202,21 @@ public class SignUpView extends JFrame implements Runnable{
 		JPanel panel = new JPanel();
 		
 		JPanel panel_1 = new JPanel();
+		
+	
+		validLabel.setForeground(Color.RED);
+		
+		
+		validIDLabel.setForeground(Color.RED);
+		
+		
+		valiedEailLabel.setForeground(new Color(255, 0, 0));
+		
+		
+		verifyPass.setForeground(Color.RED);
+		
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -203,62 +228,84 @@ public class SignUpView extends JFrame implements Runnable{
 							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)
 							.addGap(42)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNewLabel_3)
-								.addComponent(lblNewLabel_2)
 								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_3)
+								.addComponent(lblNewLabel_2)
 								.addComponent(lblNewLabel_4))
 							.addGap(34)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(chckbxNewCheckBox)
+								.addComponent(emailText2, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
+								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(chckbxNewCheckBox)
+									.addGap(32)
+									.addComponent(verifyPass))
+								.addComponent(passwordField_1, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+								.addComponent(validIDLabel)
+								.addComponent(valiedEailLabel)
+								.addComponent(chckbxNewCheckBox_1, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+								.addComponent(validLabel)
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGap(54)
 									.addComponent(createButton)
-									.addPreferredGap(ComponentPlacement.RELATED, 127, Short.MAX_VALUE))
-								.addComponent(passwordField_1, GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED, 137, Short.MAX_VALUE))
 								.addComponent(IDtextField, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-								.addComponent(nameField, GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
-								.addComponent(emailText2, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
-								.addComponent(chckbxNewCheckBox_1, GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))))
+								.addComponent(nameField, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(30)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(nameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_1)
-						.addComponent(IDtextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_2)
-						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_3)
-						.addComponent(emailText2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(chckbxNewCheckBox_1)
-					.addGap(28)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_4)
-						.addComponent(passwordField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(chckbxNewCheckBox)
-					.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-					.addComponent(createButton)
-					.addGap(56))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(396, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE))
+					.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(30)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+								.addComponent(nameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(validLabel)
+							.addGap(1)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel_1)
+								.addComponent(IDtextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addComponent(validIDLabel)
+							.addPreferredGap(ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblNewLabel_2)
+									.addGap(18)
+									.addComponent(lblNewLabel_3))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(26)
+									.addComponent(valiedEailLabel))))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(emailText2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(18)
+							.addComponent(chckbxNewCheckBox_1)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(passwordField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(chckbxNewCheckBox)
+								.addComponent(verifyPass))
+							.addGap(39)
+							.addComponent(createButton))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(56)
+							.addComponent(lblNewLabel_4)))
+					.addGap(56))
 		);
 		panel_1.setLayout(null);
 		
