@@ -8,6 +8,8 @@ public interface UserRepository {
 
 	boolean addNewUser(MarkoliaUser user)throws Exception;
 	
+	boolean userLoging(String iDString, String passString);
+	
 	boolean findUser(String user_id) throws Exception ;
 	
 	Set<MarkoliaUser> findAllUsers();

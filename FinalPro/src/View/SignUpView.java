@@ -43,6 +43,13 @@ public class SignUpView extends JFrame implements Runnable{
 	private JPasswordField passwordField_1;
 	private JLabel lblNewLabel_5;
 	
+	String nameString = null;
+	String iDString= null;
+	String EmaString= null;
+	String passwordString= null;
+	String secoundPassword= null;	
+
+	
 	public SignUpView(Controller Controller) throws HeadlessException {
 		super();
 		this.controller = Controller;
@@ -85,72 +92,85 @@ public class SignUpView extends JFrame implements Runnable{
 		JLabel validLabel = new JLabel("");
 		JLabel validIDLabel = new JLabel("");
 		JLabel valiedEailLabel = new JLabel("");
-		JLabel verifyPass = new JLabel("");
-		
+		JLabel verifyPass = new JLabel("");		
 		JButton createButton = new JButton("Create");
 		createButton.addActionListener(new ActionListener() {
 			
-			
 
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-			
-				String nameString = null;
-				String iDString= null;
-				String EmaString= null;
-				String passwordString= null;
-				String secoundPassword= null;								
-				boolean temp;
-				
+				nameString = nameField.getText();
+				iDString = IDtextField.getText();
+				EmaString = emailText2.getText();
+				passwordString = passwordField.getText();
+				secoundPassword = passwordField_1.getText();
+
 				try {
 					nameString = nameField.getText();
+					setNameField(nameString);
 					if(nameString.isEmpty()) {
 						validLabel.setText("Required field");
-
-					}						
-				} catch (Exception e2) {
-					// TODO: handle exception
-				}
-				
-				try {
-					iDString = IDtextField.getText();
-					if(iDString.isEmpty()) {
-						 validIDLabel.setText("Required field"); 
-					}
-				} catch (Exception e2) {
-					// TODO: handle exception
-				}
-				try {
-					EmaString = emailText2.getText();
-					if(EmaString.isEmpty()) {
-						valiedEailLabel.setText("Required field");
-					}
-						
-				} catch (Exception e2) {
-					// TODO: handle exception
-				}
-				
-				try {
-					passwordString = passwordField.getText();
-					secoundPassword = passwordField_1.getText();
-					if(!(passwordString.equals(secoundPassword))) {
-						verifyPass.setText("Your Password Does NOT Match!");
-					}
-				} catch (Exception e2) {
-					// TODO: handle exception
-				}
-				
-				
-				
-				try {
-		        
-					boolean flag = controller.createNewUser();				
-						if(flag) 
-							JOptionPane.showMessageDialog(null, "User registered successfully");										
-				} catch (Exception e1) {
+						throw new Exception("please fix name");
 					
-					e1.printStackTrace();
+					}
+					try {
+						iDString = IDtextField.getText();
+						if(iDString.isEmpty()) {
+							 validIDLabel.setText("Required field"); 
+							 throw new Exception("please fix ID");
+						}
+						
+						try {
+							EmaString = emailText2.getText();
+							if(EmaString.isEmpty()) {
+								valiedEailLabel.setText("Required field");
+								 throw new Exception("please fix your Email");
+							}
+						
+							try {
+								passwordString = passwordField.getText();
+								secoundPassword = passwordField_1.getText();
+								
+								if(!(passwordString.equals(secoundPassword))) {
+								
+									verifyPass.setText("Your Password Does NOT Match!");
+									throw new Exception("Password does not match, please fix");
+								}
+								try {
+									
+									
+									boolean flag = controller.createNewUser(nameString, iDString, EmaString, passwordString);	
+									
+										if(flag) 
+											JOptionPane.showMessageDialog(null, "User registered successfully");	
+										else {
+										//	throw new Exception("Password does not match, please fix");
+											JOptionPane.showMessageDialog(null, "User Already Exist");
+									
+										}
+								} catch (Exception e1) {
+									
+									e1.printStackTrace();
+								}
+							} catch (Exception e2) {
+								JOptionPane.showMessageDialog(null, e2);
+							}
+							
+							
+						} catch (Exception e2) {
+							JOptionPane.showMessageDialog(null, e2);
+						}
+						
+						
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(null, e2);	
+					}
+					
+					
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, e2);						
 				}
-				
+					
 				}
 
 		});
@@ -235,15 +255,17 @@ public class SignUpView extends JFrame implements Runnable{
 								.addComponent(lblNewLabel_4))
 							.addGap(34)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(emailText2, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
 								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(emailText2, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(valiedEailLabel))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(chckbxNewCheckBox)
 									.addGap(32)
 									.addComponent(verifyPass))
 								.addComponent(passwordField_1, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
 								.addComponent(validIDLabel)
-								.addComponent(valiedEailLabel)
 								.addComponent(chckbxNewCheckBox_1, GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
 								.addComponent(validLabel)
 								.addGroup(gl_contentPane.createSequentialGroup()
@@ -274,22 +296,21 @@ public class SignUpView extends JFrame implements Runnable{
 								.addComponent(IDtextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addComponent(validIDLabel)
-							.addPreferredGap(ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblNewLabel_2)
-									.addGap(18)
-									.addComponent(lblNewLabel_3))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(26)
-									.addComponent(valiedEailLabel))))
+					.addComponent(validIDLabel)
+					.addPreferredGap(ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(emailText2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblNewLabel_2)
+							.addGap(18)
+							.addComponent(lblNewLabel_3))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(emailText2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(valiedEailLabel))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(18)
@@ -316,25 +337,7 @@ public class SignUpView extends JFrame implements Runnable{
 		contentPane.setLayout(gl_contentPane);
 	}
 	
-
-
-//	public void start() throws Exception {
-		
-//		controller.createNewUser(getNameField(), getIDtextField(), getEmailText2(), getPsswordTextField());
-//	}
-
 	
-	public void run() {
-			
-		//System.out.println(name);
-		try {
-	//		controller.createNewUser(getNameField(), getIDtextField(), getEmailText2(), getPsswordTextField());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-	}
 
 	public String getNameTextField() {
 		return nameTextField.getText();
@@ -342,7 +345,8 @@ public class SignUpView extends JFrame implements Runnable{
 
 
 	public String getnameField() {
-		return nameField.getText();
+		System.out.println("get" + this.nameString);
+		return this.nameString;
 	}
 
 
@@ -366,10 +370,28 @@ public class SignUpView extends JFrame implements Runnable{
 	}
 
 	public String getNameField() {
-		return nameField.getText();
+		return nameString;
 	}
 	
 	public void PrintErrorMessage(String error) {
 		JOptionPane.showMessageDialog(null, error);
 	}
+
+	public void setNameTextField(JTextField nameTextField) {
+		this.nameTextField = nameTextField;
+	}
+
+	public void setNameField(String nameField) {
+		this.nameString = nameField;
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
 }

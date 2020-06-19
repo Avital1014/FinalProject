@@ -70,13 +70,14 @@ public class MarkoliaUser implements Serializable{
 		super();
 		this.user_id = user_id;
 	}
-	public MarkoliaUser(String user_id, String fullName, String emailUser, String passwordUser) {
+	public MarkoliaUser(String name, String user_id, String emailUser, String passwordUser) {
 		super();
+		this.fullName = name;
 		this.user_id = user_id;
-		this.fullName = fullName;
 		this.emailUser = emailUser;
 		this.passwordUser = passwordUser;
 	}
+	
 	public String getUser_id() {
 		return user_id;
 	}

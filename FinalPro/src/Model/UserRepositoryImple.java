@@ -29,28 +29,51 @@ public class UserRepositoryImple implements UserRepository {
 			@SuppressWarnings("resource")
 			ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fILENAME));
 			this.users = (Set<MarkoliaUser>) objectInputStream.readObject();
-			//System.out.println("size = "+users.size());
+	//		System.out.println("size = "+users.size());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		//for (MarkoliaUser markoliaUser : users) {
+	//		System.out.println(markoliaUser.toString());
+	//	}
 	}
 	
 
+	@SuppressWarnings({ "unlikely-arg-type", "unused" })
 	@Override
 	public boolean addNewUser(MarkoliaUser user) throws Exception {
-		int flag = 0;
+		//System.out.println("size = "+users.size());
+		//String xString = user.getUser_id();
+		//System.out.println("in add" + xString);
+		Boolean flag = false;
 		if (user == null) {			
 			throw new Exception("User must have a value");		
 		}
-		if ( users.contains(user.getUser_id())) {
-			throw new Exception("This User already exists");
+		
+		
+			for (MarkoliaUser markoliaUser : users) {
+				if((markoliaUser.getUser_id()).contains(user.getUser_id())	) {
+					System.out.println("found");
+					flag = true;	
+					System.out.println("flag is "+flag);
+									
+						}					
+				}
+		if(flag == true) {
+			return false;
+			//throw new Exception("User already Exist");
+			
 		}
+			
+		if(flag == true)return false;
+		else {
 		this.users.add(user);		
 		try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(fILENAME))) {	
 			objectOutputStream.writeObject(users);
-			
+			return true;
 		}
-		return true;	
+		}
+			
 	}
 
 	@Override
@@ -71,6 +94,27 @@ public class UserRepositoryImple implements UserRepository {
 		
 	}
 
+
+	@Override
+	public boolean userLoging(String iDString, String passString) {
+		boolean flag;
+		for (MarkoliaUser markoliaUser : users) {
+			if(((markoliaUser.getUser_id()).contains(iDString)) && 
+					((markoliaUser.getPasswordUser()).contains(passString)))	{
+				System.out.println("user loginf found");
+				return true;	
+					}					
+			}
+		return false;
+	}
+
+
+
+	
+	
+	
+	
+	
 	@Override
 	public Set<MarkoliaUser> findAllUsers() {
 		// TODO Auto-generated method stub
@@ -89,7 +133,6 @@ public class UserRepositoryImple implements UserRepository {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 
 	
