@@ -34,13 +34,14 @@ public class MarkoliaMainView extends JFrame{
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	private final Action action = new SwingAction();
 	 /**
 	 * Launch the application.
 	 */
 	Controller general_Controller;
-
+	
 	public void main1(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

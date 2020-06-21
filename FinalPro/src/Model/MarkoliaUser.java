@@ -63,6 +63,9 @@ public class MarkoliaUser implements Serializable{
 	private String fullName;
 	private String emailUser;
 	private String passwordUser;
+	private String qustion;
+	private String answer;
+	
 	
 
 	
@@ -70,12 +73,14 @@ public class MarkoliaUser implements Serializable{
 		super();
 		this.user_id = user_id;
 	}
-	public MarkoliaUser(String name, String user_id, String emailUser, String passwordUser) {
+	public MarkoliaUser(String name, String user_id, String emailUser, String passwordUser, String qustion, String answer ) {
 		super();
 		this.fullName = name;
 		this.user_id = user_id;
 		this.emailUser = emailUser;
 		this.passwordUser = passwordUser;
+		this.qustion = qustion;
+		this.answer = answer;
 	}
 	
 	public String getUser_id() {
@@ -102,6 +107,22 @@ public class MarkoliaUser implements Serializable{
 	}
 	public void setPasswordUser(String passwordUser) {
 		this.passwordUser = passwordUser;
+	}
+
+	public String getQustion() {
+		return qustion;
+	}
+
+	public void setQustion(String qustion) {
+		this.qustion = qustion;
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 	
 	
