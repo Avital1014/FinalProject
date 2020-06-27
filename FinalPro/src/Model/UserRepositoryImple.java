@@ -19,7 +19,7 @@ import java.lang.Exception;
 public class UserRepositoryImple implements UserRepository {
 	
 	private final String fILENAME= "Users";
-	private Set<MarkoliaUser> users = new HashSet<MarkoliaUser>() ; //Wont return duplicate names
+	private Set<customer> users = new HashSet<customer>() ; //Wont return duplicate names
 	
 	
 	@SuppressWarnings("unchecked")
@@ -28,7 +28,7 @@ public class UserRepositoryImple implements UserRepository {
 		try {			
 			@SuppressWarnings("resource")
 			ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fILENAME));
-			this.users = (Set<MarkoliaUser>) objectInputStream.readObject();
+			this.users = (Set<customer>) objectInputStream.readObject();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}	
@@ -36,15 +36,15 @@ public class UserRepositoryImple implements UserRepository {
 	
 	@SuppressWarnings({ "unlikely-arg-type", "unused" })
 	@Override
-	public boolean addNewUser(MarkoliaUser user) throws Exception {
+	public boolean addNewUser(customer user) throws Exception {
 		Boolean flag = false;
 		if (user == null) {			
 			throw new Exception("User must have a value");		
 		}
 		
 		
-			for (MarkoliaUser markoliaUser : users) {
-				if((markoliaUser.getUser_id()).contains(user.getUser_id())	) {
+			for (customer markoliaUser : users) {
+				if((markoliaUser.getUser_id()).contains(user.getUser_id())) {
 					System.out.println("found");
 					flag = true;	
 					System.out.println("flag is "+flag);
@@ -166,15 +166,15 @@ public class UserRepositoryImple implements UserRepository {
 	public String forgotPassword(String qustion, String answer, String id) throws IOException {
 		for (MarkoliaUser markoliaUser : users) {
 			if(((markoliaUser.getUser_id()).contains(id))) {
-			if(((markoliaUser.getQustion()).contains(qustion)) )	{					
-				if((markoliaUser.getAnswer()).contains(answer)) {
+			//if(((markoliaUser.getQustion()).contains(qustion)) )	{					
+			//	if((markoliaUser.getAnswer()).contains(answer)) {
 					writeToFile();
 					return(markoliaUser.getPasswordUser());										
 				}
 				
 				}					
-			}
-		}
+			//}
+		//}
 		return null;
 	}
 

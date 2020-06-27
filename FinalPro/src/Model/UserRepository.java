@@ -7,7 +7,7 @@ import java.util.Set;
 public interface UserRepository {
 	
 
-	boolean addNewUser(MarkoliaUser user)throws Exception;
+	boolean addNewUser(customer user)throws Exception;
 	
 	boolean userLoging(String iDString, String passString);
 	
@@ -29,8 +29,6 @@ public interface UserRepository {
 	
 	void writeToFile() throws IOException;
 	
-
-
 	String forgotPassword(String qustion, String answer, String id) throws IOException;
 	
 }

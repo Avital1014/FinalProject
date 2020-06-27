@@ -7,6 +7,7 @@ import java.io.IOException;
 import Model.MarkoliaUser;
 import Model.Model;
 import Model.UserRepositoryImple;
+import Model.customer;
 import View.MarkoliaMainView;
 import View.SignUpView;
 import View.signIn;
@@ -31,7 +32,9 @@ public class Controller {
 
 	public boolean createNewUser(String name, String iD, String email, String password, String question, String answer) throws Exception {	
 		boolean addUserResult = false;	
-		MarkoliaUser userTocreate = new MarkoliaUser(name, iD, email, password, question, answer);		
+		//System.out.println("at controller");
+		customer userTocreate = new customer(name, iD, email, password, question, answer);		
+		System.out.println(userTocreate.toString());
 		addUserResult = userRep.addNewUser(userTocreate);				
 		return addUserResult;	
 		}	
@@ -50,8 +53,7 @@ public class Controller {
 	
 	public boolean findUser(String id) throws Exception {
 	
-			return userRep.findUser(id);
-		
+			return userRep.findUser(id);		
 	}
 	
 	public boolean findID(String id) {
