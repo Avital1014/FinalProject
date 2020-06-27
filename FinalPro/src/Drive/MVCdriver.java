@@ -22,20 +22,20 @@ public class MVCdriver {
 	private static String fILENAME= "Users";
 	
 
-	public static void main(String [] args) throws IOException {
+	public static void main(String [] args) throws IOException, ClassNotFoundException {
 		
 		
 		//Set<MarkoliaUser> Users = (Set<MarkoliaUser>) new HashSet<MarkoliaUser>();
-		String file = "Users";
+	
 		
 		
-		try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(file, true))) {
-			System.out.println("open file in the main");
-			objectOutputStream.close();
-			
-			
-			
-		}
+		//try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(fILENAME))) {
+		//	System.out.println("open file in the main");
+//		}catch (IOException e) {
+	//		e.printStackTrace();
+		//}
+		
+		
 		/**configuration for General   */
 		Model general_Model = new Model();
 		MarkoliaMainView general_View = new MarkoliaMainView();
@@ -45,21 +45,7 @@ public class MVCdriver {
 		general_View.start();
 		((Window) general_View).setVisible(true);
 
-/*
-		List<MarkoliaUser> Users = new ArrayList<MarkoliaUser>();
-		Users.add(new MarkoliaUser(1, "avitala", "avi", "aaa@gmail", "123"));
-		Users.add(new MarkoliaUser(2, "EladBre", "eladi", "bbb@gmail", "122"));
-		Users.add(new MarkoliaUser(3, "Check", "2", "a1@gmail", "122"));
-		String file = "Users";
-		
-		
-		try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(file))) {
-		objectOutputStream.writeObject(Users);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
-}
+	//}
+	}
 }
 
-
-//}
