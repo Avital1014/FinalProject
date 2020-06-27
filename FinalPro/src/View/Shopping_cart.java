@@ -47,9 +47,8 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 import com.sun.source.doctree.SummaryTree;
+import com.sun.tools.sjavac.comp.dependencies.PublicApiCollector;
 
-
-import java.awt.Window.Type;
 import java.awt.Frame;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.AncestorEvent;
@@ -95,7 +94,7 @@ public class Shopping_cart extends JFrame {
 	private static double productPrice;
 	
 	HashMap<String, productType> cart_productsHashMap= new HashMap<String, productType>();
-	List items = new ArrayList();
+	List<String> items = new ArrayList();
 	private JTextField strawberriesCost;
 	private double strawberriesCost_int;
 	private JTextField melonCost;
@@ -126,6 +125,7 @@ public class Shopping_cart extends JFrame {
 	private double whiteCabbageCost_int;
 	private JTextField sweetPotatoCost;
 	private double sweetPotatoCost_int;
+	private JTextField textField_1;
 	/**
 	 * Launch the application.
 	 */
@@ -171,6 +171,7 @@ public class Shopping_cart extends JFrame {
 	 */
 	
 	public Shopping_cart() {
+		
 		
 		setType(Type.POPUP);
 		setVisible(true);
@@ -278,7 +279,7 @@ public class Shopping_cart extends JFrame {
 		});
 		
 			pineappleSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
-			pineappleSpinner.setModel(new SpinnerListModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8"}));
+			pineappleSpinner.setModel(new SpinnerListModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8"}));
 			pineappleSpinner.setBounds(373, 256, 56, 28);
 			fruitPanel.add(pineappleSpinner);
 			
@@ -318,7 +319,7 @@ public class Shopping_cart extends JFrame {
 			});
 			
 			strwaberriesSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
-			strwaberriesSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+			strwaberriesSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 			strwaberriesSpinner.setBounds(87, 255, 56, 28);
 			fruitPanel.add(strwaberriesSpinner);
 			
@@ -479,7 +480,7 @@ public class Shopping_cart extends JFrame {
 					melon_spinner_value= (String) melonSpinner.getValue();
 				}
 			});
-			melonSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+			melonSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 			melonSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 			melonSpinner.setBounds(639, 256, 56, 28);
 			fruitPanel.add(melonSpinner);
@@ -522,7 +523,7 @@ public class Shopping_cart extends JFrame {
 					watermelon_spinner_value =  (String) watermelonSpinner.getValue();
 				}
 			});
-			watermelonSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+			watermelonSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 			watermelonSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 			watermelonSpinner.setBounds(933, 256, 56, 28);
 			fruitPanel.add(watermelonSpinner);
@@ -567,7 +568,7 @@ public class Shopping_cart extends JFrame {
 				}
 				
 			});
-			bananaSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+			bananaSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 			bananaSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 			bananaSpinner.setBounds(87, 560, 56, 28);
 			fruitPanel.add(bananaSpinner);
@@ -611,7 +612,7 @@ public class Shopping_cart extends JFrame {
 					lemon_spinner_value =  (String) lemonSpinner.getValue();
 				}
 			});
-			lemonSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+			lemonSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 			lemonSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 			lemonSpinner.setBounds(361, 560, 56, 28);
 			fruitPanel.add(lemonSpinner);
@@ -655,7 +656,7 @@ public class Shopping_cart extends JFrame {
 					pinkLady_spinner_value =  (String) pinkLadySpinner.getValue();
 				}
 			});
-			pinkLadySpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+			pinkLadySpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 			pinkLadySpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 			pinkLadySpinner.setBounds(637, 560, 56, 28);
 			fruitPanel.add(pinkLadySpinner);
@@ -699,7 +700,7 @@ public class Shopping_cart extends JFrame {
 					peachPita_spinner_value =  (String) peachPitaSpinner.getValue();
 				}
 			});
-			peachPitaSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+			peachPitaSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 			peachPitaSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 			peachPitaSpinner.setBounds(933, 560, 56, 28);
 			fruitPanel.add(peachPitaSpinner);
@@ -805,12 +806,17 @@ public class Shopping_cart extends JFrame {
 		/**
 		 * Finish Button
 		 */
-		
+		JLabel lblNewLabel_1 = new JLabel("New label");
 		JButton finishShopButton = new JButton("Finish the shopping,\r\nand proceed to Summary");
 		finishShopButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(cart_productsHashMap);
+				for(String keyString : cart_productsHashMap.keySet()) {
+					System.out.println("key" + keyString + "name: " + getProductName(keyString)+ " Price " + getProductPrice(keyString)+ " Value " + getSpinnerValue(keyString));
+					
+				}
 				
+				System.out.println("sdfgsdf");
+				printToJlist();
 				//JPanel newSummaryPanel = new JPanel();
 				//newSummaryPanel.add(new JLabel("your summary page"));
 				//newSummaryPanel.action(, finishShopButton)
@@ -836,7 +842,7 @@ public class Shopping_cart extends JFrame {
 
 			}
 		});
-		onionSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+		onionSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 		onionSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 		onionSpinner.setBounds(81, 237, 56, 28);
 		vegetablesPanel.add(onionSpinner);
@@ -905,7 +911,7 @@ public class Shopping_cart extends JFrame {
 				purpleOnion_spinner_value =  (String) purpleOnionSpinner.getValue();
 			}
 		});
-		purpleOnionSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+		purpleOnionSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 		purpleOnionSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 		purpleOnionSpinner.setBounds(358, 237, 56, 28);
 		vegetablesPanel.add(purpleOnionSpinner);
@@ -963,7 +969,7 @@ public class Shopping_cart extends JFrame {
 				tomato_spinner_value =  (String) tomatoSpinner.getValue();
 			}
 		});
-		tomatoSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+		tomatoSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 		tomatoSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 		tomatoSpinner.setBounds(652, 236, 56, 28);
 		vegetablesPanel.add(tomatoSpinner);
@@ -1020,7 +1026,7 @@ public class Shopping_cart extends JFrame {
 				cucumber_spinner_value =  (String) cucumberSpinner.getValue();
 			}
 		});
-		cucumberSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+		cucumberSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 		cucumberSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 		cucumberSpinner.setBounds(917, 237, 56, 28);
 		vegetablesPanel.add(cucumberSpinner);
@@ -1075,10 +1081,15 @@ public class Shopping_cart extends JFrame {
 		cornSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				corn_spinner_value =  (String) cornSpinner.getValue();
+				//Elad
+				//System.out.println(corn_spinner_value);
+				//lblNewLabel_1.setText(corn_spinner_value);
+			
+				
 			}
 			
 		});
-		cornSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+		cornSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 		cornSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 		cornSpinner.setBounds(81, 561, 56, 28);
 		vegetablesPanel.add(cornSpinner);
@@ -1121,7 +1132,7 @@ public class Shopping_cart extends JFrame {
 				eggplant_spinner_value =  (String) eggplantSpinner.getValue();
 			}
 		});
-		eggplantSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+		eggplantSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 		eggplantSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 		eggplantSpinner.setBounds(358, 561, 56, 28);
 		vegetablesPanel.add(eggplantSpinner);
@@ -1179,7 +1190,7 @@ public class Shopping_cart extends JFrame {
 				whiteCabbage_spinner_value =  (String) whiteCabbageSpinner.getValue();
 			}
 		});
-		whiteCabbageSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+		whiteCabbageSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 		whiteCabbageSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 		whiteCabbageSpinner.setBounds(652, 561, 56, 28);
 		vegetablesPanel.add(whiteCabbageSpinner);
@@ -1239,7 +1250,7 @@ public class Shopping_cart extends JFrame {
 
 			}
 		});
-		sweetPotatoSpinner.setModel(new SpinnerListModel(new String[] {"0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
+		sweetPotatoSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
 		sweetPotatoSpinner.setFont(new Font("Tahoma", Font.BOLD, 12));
 		sweetPotatoSpinner.setBounds(935, 561, 56, 28);
 		vegetablesPanel.add(sweetPotatoSpinner);
@@ -1297,13 +1308,35 @@ public class Shopping_cart extends JFrame {
 		Cart_list.setLineWrap(true);
 		Cart_list.setWrapStyleWord(true);
 		Cart_list.setEditable(false);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(426, 142, 96, 19);
+		Summary_Panel.add(textField_1);
+		textField_1.setColumns(10);
+		
+
+		lblNewLabel_1.setBounds(222, 513, 45, 13);
+		Summary_Panel.add(lblNewLabel_1);
 		tabbedPane.setBackgroundAt(2, Color.WHITE);
+		/*
 		for (String keyString : cart_productsHashMap.keySet()) {
+			
 			Cart_list.append("Product:" + keyString + "\n");
 			items.add(getProductName(keyString));
 			Cart_list.append("Name:" + getProductName(keyString) + "Proce:" + getProductPrice(keyString) + "Value:" + getSpinnerValue(keyString));
-		}
+		}*/
 		//setResizable(false);
 	   // setVisible(true);
+	
+	}
+	
+	public void printToJlist() {
+for (String keyString : cart_productsHashMap.keySet()) {
+			System.out.println("Key is " + keyString);
+			Cart_list.append("Product:" + keyString + "\n");
+			System.out.println("Print");
+			items.add(getProductName(keyString));
+			Cart_list.append("Name:" + getProductName(keyString) + "Proce:" + getProductPrice(keyString) + "Value:" + getSpinnerValue(keyString));
+		}
 	}
 }
