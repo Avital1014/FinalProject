@@ -46,10 +46,7 @@ public class UserRepositoryImple implements UserRepository {
 		
 	
 	public static ObjectInputStream sendFile() {
-		//for (customer custo : users) {
-	//		System.out.println(custo.toString());
-			
-	//	}
+
 	System.out.println("sendfile");
 	return objectInputStream;
 	}
