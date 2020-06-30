@@ -99,6 +99,11 @@ public class MarkoliaMainView extends JFrame{
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\350x3001.jpg"));
 		lblNewLabel.setBounds(0, 0, 334, 261);
 		panel.add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(22, 213, 89, 23);
+		panel.add(btnNewButton);
+
 
 		};
 		
@@ -124,6 +129,4 @@ public void start() {
 	public void setController(Controller general_Controller) {
 		this.general_Controller = general_Controller;
 	}
-
-
 	}

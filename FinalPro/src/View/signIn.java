@@ -73,10 +73,16 @@ public class signIn extends JFrame {
 				loginPasswordString = passwordField.getText();
 				try {
 					flag = controller.userLogin(loginIDString, loginPasswordString);
-					System.out.println("flag is " + flag);
-					if(flag) {
-						JOptionPane.showMessageDialog(null, "You have Successfully Login"+"\n" + "Welcome " + controller.findNameById(loginIDString));
-						//ליצור מסך חדש של הזמנה
+					//System.out.println("flag is " + flag);
+					if((flag == true) && loginIDString.equals("root") && loginPasswordString.equals("root")) {
+						ManagerView managerview = new ManagerView();
+						managerview.setVisible(true);
+						
+					}
+					else if (flag) {
+						Shopping_cart shopping_cart = new Shopping_cart();
+						shopping_cart.setVisible(true);
+						
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "ID/Password worng!");
