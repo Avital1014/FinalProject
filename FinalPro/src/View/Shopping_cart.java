@@ -50,6 +50,7 @@ import javax.swing.Box;
 import com.sun.source.doctree.SummaryTree;
 //import com.sun.tools.sjavac.comp.dependencies.PublicApiCollector;
 
+
 import Controller.Controller;
 import Model.customer;
 import Model.products;
@@ -107,7 +108,8 @@ public class Shopping_cart extends JFrame {
 	private static String spinnerValue;
 	private static double productPrice;
 	
-	HashMap<String, productType> cart_productsHashMap= new HashMap<String, productType>();
+	Set<products> customerPurchase = new HashSet<products>();
+	HashMap<Integer, productType> cart_productsHashMap= new HashMap<Integer, productType>();
 	Controller controller = new Controller();
 	List<String> items = new ArrayList();
 	private JTextField strawberriesCost;
@@ -143,6 +145,7 @@ public class Shopping_cart extends JFrame {
 	private JTextField textField_1;
 	private Set<products> productslist = new HashSet<products>();
 	private String  temp;
+	private JTextField textField_2;
 		
 	
 	/**
@@ -158,16 +161,15 @@ public class Shopping_cart extends JFrame {
 	}
 	  
 	
-	
-	public static String getProductName(String keyString) {
+	public static String getProductName(int i) {
 		return productName;
 	}
 
-	public static String getSpinnerValue(String keyString) {
+	public static String getSpinnerValue(int keyString) {
 		return spinnerValue;
 	}
 
-	public static double getProductPrice(String keyString) {
+	public static double getProductPrice(int keyString) {
 		return productPrice;
 	}
 
@@ -205,8 +207,7 @@ public class Shopping_cart extends JFrame {
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
-		
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBackground(Color.WHITE);
 		tabbedPane.setFont(new Font("Calibri", Font.BOLD, 20));
@@ -266,7 +267,7 @@ public class Shopping_cart extends JFrame {
 		JButton melonButton = new JButton("Add to Cart");
 		melonButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put("01", new productType("Melon", melon_spinner_value,melonCost_int));
+				cart_productsHashMap.put(1, new productType("Melon", melon_spinner_value,melonCost_int));
 			}
 		});
 		
@@ -289,7 +290,7 @@ public class Shopping_cart extends JFrame {
 		JButton pineappleButton = new JButton("Add to Cart");
 		pineappleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put("02", new productType("Pineapple", pineapple_spinner_value,pineappleCost_int));
+				cart_productsHashMap.put(2, new productType("Pineapple", pineapple_spinner_value,pineappleCost_int));
 				
 			}
 		});
@@ -330,8 +331,8 @@ public class Shopping_cart extends JFrame {
 			strawberriesbButton.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent e) {
-					
-					cart_productsHashMap.put("03", new productType("Strawberries", strawberries_spinner_value,strawberriesCost_int ));
+					customerPurchase.add(new products("Strawberries", String.valueOf(strawberries_spinner_value), strawberries_spinner_value));
+					//cart_productsHashMap.put(3, new productType("Strawberries", strawberries_spinner_value,strawberriesCost_int ));
 				}
 			});
 			strawberriesbButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -376,7 +377,7 @@ public class Shopping_cart extends JFrame {
 			JButton peachPitaButton = new JButton("Add to Cart");
 			peachPitaButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					cart_productsHashMap.put("04", new productType("Peach Pita", peachPita_spinner_value,peachPitaCost_int));
+					cart_productsHashMap.put(4, new productType("Peach Pita", peachPita_spinner_value,peachPitaCost_int));
 				}
 			});
 			peachPitaButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -400,7 +401,7 @@ public class Shopping_cart extends JFrame {
 			JButton pinkLadyButton = new JButton("Add to Cart");
 			pinkLadyButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					cart_productsHashMap.put("05", new productType("Pink Lady Apple", pinkLady_spinner_value,peachPitaCost_int));
+					cart_productsHashMap.put(5, new productType("Pink Lady Apple", pinkLady_spinner_value,peachPitaCost_int));
 				}
 			});
 			pinkLadyButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -424,7 +425,7 @@ public class Shopping_cart extends JFrame {
 			JButton lemonButton = new JButton("Add to Cart");
 			lemonButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					cart_productsHashMap.put("06", new productType("Lemon", lemon_spinner_value,lemonCost_int));
+					cart_productsHashMap.put(6, new productType("Lemon", lemon_spinner_value,lemonCost_int));
 				}
 			});
 			lemonButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -438,7 +439,7 @@ public class Shopping_cart extends JFrame {
 			JButton bananaButton = new JButton("Add to Cart");
 			bananaButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					cart_productsHashMap.put("07", new productType("Banana", banana_spinner_value,bananaCost_int));
+					cart_productsHashMap.put(7, new productType("Banana", banana_spinner_value,bananaCost_int));
 				}
 			});
 			bananaButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -763,8 +764,7 @@ public class Shopping_cart extends JFrame {
 			for (products products : productslist) {
 				if((products.getProductName()).contains("Watermelon")) {
 					//
-					temp = products.getProductPrice();
-				
+					temp = products.getProductPrice();				
 					break;
 									
 				}
@@ -1226,10 +1226,10 @@ public class Shopping_cart extends JFrame {
 		JButton finishShopButton = new JButton("Finish the shopping,\r\nand proceed to Summary");
 		finishShopButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for(String keyString : cart_productsHashMap.keySet()) {
-					System.out.println("key" + keyString + "name: " + getProductName(keyString)+ " Price " + getProductPrice(keyString)+ " Value " + getSpinnerValue(keyString));
-					
+				for (products products : customerPurchase) {
+					System.out.println(products.toString());
 				}
+				/*
 				for (String keyString : cart_productsHashMap.keySet()) {
 					System.out.println("Key is " + keyString);
 					Cart_list.append("Product:" + keyString + "\n");
@@ -1237,9 +1237,10 @@ public class Shopping_cart extends JFrame {
 					items.add(getProductName(keyString));
 					Cart_list.append("Name:" + getProductName(keyString) + "Proce:" + getProductPrice(keyString) + "Value:" + getSpinnerValue(keyString));
 				}
-				
+				*/
+				textField_2.setText("Avital");
 				System.out.println("sdfgsdf");
-				printToJlist();
+				//printToJlist();
 				//JPanel newSummaryPanel = new JPanel();
 				//newSummaryPanel.add(new JLabel("your summary page"));
 				//newSummaryPanel.action(, finishShopButton)
@@ -1350,7 +1351,7 @@ public class Shopping_cart extends JFrame {
 		JButton onionButton = new JButton("Add to Cart");
 		onionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put("08", new productType("Onion", onion_spinner_value,onionCost_int));
+				cart_productsHashMap.put(8, new productType("Onion", onion_spinner_value,onionCost_int));
 			}
 		});
 		onionButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1362,7 +1363,7 @@ public class Shopping_cart extends JFrame {
 		JButton purpleOnionButton = new JButton("Add to Cart");
 		purpleOnionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put("15", new productType("Purple Onion", purpleOnion_spinner_value,purpleOnionCost_int));
+				cart_productsHashMap.put(15, new productType("Purple Onion", purpleOnion_spinner_value,purpleOnionCost_int));
 			}
 		});
 		purpleOnionButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1465,7 +1466,7 @@ public class Shopping_cart extends JFrame {
 		JButton tomatoButton = new JButton("Add to Cart");
 		tomatoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put("09", new productType("Tomato", tomato_spinner_value,tomatoCost_int));
+				cart_productsHashMap.put(9, new productType("Tomato", tomato_spinner_value,tomatoCost_int));
 			}
 		});
 		tomatoButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1569,7 +1570,7 @@ public class Shopping_cart extends JFrame {
 		JButton cucumberButton = new JButton("Add to Cart");
 		cucumberButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put("10", new productType("Cucumber", cucumber_spinner_value,cucumberCost_int));
+				cart_productsHashMap.put(10, new productType("Cucumber", cucumber_spinner_value,cucumberCost_int));
 			}
 		});
 		cucumberButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1671,7 +1672,7 @@ public class Shopping_cart extends JFrame {
 		JButton cornButton = new JButton("Add to Cart");
 		cornButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put("11", new productType("Corn", corn_spinner_value,cornCost_int));
+				cart_productsHashMap.put(11, new productType("Corn", corn_spinner_value,cornCost_int));
 			}
 		});
 		cornButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1875,7 +1876,7 @@ public class Shopping_cart extends JFrame {
 		JButton eggplantButton = new JButton("Add to Cart");
 		eggplantButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put("12", new productType("Eggplant", eggplant_spinner_value,eggplantCost_int));
+				cart_productsHashMap.put(12, new productType("Eggplant", eggplant_spinner_value,eggplantCost_int));
 			}
 		});
 		
@@ -1978,7 +1979,7 @@ public class Shopping_cart extends JFrame {
 		JButton whiteCabbageButton = new JButton("Add to Cart");
 		whiteCabbageButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put("13", new productType("White Cabbage", whiteCabbage_spinner_value,whiteCabbageCost_int));
+				cart_productsHashMap.put(13, new productType("White Cabbage", whiteCabbage_spinner_value,whiteCabbageCost_int));
 
 			}
 		});
@@ -2083,7 +2084,7 @@ public class Shopping_cart extends JFrame {
 		JButton sweetPotatoButton = new JButton("Add to Cart");
 		sweetPotatoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put("14", new productType("Sweet Potato", sweetPotato_spinner_value,sweetPotatoCost_int));
+				cart_productsHashMap.put(14, new productType("Sweet Potato", sweetPotato_spinner_value,sweetPotatoCost_int));
 
 			}
 		});
@@ -2111,24 +2112,16 @@ public class Shopping_cart extends JFrame {
 
 		lblNewLabel_1.setBounds(222, 513, 45, 13);
 		Summary_Panel.add(lblNewLabel_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(27, 85, 86, 20);
+		Summary_Panel.add(textField_2);
+		textField_2.setColumns(10);
 		tabbedPane.setBackgroundAt(2, Color.WHITE);
 		
 		controller.writeToFIleproductslist(productslist);
 	
 	}
-	
-
-	
-		/*
-		for (String keyString : cart_productsHashMap.keySet()) {
-			
-			Cart_list.append("Product:" + keyString + "\n");
-			items.add(getProductName(keyString));
-			Cart_list.append("Name:" + getProductName(keyString) + "Proce:" + getProductPrice(keyString) + "Value:" + getSpinnerValue(keyString));
-		}*/
-		//setResizable(false);
-	   // setVisible(true);
-	
 	
 	
 	public void setStrawberriesCost(String temp) {
@@ -2144,12 +2137,12 @@ public class Shopping_cart extends JFrame {
 	}
 
 	public void printToJlist() {
-for (String keyString : cart_productsHashMap.keySet()) {
-			System.out.println("Key is " + keyString);
-			Cart_list.append("Product:" + keyString + "\n");
+for (int i : cart_productsHashMap.keySet()) {
+			System.out.println("Key is " + i);
+			Cart_list.append("Product:" + i + "\n");
 			System.out.println("Print");
-			items.add(getProductName(keyString));
-			Cart_list.append("Name:" + getProductName(keyString) + "Proce:" + getProductPrice(keyString) + "Value:" + getSpinnerValue(keyString));
+			items.add(getProductName(i));
+			Cart_list.append("Name:" + getProductName(i) + "Proce:" + getProductPrice(i) + "Value:" + getSpinnerValue(i));
 		}
 	}
 }
