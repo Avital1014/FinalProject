@@ -121,7 +121,16 @@ public class ManagerView extends JFrame implements Runnable {
 
 	@Override
 	public void run() {
-		Shopping_cart cartForEdit = new Shopping_cart();
+		Shopping_cart cartForEdit = null;
+		try {
+			cartForEdit = new Shopping_cart();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		cartForEdit.setVisible(true);
 		
 	}

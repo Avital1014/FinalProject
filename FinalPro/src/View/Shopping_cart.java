@@ -42,6 +42,7 @@ import javax.swing.JButton;
 //import net.miginfocom.swing.MigLayout;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.Box;
 //import com.jgoodies.forms.layout.FormLayout;
 //import com.jgoodies.forms.layout.ColumnSpec;
@@ -49,7 +50,6 @@ import javax.swing.Box;
 //import com.jgoodies.forms.layout.RowSpec;
 import com.sun.source.doctree.SummaryTree;
 //import com.sun.tools.sjavac.comp.dependencies.PublicApiCollector;
-
 
 import Controller.Controller;
 import Model.customer;
@@ -108,8 +108,7 @@ public class Shopping_cart extends JFrame {
 	private static String spinnerValue;
 	private static double productPrice;
 	
-	Set<products> customerPurchase = new HashSet<products>();
-	HashMap<Integer, productType> cart_productsHashMap= new HashMap<Integer, productType>();
+	HashMap<String, productType> cart_productsHashMap= new HashMap<String, productType>();
 	Controller controller = new Controller();
 	List<String> items = new ArrayList();
 	private JTextField strawberriesCost;
@@ -142,11 +141,9 @@ public class Shopping_cart extends JFrame {
 	private double whiteCabbageCost_int;
 	private JTextField sweetPotatoCost;
 	private double sweetPotatoCost_int;
-	private JTextField textField_1;
 	private Set<products> productslist = new HashSet<products>();
 	private String  temp;
-	private JTextField textField_2;
-		
+	JLabel Cart_final = new JLabel("New label");	
 	
 	/**
 	 * Launch the application.
@@ -161,15 +158,16 @@ public class Shopping_cart extends JFrame {
 	}
 	  
 	
-	public static String getProductName(int i) {
+	
+	public static String getProductName(String keyString) {
 		return productName;
 	}
 
-	public static String getSpinnerValue(int keyString) {
+	public static String getSpinnerValue(String keyString) {
 		return spinnerValue;
 	}
 
-	public static double getProductPrice(int keyString) {
+	public static double getProductPrice(String keyString) {
 		return productPrice;
 	}
 
@@ -207,7 +205,8 @@ public class Shopping_cart extends JFrame {
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));		
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBackground(Color.WHITE);
 		tabbedPane.setFont(new Font("Calibri", Font.BOLD, 20));
@@ -243,7 +242,8 @@ public class Shopping_cart extends JFrame {
 		JButton watermelonButton = new JButton("Add to Cart");
 		watermelonButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put("00", new productType("Watermelon", watermelon_spinner_value, watermelonCost_int));
+				//cart_productsHashMap.put("00", new productType("Watermelon", watermelon_spinner_value, watermelonCost_int));
+				productslist.add(new products("Watermelon",String.valueOf(watermelonCost_int) , Integer.parseInt(watermelon_spinner_value)));
 
 			}
 		});
@@ -267,7 +267,8 @@ public class Shopping_cart extends JFrame {
 		JButton melonButton = new JButton("Add to Cart");
 		melonButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put(1, new productType("Melon", melon_spinner_value,melonCost_int));
+				//cart_productsHashMap.put("01", new productType("Melon", melon_spinner_value,melonCost_int));
+				productslist.add(new products("Melon",String.valueOf(melonCost_int) , Integer.parseInt(melon_spinner_value)));
 			}
 		});
 		
@@ -290,7 +291,8 @@ public class Shopping_cart extends JFrame {
 		JButton pineappleButton = new JButton("Add to Cart");
 		pineappleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put(2, new productType("Pineapple", pineapple_spinner_value,pineappleCost_int));
+				//cart_productsHashMap.put("02", new productType("Pineapple", pineapple_spinner_value,pineappleCost_int));
+				productslist.add(new products("Pineapple",String.valueOf(pineappleCost_int) , Integer.parseInt(pineapple_spinner_value)));
 				
 			}
 		});
@@ -331,8 +333,9 @@ public class Shopping_cart extends JFrame {
 			strawberriesbButton.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent e) {
-					customerPurchase.add(new products("Strawberries", String.valueOf(strawberries_spinner_value), strawberries_spinner_value));
-					//cart_productsHashMap.put(3, new productType("Strawberries", strawberries_spinner_value,strawberriesCost_int ));
+					
+					//cart_productsHashMap.put("03", new productType("Strawberries", strawberries_spinner_value,strawberriesCost_int ));
+					productslist.add(new products("Strawberries",String.valueOf(strawberriesCost_int) , Integer.parseInt(strawberries_spinner_value.trim())));
 				}
 			});
 			strawberriesbButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -346,7 +349,9 @@ public class Shopping_cart extends JFrame {
 			JSpinner strwaberriesSpinner = new JSpinner();
 			strwaberriesSpinner.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
-					strawberries_spinner_value= (String) strwaberriesSpinner.getValue();
+		
+					strawberries_spinner_value = (String) strwaberriesSpinner.getValue();
+					//Integer.parseInt(strawberries_spinner_value);
 				}
 			});
 			
@@ -377,7 +382,8 @@ public class Shopping_cart extends JFrame {
 			JButton peachPitaButton = new JButton("Add to Cart");
 			peachPitaButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					cart_productsHashMap.put(4, new productType("Peach Pita", peachPita_spinner_value,peachPitaCost_int));
+					//cart_productsHashMap.put("04", new productType("Peach Pita", peachPita_spinner_value,peachPitaCost_int));
+					productslist.add(new products("Peach Pita",String.valueOf(peachPitaCost_int) , Integer.parseInt(peachPita_spinner_value)));
 				}
 			});
 			peachPitaButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -401,7 +407,8 @@ public class Shopping_cart extends JFrame {
 			JButton pinkLadyButton = new JButton("Add to Cart");
 			pinkLadyButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					cart_productsHashMap.put(5, new productType("Pink Lady Apple", pinkLady_spinner_value,peachPitaCost_int));
+					//cart_productsHashMap.put("05", new productType("Pink Lady Apple", pinkLady_spinner_value,peachPitaCost_int));
+					productslist.add(new products("Pink Lady Apple",String.valueOf(pinkLadyCost_int) , Integer.parseInt(pinkLady_spinner_value)));
 				}
 			});
 			pinkLadyButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -425,7 +432,8 @@ public class Shopping_cart extends JFrame {
 			JButton lemonButton = new JButton("Add to Cart");
 			lemonButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					cart_productsHashMap.put(6, new productType("Lemon", lemon_spinner_value,lemonCost_int));
+					//cart_productsHashMap.put("06", new productType("Lemon", lemon_spinner_value,lemonCost_int));
+					productslist.add(new products("Lemon",String.valueOf(lemonCost_int) , Integer.parseInt(lemon_spinner_value)));
 				}
 			});
 			lemonButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -439,7 +447,8 @@ public class Shopping_cart extends JFrame {
 			JButton bananaButton = new JButton("Add to Cart");
 			bananaButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					cart_productsHashMap.put(7, new productType("Banana", banana_spinner_value,bananaCost_int));
+					//cart_productsHashMap.put("07", new productType("Banana", banana_spinner_value,bananaCost_int));
+					productslist.add(new products("Banana",String.valueOf(bananaCost_int) , Integer.parseInt(banana_spinner_value)));
 				}
 			});
 			bananaButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -464,7 +473,7 @@ public class Shopping_cart extends JFrame {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-						String temp = strawberriesCost.getText();
+						String temp = pineappleCost.getText();
 						for (products products : productslist) {
 							if((products.getProductName()).contains("Pineapple")) {
 								
@@ -491,7 +500,7 @@ public class Shopping_cart extends JFrame {
 				}
 			});
 			
-	
+			//The Super User can edit Pineapple cost
 			if (flag) {
 				pineappleCost.setEditable(true);
 			}
@@ -561,7 +570,7 @@ public class Shopping_cart extends JFrame {
 				}
 			});
 
-
+			//Super User can edit starwberries cost 
 			if (flag) {
 				strawberriesCost.setEditable(true);
 				
@@ -632,7 +641,7 @@ public class Shopping_cart extends JFrame {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-						String temp = strawberriesCost.getText();
+						String temp = melonCost.getText();
 						for (products products : productslist) {
 							if((products.getProductName()).contains("Melon")) {
 								
@@ -664,6 +673,7 @@ public class Shopping_cart extends JFrame {
 			melonCost.setHorizontalAlignment(SwingConstants.CENTER);
 			melonCost.setForeground(Color.BLACK);
 			melonCost.setFont(new Font("Calibri", Font.BOLD, 24));
+			//Super User can Edit melon cost
 			if (flag) {
 				melonCost.setEditable(true);
 			}
@@ -673,7 +683,7 @@ public class Shopping_cart extends JFrame {
 			
 			for (products products : productslist) {
 				if((products.getProductName()).contains("Melon")) {
-					//
+					
 					temp = products.getProductPrice();
 				
 					break;
@@ -702,6 +712,7 @@ public class Shopping_cart extends JFrame {
 			watermelonSpinner.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
 					watermelon_spinner_value =  (String) watermelonSpinner.getValue();
+					//watermelon_spinner_value = Double.parseDouble((String) watermelonSpinner.getValue());
 				}
 			});
 			watermelonSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
@@ -723,7 +734,7 @@ public class Shopping_cart extends JFrame {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-						String temp = strawberriesCost.getText();
+						String temp = watemelonCost.getText();
 						for (products products : productslist) {
 							if((products.getProductName()).contains("Watermelon")) {
 								
@@ -755,6 +766,7 @@ public class Shopping_cart extends JFrame {
 			watemelonCost.setHorizontalAlignment(SwingConstants.CENTER);
 			watemelonCost.setForeground(Color.BLACK);
 			watemelonCost.setFont(new Font("Calibri", Font.BOLD, 24));
+			//Super User can edit watermelon Cost
 			if (flag) {
 				watemelonCost.setEditable(true);
 			}
@@ -764,7 +776,8 @@ public class Shopping_cart extends JFrame {
 			for (products products : productslist) {
 				if((products.getProductName()).contains("Watermelon")) {
 					//
-					temp = products.getProductPrice();				
+					temp = products.getProductPrice();
+				
 					break;
 									
 				}
@@ -814,7 +827,7 @@ public class Shopping_cart extends JFrame {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-						String temp = strawberriesCost.getText();
+						String temp = bananaCost.getText();
 						for (products products : productslist) {
 							if((products.getProductName()).contains("Banana")) {
 								
@@ -841,7 +854,7 @@ public class Shopping_cart extends JFrame {
 				}
 			});
 
-			
+			//Super User can edit Banana cost 
 			if (flag) {
 				bananaCost.setEditable(true);
 			}
@@ -905,7 +918,7 @@ public class Shopping_cart extends JFrame {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-						String temp = strawberriesCost.getText();
+						String temp = lemonCost.getText();
 						for (products products : productslist) {
 							if((products.getProductName()).contains("Lemon")) {
 								
@@ -936,6 +949,7 @@ public class Shopping_cart extends JFrame {
 			lemonCost.setHorizontalAlignment(SwingConstants.CENTER);
 			lemonCost.setForeground(Color.BLACK);
 			lemonCost.setFont(new Font("Calibri", Font.BOLD, 24));
+			//Super User can Edit Lemon cost 
 			if (flag) {
 				lemonCost.setEditable(true);
 			}
@@ -998,7 +1012,7 @@ public class Shopping_cart extends JFrame {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-						String temp = strawberriesCost.getText();
+						String temp = pinkLadyCost.getText();
 						for (products products : productslist) {
 							if((products.getProductName()).contains("Pink Lady Apple")) {
 								
@@ -1029,6 +1043,7 @@ public class Shopping_cart extends JFrame {
 			pinkLadyCost.setHorizontalAlignment(SwingConstants.CENTER);
 			pinkLadyCost.setForeground(Color.BLACK);
 			pinkLadyCost.setFont(new Font("Calibri", Font.BOLD, 24));
+			//super user can edit pink lady cost 
 			if (flag) {
 				pinkLadyCost.setEditable(true);
 			}
@@ -1089,7 +1104,7 @@ public class Shopping_cart extends JFrame {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-						String temp = strawberriesCost.getText();
+						String temp = peachPitaCost.getText();
 						for (products products : productslist) {
 							if((products.getProductName()).contains("Peach Pita")) {
 								
@@ -1120,6 +1135,7 @@ public class Shopping_cart extends JFrame {
 			peachPitaCost.setHorizontalAlignment(SwingConstants.CENTER);
 			peachPitaCost.setForeground(Color.BLACK);
 			peachPitaCost.setFont(new Font("Calibri", Font.BOLD, 24));
+			//super user can edit peach pita cost 
 			if (flag) {
 				peachPitaCost.setEditable(true);
 			}
@@ -1218,28 +1234,27 @@ public class Shopping_cart extends JFrame {
 		lblCorn.setFont(new Font("Calibri", Font.BOLD, 24));
 		lblCorn.setBounds(35, 327, 267, 229);
 		vegetablesPanel.add(lblCorn);
-		
-		/**
-		 * Finish Button
-		 */
-		JLabel lblNewLabel_1 = new JLabel("New label");
 		JButton finishShopButton = new JButton("Finish the shopping,\r\nand proceed to Summary");
 		finishShopButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for (products products : customerPurchase) {
-					System.out.println(products.toString());
+				/*for(String keyString : cart_productsHashMap.keySet()) {
+					System.out.println("key" + keyString + "name: " + getProductName(keyString)+ " Price " + getProductPrice(keyString)+ " Value " + getSpinnerValue(keyString));
+					
 				}
-				/*
 				for (String keyString : cart_productsHashMap.keySet()) {
 					System.out.println("Key is " + keyString);
 					Cart_list.append("Product:" + keyString + "\n");
 					System.out.println("Print");
 					items.add(getProductName(keyString));
 					Cart_list.append("Name:" + getProductName(keyString) + "Proce:" + getProductPrice(keyString) + "Value:" + getSpinnerValue(keyString));
+				}*/
+				for(products products: productslist)
+				{
+					//System.out.println(products.printProducts());
+					Cart_final.setText(products.printProducts());
+					
 				}
-				*/
-				textField_2.setText("Avital");
-				System.out.println("sdfgsdf");
+				//System.out.println("sdfgsdf");
 				//printToJlist();
 				//JPanel newSummaryPanel = new JPanel();
 				//newSummaryPanel.add(new JLabel("your summary page"));
@@ -1285,7 +1300,7 @@ public class Shopping_cart extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String temp = strawberriesCost.getText();
+					String temp = onionCost.getText();
 					for (products products : productslist) {
 						if((products.getProductName()).contains("Onion")) {
 							
@@ -1315,6 +1330,7 @@ public class Shopping_cart extends JFrame {
 		onionCost.setHorizontalAlignment(SwingConstants.CENTER);
 		onionCost.setForeground(Color.BLACK);
 		onionCost.setFont(new Font("Calibri", Font.BOLD, 24));
+		//super user can edit onion cost 
 		if (flag) {
 			onionCost.setEditable(true);
 		}
@@ -1351,7 +1367,8 @@ public class Shopping_cart extends JFrame {
 		JButton onionButton = new JButton("Add to Cart");
 		onionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put(8, new productType("Onion", onion_spinner_value,onionCost_int));
+				//cart_productsHashMap.put("08", new productType("Onion", onion_spinner_value,onionCost_int));
+				productslist.add(new products("Onion",String.valueOf(onionCost_int) , Integer.parseInt(onion_spinner_value)));
 			}
 		});
 		onionButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1363,7 +1380,8 @@ public class Shopping_cart extends JFrame {
 		JButton purpleOnionButton = new JButton("Add to Cart");
 		purpleOnionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put(15, new productType("Purple Onion", purpleOnion_spinner_value,purpleOnionCost_int));
+				//cart_productsHashMap.put("15", new productType("Purple Onion", purpleOnion_spinner_value,purpleOnionCost_int));
+				productslist.add(new products("Purple Onion",String.valueOf(purpleOnionCost_int) , Integer.parseInt(purpleOnion_spinner_value)));
 			}
 		});
 		purpleOnionButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1399,7 +1417,7 @@ public class Shopping_cart extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String temp = strawberriesCost.getText();
+					String temp = textField.getText();
 					for (products products : productslist) {
 						if((products.getProductName()).contains("Purple Onion")) {
 							
@@ -1430,6 +1448,7 @@ public class Shopping_cart extends JFrame {
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setForeground(Color.BLACK);
 		textField.setFont(new Font("Calibri", Font.BOLD, 24));
+		//super user can edit purple onion cost
 		if (flag) {
 			textField.setEditable(true);
 		}
@@ -1466,7 +1485,8 @@ public class Shopping_cart extends JFrame {
 		JButton tomatoButton = new JButton("Add to Cart");
 		tomatoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put(9, new productType("Tomato", tomato_spinner_value,tomatoCost_int));
+				//cart_productsHashMap.put("09", new productType("Tomato", tomato_spinner_value,tomatoCost_int));
+				productslist.add(new products("Tomato",String.valueOf(tomatoCost_int) , Integer.parseInt(tomato_spinner_value)));
 			}
 		});
 		tomatoButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1503,7 +1523,7 @@ public class Shopping_cart extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String temp = strawberriesCost.getText();
+					String temp = tomatoCost.getText();
 					for (products products : productslist) {
 						if((products.getProductName()).contains("Tomato")) {
 							
@@ -1534,6 +1554,7 @@ public class Shopping_cart extends JFrame {
 		tomatoCost.setHorizontalAlignment(SwingConstants.CENTER);
 		tomatoCost.setForeground(Color.BLACK);
 		tomatoCost.setFont(new Font("Calibri", Font.BOLD, 24));
+		//super user can edit tomato cost 
 		if (flag) {
 			tomatoCost.setEditable(true);
 		}
@@ -1570,7 +1591,8 @@ public class Shopping_cart extends JFrame {
 		JButton cucumberButton = new JButton("Add to Cart");
 		cucumberButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put(10, new productType("Cucumber", cucumber_spinner_value,cucumberCost_int));
+				//cart_productsHashMap.put("10", new productType("Cucumber", cucumber_spinner_value,cucumberCost_int));
+				productslist.add(new products("Cucumber",String.valueOf(cucumberCost_int) , Integer.parseInt(cucumber_spinner_value)));
 			}
 		});
 		cucumberButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1606,7 +1628,7 @@ public class Shopping_cart extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String temp = strawberriesCost.getText();
+					String temp = cucumberCost.getText();
 					for (products products : productslist) {
 						if((products.getProductName()).contains("Cucumber")) {
 							
@@ -1636,6 +1658,7 @@ public class Shopping_cart extends JFrame {
 		cucumberCost.setHorizontalAlignment(SwingConstants.CENTER);
 		cucumberCost.setForeground(Color.BLACK);
 		cucumberCost.setFont(new Font("Calibri", Font.BOLD, 24));
+		//super user can edit cucumber cost
 		if (flag) {
 			cucumberCost.setEditable(true);
 		}
@@ -1672,7 +1695,8 @@ public class Shopping_cart extends JFrame {
 		JButton cornButton = new JButton("Add to Cart");
 		cornButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put(11, new productType("Corn", corn_spinner_value,cornCost_int));
+				//cart_productsHashMap.put("11", new productType("Corn", corn_spinner_value,cornCost_int));
+				productslist.add(new products("Corn",String.valueOf(cornCost_int) , Integer.parseInt(corn_spinner_value)));
 			}
 		});
 		cornButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1710,7 +1734,7 @@ public class Shopping_cart extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String temp = strawberriesCost.getText();
+					String temp = cornCost.getText();
 					for (products products : productslist) {
 						if((products.getProductName()).contains("Corn")) {
 							
@@ -1740,6 +1764,7 @@ public class Shopping_cart extends JFrame {
 		cornCost.setHorizontalAlignment(SwingConstants.CENTER);
 		cornCost.setForeground(Color.BLACK);
 		cornCost.setFont(new Font("Calibri", Font.BOLD, 24));
+		//super user can edit corn cost 
 		if (flag) {
 			cornCost.setEditable(true);
 		}
@@ -1804,7 +1829,7 @@ public class Shopping_cart extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String temp = strawberriesCost.getText();
+					String temp = eggplantCost.getText();
 					for (products products : productslist) {
 						if((products.getProductName()).contains("Eggplant")) {
 							
@@ -1840,6 +1865,7 @@ public class Shopping_cart extends JFrame {
 		eggplantCost.setHorizontalAlignment(SwingConstants.CENTER);
 		eggplantCost.setForeground(Color.BLACK);
 		eggplantCost.setFont(new Font("Calibri", Font.BOLD, 24));
+		//super user can edit eggplant cost
 		if (flag) {
 			eggplantCost.setEditable(true);
 		}
@@ -1876,7 +1902,8 @@ public class Shopping_cart extends JFrame {
 		JButton eggplantButton = new JButton("Add to Cart");
 		eggplantButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put(12, new productType("Eggplant", eggplant_spinner_value,eggplantCost_int));
+				//cart_productsHashMap.put("12", new productType("Eggplant", eggplant_spinner_value,eggplantCost_int));
+				productslist.add(new products("Eggplant",String.valueOf(eggplantCost_int) , Integer.parseInt(eggplant_spinner_value)));
 			}
 		});
 		
@@ -1913,7 +1940,7 @@ public class Shopping_cart extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String temp = strawberriesCost.getText();
+					String temp = whiteCabageCost.getText();
 					for (products products : productslist) {
 						if((products.getProductName()).contains("White Cabbage")) {
 							
@@ -1943,6 +1970,7 @@ public class Shopping_cart extends JFrame {
 		whiteCabageCost.setHorizontalAlignment(SwingConstants.CENTER);
 		whiteCabageCost.setForeground(Color.BLACK);
 		whiteCabageCost.setFont(new Font("Calibri", Font.BOLD, 24));
+		//super user can edit white cabbage cost
 		if (flag) {
 			whiteCabageCost.setEditable(true);;
 		}
@@ -1979,7 +2007,8 @@ public class Shopping_cart extends JFrame {
 		JButton whiteCabbageButton = new JButton("Add to Cart");
 		whiteCabbageButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put(13, new productType("White Cabbage", whiteCabbage_spinner_value,whiteCabbageCost_int));
+				//cart_productsHashMap.put("13", new productType("White Cabbage", whiteCabbage_spinner_value,whiteCabbageCost_int));
+				productslist.add(new products("White Cabbage",String.valueOf(whiteCabbageCost_int) , Integer.parseInt(whiteCabbage_spinner_value)));
 
 			}
 		});
@@ -2018,7 +2047,7 @@ public class Shopping_cart extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-					String temp = strawberriesCost.getText();
+					String temp = sweetPotatoCost.getText();
 					for (products products : productslist) {
 						if((products.getProductName()).contains("Sweet Potato")) {
 							
@@ -2048,6 +2077,7 @@ public class Shopping_cart extends JFrame {
 		sweetPotatoCost.setHorizontalAlignment(SwingConstants.CENTER);
 		sweetPotatoCost.setForeground(Color.BLACK);
 		sweetPotatoCost.setFont(new Font("Calibri", Font.BOLD, 24));
+		//super user can edit sweet potato cost 
 		if (flag) {
 			sweetPotatoCost.setEditable(true);
 		}
@@ -2084,7 +2114,8 @@ public class Shopping_cart extends JFrame {
 		JButton sweetPotatoButton = new JButton("Add to Cart");
 		sweetPotatoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cart_productsHashMap.put(14, new productType("Sweet Potato", sweetPotato_spinner_value,sweetPotatoCost_int));
+				//cart_productsHashMap.put("14", new productType("Sweet Potato", sweetPotato_spinner_value,sweetPotatoCost_int));
+				productslist.add(new products("Sweet Potato",String.valueOf(sweetPotatoCost_int) , Integer.parseInt(sweetPotato_spinner_value)));
 
 			}
 		});
@@ -2096,32 +2127,27 @@ public class Shopping_cart extends JFrame {
 		tabbedPane.addTab("Summaryy", null, Summary_Panel, null);
 		Summary_Panel.setLayout(null);
 		
-		JTextArea Cart_list = new JTextArea();
-		Cart_list.setBounds(311, 83, 532, 251);
-		Summary_Panel.add(Cart_list);
-		Cart_list.setLineWrap(true);
-		Cart_list.setWrapStyleWord(true);
-
-		Cart_list.setEditable(false);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(426, 142, 96, 19);
-		Summary_Panel.add(textField_1);
-		textField_1.setColumns(10);
-		
-
-		lblNewLabel_1.setBounds(222, 513, 45, 13);
-		Summary_Panel.add(lblNewLabel_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(27, 85, 86, 20);
-		Summary_Panel.add(textField_2);
-		textField_2.setColumns(10);
+		Cart_final.setBounds(81, 94, 443, 250);
+		Summary_Panel.add(Cart_final);
 		tabbedPane.setBackgroundAt(2, Color.WHITE);
 		
 		controller.writeToFIleproductslist(productslist);
 	
 	}
+	
+
+	
+		/*
+		for (String keyString : cart_productsHashMap.keySet()) {
+			
+			Cart_list.append("Product:" + keyString + "\n");
+			items.add(getProductName(keyString));
+			Cart_list.append("Name:" + getProductName(keyString) + "Proce:" + getProductPrice(keyString) + "Value:" + getSpinnerValue(keyString));
+		}*/
+		//setResizable(false);
+	   // setVisible(true);
+	
 	
 	
 	public void setStrawberriesCost(String temp) {
@@ -2134,15 +2160,5 @@ public class Shopping_cart extends JFrame {
 		String tempString =this.strawberriesCost.getText();
 		
 		return strawberriesCost.getText();
-	}
-
-	public void printToJlist() {
-for (int i : cart_productsHashMap.keySet()) {
-			System.out.println("Key is " + i);
-			Cart_list.append("Product:" + i + "\n");
-			System.out.println("Print");
-			items.add(getProductName(i));
-			Cart_list.append("Name:" + getProductName(i) + "Proce:" + getProductPrice(i) + "Value:" + getSpinnerValue(i));
-		}
 	}
 }

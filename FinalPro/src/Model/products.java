@@ -13,15 +13,25 @@ public class products implements Serializable {
 //	private Set<products> productsList = new HashSet<products>() ; //Wont return duplicate names
 	String productName;
 	String productPrice;
-	String quantity;
+	int quantity;
 	
 	
 	
-	public products(String productName, String productPrice, String strawberries_spinner_value) {
+	public products(String productName, String productPrice, int spinner_value) {
 		super();
 		this.productName = productName;
 		this.productPrice = productPrice;
-		this.quantity = strawberries_spinner_value;
+		this.quantity = quantity;
+	}
+
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 
@@ -36,6 +46,11 @@ public class products implements Serializable {
 	public String toString() {
 
 		 return "product [name=" + productName + ", price=" + productPrice + "]";
+		 		
+	}
+	public String printProducts() {
+
+		 return "product [name=" + productName + ", Product quantity= " + quantity +  ", price=" + productPrice + "]" + "\n";
 		 		
 	}
 
