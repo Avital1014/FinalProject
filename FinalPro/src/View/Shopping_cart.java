@@ -1,6 +1,7 @@
 package View;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -38,16 +39,20 @@ import java.awt.Canvas;
 import java.awt.Rectangle;
 import java.awt.Cursor;
 import javax.swing.JButton;
-import net.miginfocom.swing.MigLayout;
+//import net.miginfocom.swing.MigLayout;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
 import javax.swing.Box;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
+//import com.jgoodies.forms.layout.FormLayout;
+//import com.jgoodies.forms.layout.ColumnSpec;
+//import com.jgoodies.forms.layout.FormSpecs;
+//import com.jgoodies.forms.layout.RowSpec;
 import com.sun.source.doctree.SummaryTree;
-import com.sun.tools.sjavac.comp.dependencies.PublicApiCollector;
+//import com.sun.tools.sjavac.comp.dependencies.PublicApiCollector;
+
+import Controller.Controller;
+import Model.customer;
+import Model.products;
 
 import java.awt.Frame;
 import javax.swing.event.AncestorListener;
@@ -63,6 +68,15 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import java.util.List;
+import java.util.Set;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 public class Shopping_cart extends JFrame {
 
 	/**
@@ -94,6 +108,7 @@ public class Shopping_cart extends JFrame {
 	private static double productPrice;
 	
 	HashMap<String, productType> cart_productsHashMap= new HashMap<String, productType>();
+	Controller controller = new Controller();
 	List<String> items = new ArrayList();
 	private JTextField strawberriesCost;
 	private double strawberriesCost_int;
@@ -126,6 +141,10 @@ public class Shopping_cart extends JFrame {
 	private JTextField sweetPotatoCost;
 	private double sweetPotatoCost_int;
 	private JTextField textField_1;
+	private Set<products> productslist = new HashSet<products>();
+	private String  temp;
+		
+	
 	/**
 	 * Launch the application.
 	 */
@@ -168,9 +187,11 @@ public class Shopping_cart extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
 	
-	public Shopping_cart() {
+	public Shopping_cart() throws FileNotFoundException, IOException {
 		
 		
 		setType(Type.POPUP);
@@ -195,6 +216,16 @@ public class Shopping_cart extends JFrame {
 		fruitPanel.setBackground(Color.WHITE);
 		tabbedPane.addTab("Fruits", null, fruitPanel, null);
 		fruitPanel.setLayout(null);
+		
+		/*Detrmine if the current user is root*/
+		boolean flag = controller.isCurrenIsRoot(Controller.currentUser.getUser_id(), Controller.currentUser.getPasswordUser());
+	
+		this.productslist = controller.getProductList();
+		
+	//	 for (products customer : productslist) {
+		//	 System.out.println("in view");
+			//System.out.println(customer.toString());
+		//}
 		
 		/**
 		 * Watermelon- Button 
@@ -427,12 +458,60 @@ public class Shopping_cart extends JFrame {
 			 */
 			
 			pineappleCost = new JTextField();
-			pineappleCost.setEditable(false);
+			
+			pineappleCost.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+						String temp = strawberriesCost.getText();
+						for (products products : productslist) {
+							if((products.getProductName()).contains("Pineapple")) {
+								
+								products.setProductPrice(temp);
+								try {
+									controller.writeToFIleproductslist(productslist);
+								} catch (FileNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+						
+						
+								break;
+								
+											
+							}
+						}
+					
+					
+					}
+				}
+			});
+			
+	
+			if (flag) {
+				pineappleCost.setEditable(true);
+			}
+			else {
+				pineappleCost.setEditable(false);
+			}
+			for (products products : productslist) {
+				if((products.getProductName()).contains("Pineapple")) {
+					
+					temp = products.getProductPrice();
+					
+					break;
+					
+								
+				}
+			}
 			pineappleCost.setForeground(Color.BLACK);
 			pineappleCost.setHorizontalAlignment(SwingConstants.CENTER);
 			pineappleCost.setBackground(Color.WHITE);
 			pineappleCost.setFont(new Font("Calibri", Font.BOLD, 24));
-			pineappleCost.setText("49.8");
+			pineappleCost.setText(temp);
 			pineappleCost.setBounds(439, 255, 69, 29);
 			fruitPanel.add(pineappleCost);
 			pineappleCost.setColumns(10);
@@ -450,11 +529,63 @@ public class Shopping_cart extends JFrame {
 			 */
 			
 			strawberriesCost = new JTextField();
-			strawberriesCost.setText("9.5");
+			strawberriesCost.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+						String temp = strawberriesCost.getText();
+						for (products products : productslist) {
+							if((products.getProductName()).contains("Strawberries")) {
+								
+								products.setProductPrice(temp);
+								try {
+									controller.writeToFIleproductslist(productslist);
+								} catch (FileNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+						
+						
+								break;
+								
+											
+							}
+						}
+					
+					
+					}
+				}
+			});
+
+
+			if (flag) {
+				strawberriesCost.setEditable(true);
+				
+			}
+			else {
+				
+				strawberriesCost.setEditable(false);
+			}
+			
+			for (products products : productslist) {
+				if((products.getProductName()).contains("Strawberries")) {
+					
+					temp = products.getProductPrice();
+					
+					break;
+					
+			
+				}
+			}
+				
+			strawberriesCost.setText(temp);			
+			strawberriesCost.setText(getStrawberriesCost());
 			strawberriesCost.setHorizontalAlignment(SwingConstants.CENTER);
 			strawberriesCost.setForeground(Color.BLACK);
 			strawberriesCost.setFont(new Font("Calibri", Font.BOLD, 24));
-			strawberriesCost.setEditable(false);
 			strawberriesCost.setColumns(10);
 			strawberriesCost.setBackground(Color.WHITE);
 			strawberriesCost.setBounds(163, 256, 69, 29);
@@ -495,11 +626,60 @@ public class Shopping_cart extends JFrame {
 			 */
 			
 			melonCost = new JTextField();
-			melonCost.setText("7.8");
+			
+			melonCost.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+						String temp = strawberriesCost.getText();
+						for (products products : productslist) {
+							if((products.getProductName()).contains("Melon")) {
+								
+								products.setProductPrice(temp);
+								try {
+									controller.writeToFIleproductslist(productslist);
+								} catch (FileNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+						
+						
+								break;
+								
+											
+							}
+						}
+					
+					
+					}
+				}
+			});
+
+
+			
 			melonCost.setHorizontalAlignment(SwingConstants.CENTER);
 			melonCost.setForeground(Color.BLACK);
 			melonCost.setFont(new Font("Calibri", Font.BOLD, 24));
-			melonCost.setEditable(false);
+			if (flag) {
+				melonCost.setEditable(true);
+			}
+			else {
+				melonCost.setEditable(false);
+			}
+			
+			for (products products : productslist) {
+				if((products.getProductName()).contains("Melon")) {
+					//
+					temp = products.getProductPrice();
+				
+					break;
+									
+				}
+			}
+			melonCost.setText(temp);
 			melonCost.setColumns(10);
 			melonCost.setBackground(Color.WHITE);
 			melonCost.setBounds(713, 256, 69, 29);
@@ -538,11 +718,58 @@ public class Shopping_cart extends JFrame {
 			 */
 			
 			watemelonCost = new JTextField();
-			watemelonCost.setText("4.8");
+			watemelonCost.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+						String temp = strawberriesCost.getText();
+						for (products products : productslist) {
+							if((products.getProductName()).contains("Watermelon")) {
+								
+								products.setProductPrice(temp);
+								try {
+									controller.writeToFIleproductslist(productslist);
+								} catch (FileNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+						
+						
+								break;
+								
+											
+							}
+						}
+					
+					
+					}
+				}
+			});
+
+
+			
 			watemelonCost.setHorizontalAlignment(SwingConstants.CENTER);
 			watemelonCost.setForeground(Color.BLACK);
 			watemelonCost.setFont(new Font("Calibri", Font.BOLD, 24));
-			watemelonCost.setEditable(false);
+			if (flag) {
+				watemelonCost.setEditable(true);
+			}
+			else {
+				watemelonCost.setEditable(false);
+			}
+			for (products products : productslist) {
+				if((products.getProductName()).contains("Watermelon")) {
+					//
+					temp = products.getProductPrice();
+				
+					break;
+									
+				}
+			}
+			watemelonCost.setText(temp);
 			watemelonCost.setColumns(10);
 			watemelonCost.setBackground(Color.WHITE);
 			watemelonCost.setBounds(1010, 256, 69, 29);
@@ -583,11 +810,58 @@ public class Shopping_cart extends JFrame {
 			 */
 			
 			bananaCost = new JTextField();
-			bananaCost.setText("11.8");
+			bananaCost.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+						String temp = strawberriesCost.getText();
+						for (products products : productslist) {
+							if((products.getProductName()).contains("Banana")) {
+								
+								products.setProductPrice(temp);
+								try {
+									controller.writeToFIleproductslist(productslist);
+								} catch (FileNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+						
+						
+								break;
+								
+											
+							}
+						}
+					
+					
+					}
+				}
+			});
+
+			
+			if (flag) {
+				bananaCost.setEditable(true);
+			}
+			else {
+				watemelonCost.setEditable(false);
+			}
+			for (products products : productslist) {
+				if((products.getProductName()).contains("Banana")) {
+					//
+					temp = products.getProductPrice();
+				
+					break;
+									
+				}
+			}
+			
+			bananaCost.setText(temp);
 			bananaCost.setHorizontalAlignment(SwingConstants.CENTER);
 			bananaCost.setForeground(Color.BLACK);
 			bananaCost.setFont(new Font("Calibri", Font.BOLD, 24));
-			bananaCost.setEditable(false);
 			bananaCost.setColumns(10);
 			bananaCost.setBackground(Color.WHITE);
 			bananaCost.setBounds(163, 561, 69, 29);
@@ -627,11 +901,60 @@ public class Shopping_cart extends JFrame {
 			 */
 			
 			lemonCost = new JTextField();
-			lemonCost.setText("14.8");
+			lemonCost.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+						String temp = strawberriesCost.getText();
+						for (products products : productslist) {
+							if((products.getProductName()).contains("Lemon")) {
+								
+								products.setProductPrice(temp);
+								try {
+									controller.writeToFIleproductslist(productslist);
+								} catch (FileNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+						
+						
+								break;
+								
+											
+							}
+						}
+					
+					
+					}
+				}
+			});
+
+			
 			lemonCost.setHorizontalAlignment(SwingConstants.CENTER);
 			lemonCost.setForeground(Color.BLACK);
 			lemonCost.setFont(new Font("Calibri", Font.BOLD, 24));
-			lemonCost.setEditable(false);
+			if (flag) {
+				lemonCost.setEditable(true);
+			}
+			else {
+				lemonCost.setEditable(false);
+			}
+			
+			for (products products : productslist) {
+				if((products.getProductName()).contains("Lemon")) {
+					//
+					temp = products.getProductPrice();
+				
+					break;
+									
+				}
+			}
+			
+			lemonCost.setText(temp);
+			
 			lemonCost.setColumns(10);
 			lemonCost.setBackground(Color.WHITE);
 			lemonCost.setBounds(437, 561, 69, 29);
@@ -671,11 +994,58 @@ public class Shopping_cart extends JFrame {
 			 */
 			
 			pinkLadyCost = new JTextField();
-			pinkLadyCost.setText("18.8");
+			pinkLadyCost.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+						String temp = strawberriesCost.getText();
+						for (products products : productslist) {
+							if((products.getProductName()).contains("Pink Lady Apple")) {
+								
+								products.setProductPrice(temp);
+								try {
+									controller.writeToFIleproductslist(productslist);
+								} catch (FileNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+						
+						
+								break;
+								
+											
+							}
+						}
+					
+					
+					}
+				}
+			});
+
+			
 			pinkLadyCost.setHorizontalAlignment(SwingConstants.CENTER);
 			pinkLadyCost.setForeground(Color.BLACK);
 			pinkLadyCost.setFont(new Font("Calibri", Font.BOLD, 24));
-			pinkLadyCost.setEditable(false);
+			if (flag) {
+				pinkLadyCost.setEditable(true);
+			}
+			else {
+				pinkLadyCost.setEditable(false);
+			}
+			
+			for (products products : productslist) {
+				if((products.getProductName()).contains("Pink Lady Apple")) {
+					//
+					temp = products.getProductPrice();
+				
+					break;
+									
+				}
+			}
+			pinkLadyCost.setText(temp);
 			pinkLadyCost.setColumns(10);
 			pinkLadyCost.setBackground(Color.WHITE);
 			pinkLadyCost.setBounds(713, 561, 69, 29);
@@ -715,11 +1085,57 @@ public class Shopping_cart extends JFrame {
 			 */
 			
 			peachPitaCost = new JTextField();
-			peachPitaCost.setText("18.8");
+			peachPitaCost.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+						String temp = strawberriesCost.getText();
+						for (products products : productslist) {
+							if((products.getProductName()).contains("Peach Pita")) {
+								
+								products.setProductPrice(temp);
+								try {
+									controller.writeToFIleproductslist(productslist);
+								} catch (FileNotFoundException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+						
+						
+								break;
+								
+											
+							}
+						}
+					
+					
+					}
+				}
+			});
+
+			
 			peachPitaCost.setHorizontalAlignment(SwingConstants.CENTER);
 			peachPitaCost.setForeground(Color.BLACK);
 			peachPitaCost.setFont(new Font("Calibri", Font.BOLD, 24));
-			peachPitaCost.setEditable(false);
+			if (flag) {
+				peachPitaCost.setEditable(true);
+			}
+			else {
+				peachPitaCost.setEditable(false);
+			}
+			for (products products : productslist) {
+				if((products.getProductName()).contains("Peach Pita")) {
+					//
+					temp = products.getProductPrice();
+				
+					break;
+									
+				}
+			}
+			peachPitaCost.setText(temp);
 			peachPitaCost.setColumns(10);
 			peachPitaCost.setBackground(Color.WHITE);
 			peachPitaCost.setBounds(1009, 561, 69, 29);
@@ -814,6 +1230,13 @@ public class Shopping_cart extends JFrame {
 					System.out.println("key" + keyString + "name: " + getProductName(keyString)+ " Price " + getProductPrice(keyString)+ " Value " + getSpinnerValue(keyString));
 					
 				}
+				for (String keyString : cart_productsHashMap.keySet()) {
+					System.out.println("Key is " + keyString);
+					Cart_list.append("Product:" + keyString + "\n");
+					System.out.println("Print");
+					items.add(getProductName(keyString));
+					Cart_list.append("Name:" + getProductName(keyString) + "Proce:" + getProductPrice(keyString) + "Value:" + getSpinnerValue(keyString));
+				}
 				
 				System.out.println("sdfgsdf");
 				printToJlist();
@@ -857,11 +1280,56 @@ public class Shopping_cart extends JFrame {
 		 */
 		
 		onionCost = new JTextField();
-		onionCost.setText("4.8");
+		onionCost.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String temp = strawberriesCost.getText();
+					for (products products : productslist) {
+						if((products.getProductName()).contains("Onion")) {
+							
+							products.setProductPrice(temp);
+							try {
+								controller.writeToFIleproductslist(productslist);
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+					
+					
+							break;
+							
+										
+						}
+					}
+				
+				
+				}
+			}
+		});
+		;
 		onionCost.setHorizontalAlignment(SwingConstants.CENTER);
 		onionCost.setForeground(Color.BLACK);
 		onionCost.setFont(new Font("Calibri", Font.BOLD, 24));
-		onionCost.setEditable(false);
+		if (flag) {
+			onionCost.setEditable(true);
+		}
+		else {
+			onionCost.setEditable(false);
+		}
+		for (products products : productslist) {
+			if((products.getProductName()).contains("Onion")) {
+				//
+				temp = products.getProductPrice();
+			
+				break;
+								
+			}
+		}
+		onionCost.setText(temp);
 		onionCost.setColumns(10);
 		onionCost.setBackground(Color.WHITE);
 		onionCost.setBounds(157, 238, 69, 29);
@@ -926,11 +1394,57 @@ public class Shopping_cart extends JFrame {
 		 */
 		
 		textField = new JTextField();
-		textField.setText("7.8");
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String temp = strawberriesCost.getText();
+					for (products products : productslist) {
+						if((products.getProductName()).contains("Purple Onion")) {
+							
+							products.setProductPrice(temp);
+							try {
+								controller.writeToFIleproductslist(productslist);
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+					
+					
+							break;
+							
+										
+						}
+					}
+				
+				
+				}
+			}
+		});
+		
+		
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
 		textField.setForeground(Color.BLACK);
 		textField.setFont(new Font("Calibri", Font.BOLD, 24));
-		textField.setEditable(false);
+		if (flag) {
+			textField.setEditable(true);
+		}
+		else {
+			textField.setEditable(false);
+		}
+		for (products products : productslist) {
+			if((products.getProductName()).contains("Purple Onion")) {
+				//
+				temp = products.getProductPrice();
+			
+				break;
+								
+			}
+		}
+		textField.setText(temp);
 		textField.setColumns(10);
 		textField.setBackground(Color.WHITE);
 		textField.setBounds(434, 238, 69, 29);
@@ -984,11 +1498,57 @@ public class Shopping_cart extends JFrame {
 		 */
 		
 		tomatoCost = new JTextField();
-		tomatoCost.setText("9.8");
+		tomatoCost.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String temp = strawberriesCost.getText();
+					for (products products : productslist) {
+						if((products.getProductName()).contains("Tomato")) {
+							
+							products.setProductPrice(temp);
+							try {
+								controller.writeToFIleproductslist(productslist);
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+					
+					
+							break;
+							
+										
+						}
+					}
+				
+				
+				}
+			}
+		});
+		
+		
 		tomatoCost.setHorizontalAlignment(SwingConstants.CENTER);
 		tomatoCost.setForeground(Color.BLACK);
 		tomatoCost.setFont(new Font("Calibri", Font.BOLD, 24));
-		tomatoCost.setEditable(false);
+		if (flag) {
+			tomatoCost.setEditable(true);
+		}
+		else {
+			tomatoCost.setEditable(false);
+		}
+		for (products products : productslist) {
+			if((products.getProductName()).contains("Tomato")) {
+				//
+				temp = products.getProductPrice();
+			
+				break;
+								
+			}
+		}
+		tomatoCost.setText(temp);
 		tomatoCost.setColumns(10);
 		tomatoCost.setBackground(Color.WHITE);
 		tomatoCost.setBounds(728, 237, 69, 29);
@@ -1041,11 +1601,56 @@ public class Shopping_cart extends JFrame {
 		 */
 		
 		cucumberCost = new JTextField();
-		cucumberCost.setText("8.8");
+		cucumberCost.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String temp = strawberriesCost.getText();
+					for (products products : productslist) {
+						if((products.getProductName()).contains("Cucumber")) {
+							
+							products.setProductPrice(temp);
+							try {
+								controller.writeToFIleproductslist(productslist);
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+					
+					
+							break;
+							
+										
+						}
+					}
+				
+				
+				}
+			}
+		});
+		
 		cucumberCost.setHorizontalAlignment(SwingConstants.CENTER);
 		cucumberCost.setForeground(Color.BLACK);
 		cucumberCost.setFont(new Font("Calibri", Font.BOLD, 24));
-		cucumberCost.setEditable(false);
+		if (flag) {
+			cucumberCost.setEditable(true);
+		}
+		else {
+			cucumberCost.setEditable(false);
+		}
+		for (products products : productslist) {
+			if((products.getProductName()).contains("Cucumber")) {
+				//
+				temp = products.getProductPrice();
+			
+				break;
+								
+			}
+		}
+		cucumberCost.setText(temp);
 		cucumberCost.setColumns(10);
 		cucumberCost.setBackground(Color.WHITE);
 		cucumberCost.setBounds(993, 238, 69, 29);
@@ -1081,11 +1686,7 @@ public class Shopping_cart extends JFrame {
 		cornSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				corn_spinner_value =  (String) cornSpinner.getValue();
-				//Elad
-				//System.out.println(corn_spinner_value);
-				//lblNewLabel_1.setText(corn_spinner_value);
-			
-				
+
 			}
 			
 		});
@@ -1104,11 +1705,57 @@ public class Shopping_cart extends JFrame {
 		 */
 		
 		cornCost = new JTextField();
-		cornCost.setText("24.8");
+		cornCost.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String temp = strawberriesCost.getText();
+					for (products products : productslist) {
+						if((products.getProductName()).contains("Corn")) {
+							
+							products.setProductPrice(temp);
+							try {
+								controller.writeToFIleproductslist(productslist);
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+					
+					
+							break;
+							
+										
+						}
+					}
+				
+				
+				}
+			}
+		});
+		
 		cornCost.setHorizontalAlignment(SwingConstants.CENTER);
 		cornCost.setForeground(Color.BLACK);
 		cornCost.setFont(new Font("Calibri", Font.BOLD, 24));
-		cornCost.setEditable(false);
+		if (flag) {
+			cornCost.setEditable(true);
+		}
+		else {
+			cornCost.setEditable(false);
+		}
+		
+		for (products products : productslist) {
+			if((products.getProductName()).contains("Corn")) {
+				//
+				temp = products.getProductPrice();
+			
+				break;
+								
+			}
+		}
+		cornCost.setText(temp);
 		cornCost.setColumns(10);
 		cornCost.setBackground(Color.WHITE);
 		cornCost.setBounds(157, 562, 69, 29);
@@ -1138,6 +1785,11 @@ public class Shopping_cart extends JFrame {
 		vegetablesPanel.add(eggplantSpinner);
 		
 		JLabel label_17 = new JLabel("kg");
+		label_17.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
 		label_17.setFont(new Font("Tahoma", Font.BOLD, 14));
 		label_17.setBounds(414, 567, 46, 28);
 		vegetablesPanel.add(label_17);
@@ -1147,11 +1799,62 @@ public class Shopping_cart extends JFrame {
 		 */
 		
 		eggplantCost = new JTextField();
-		eggplantCost.setText("8.8");
+		eggplantCost.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String temp = strawberriesCost.getText();
+					for (products products : productslist) {
+						if((products.getProductName()).contains("Eggplant")) {
+							
+							products.setProductPrice(temp);
+							try {
+								controller.writeToFIleproductslist(productslist);
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+					
+					
+							break;
+							
+										
+						}
+					}
+				
+				
+				}
+			}
+		});
+		
+		
+		eggplantCost.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
 		eggplantCost.setHorizontalAlignment(SwingConstants.CENTER);
 		eggplantCost.setForeground(Color.BLACK);
 		eggplantCost.setFont(new Font("Calibri", Font.BOLD, 24));
-		eggplantCost.setEditable(false);
+		if (flag) {
+			eggplantCost.setEditable(true);
+		}
+		else {
+			eggplantCost.setEditable(false);
+		}
+		for (products products : productslist) {
+			if((products.getProductName()).contains("Eggplant")) {
+				//
+				temp = products.getProductPrice();
+			
+				break;
+								
+			}
+		}
+		eggplantCost.setText(temp);
 		eggplantCost.setColumns(10);
 		eggplantCost.setBackground(Color.WHITE);
 		eggplantCost.setBounds(434, 562, 69, 29);
@@ -1205,11 +1908,56 @@ public class Shopping_cart extends JFrame {
 		 */
 		
 		whiteCabageCost = new JTextField();
-		whiteCabageCost.setText("5.8");
+		whiteCabageCost.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String temp = strawberriesCost.getText();
+					for (products products : productslist) {
+						if((products.getProductName()).contains("White Cabbage")) {
+							
+							products.setProductPrice(temp);
+							try {
+								controller.writeToFIleproductslist(productslist);
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+					
+					
+							break;
+							
+										
+						}
+					}
+				
+				
+				}
+			}
+		});
+		
 		whiteCabageCost.setHorizontalAlignment(SwingConstants.CENTER);
 		whiteCabageCost.setForeground(Color.BLACK);
 		whiteCabageCost.setFont(new Font("Calibri", Font.BOLD, 24));
-		whiteCabageCost.setEditable(false);
+		if (flag) {
+			whiteCabageCost.setEditable(true);;
+		}
+		else {
+			whiteCabageCost.setEditable(false);
+		}
+		for (products products : productslist) {
+			if((products.getProductName()).contains("White Cabbage")) {
+				//
+				temp = products.getProductPrice();
+			
+				break;
+								
+			}
+		}
+		whiteCabageCost.setText(temp);
 		whiteCabageCost.setColumns(10);
 		whiteCabageCost.setBackground(Color.WHITE);
 		whiteCabageCost.setBounds(728, 562, 69, 29);
@@ -1265,11 +2013,56 @@ public class Shopping_cart extends JFrame {
 		 */
 		
 		sweetPotatoCost = new JTextField();
-		sweetPotatoCost.setText("16.8");
+		sweetPotatoCost.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String temp = strawberriesCost.getText();
+					for (products products : productslist) {
+						if((products.getProductName()).contains("Sweet Potato")) {
+							
+							products.setProductPrice(temp);
+							try {
+								controller.writeToFIleproductslist(productslist);
+							} catch (FileNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+					
+					
+							break;
+							
+										
+						}
+					}
+				
+				
+				}
+			}
+		});
+		
 		sweetPotatoCost.setHorizontalAlignment(SwingConstants.CENTER);
 		sweetPotatoCost.setForeground(Color.BLACK);
 		sweetPotatoCost.setFont(new Font("Calibri", Font.BOLD, 24));
-		sweetPotatoCost.setEditable(false);
+		if (flag) {
+			sweetPotatoCost.setEditable(true);
+		}
+		else {
+			sweetPotatoCost.setEditable(false);
+		}
+		for (products products : productslist) {
+			if((products.getProductName()).contains("Sweet Potato")) {
+				//
+				temp = products.getProductPrice();
+			
+				break;
+								
+			}
+		}
+		sweetPotatoCost.setText(temp);
 		sweetPotatoCost.setColumns(10);
 		sweetPotatoCost.setBackground(Color.WHITE);
 		sweetPotatoCost.setBounds(1011, 562, 69, 29);
@@ -1307,6 +2100,7 @@ public class Shopping_cart extends JFrame {
 		Summary_Panel.add(Cart_list);
 		Cart_list.setLineWrap(true);
 		Cart_list.setWrapStyleWord(true);
+
 		Cart_list.setEditable(false);
 		
 		textField_1 = new JTextField();
@@ -1318,6 +2112,13 @@ public class Shopping_cart extends JFrame {
 		lblNewLabel_1.setBounds(222, 513, 45, 13);
 		Summary_Panel.add(lblNewLabel_1);
 		tabbedPane.setBackgroundAt(2, Color.WHITE);
+		
+		controller.writeToFIleproductslist(productslist);
+	
+	}
+	
+
+	
 		/*
 		for (String keyString : cart_productsHashMap.keySet()) {
 			
@@ -1328,8 +2129,20 @@ public class Shopping_cart extends JFrame {
 		//setResizable(false);
 	   // setVisible(true);
 	
-	}
 	
+	
+	public void setStrawberriesCost(String temp) {
+		this.strawberriesCost.setText(temp);
+
+	}
+
+
+	public String getStrawberriesCost() {
+		String tempString =this.strawberriesCost.getText();
+		
+		return strawberriesCost.getText();
+	}
+
 	public void printToJlist() {
 for (String keyString : cart_productsHashMap.keySet()) {
 			System.out.println("Key is " + keyString);

@@ -80,6 +80,12 @@ public class MarkoliaUser implements Serializable{
 		//this.answer = answer;
 	}
 	
+	public MarkoliaUser(String user_id, String passwordUser) {
+		this.user_id = user_id;
+		this.passwordUser = passwordUser;
+	}
+
+
 	public String getUser_id() {
 		return user_id;
 	}

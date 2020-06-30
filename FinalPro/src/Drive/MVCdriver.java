@@ -1,8 +1,10 @@
 package Drive;
 
 import java.awt.Window;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -12,8 +14,12 @@ import java.util.Set;
 import Controller.Controller;
 import Model.MarkoliaUser;
 import Model.Model;
+import Model.customer;
+import Model.products;
 import View.MarkoliaMainView;
 import View.SignUpView;
+
+
 
 
 
@@ -22,18 +28,8 @@ public class MVCdriver {
 	private static String fILENAME= "Users";
 	
 
-	public static void main(String [] args) throws IOException, ClassNotFoundException {
-		
-		
-		//Set<MarkoliaUser> Users = (Set<MarkoliaUser>) new HashSet<MarkoliaUser>();
-	
-		
-		
-		//try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(fILENAME))) {
-		//	System.out.println("open file in the main");
-//		}catch (IOException e) {
-	//		e.printStackTrace();
-		//}
+	@SuppressWarnings("unchecked")
+	public static void main(String [] args) throws IOException, ClassNotFoundException  {
 		
 		
 		/**configuration for General   */
@@ -48,4 +44,6 @@ public class MVCdriver {
 	//}
 	}
 }
+
+
 

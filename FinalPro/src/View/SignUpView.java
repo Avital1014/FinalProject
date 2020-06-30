@@ -262,6 +262,14 @@ public class SignUpView extends JFrame implements Runnable{
 	
 		validAnswer.setForeground(new Color(255, 0, 0));
 		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("working");
+				controller.exportUsers(null);
+			}
+		});
+		
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -302,10 +310,13 @@ public class SignUpView extends JFrame implements Runnable{
 									.addGap(95)
 									.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 264, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(186)
+									.addGap(34)
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 										.addComponent(answerTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(createButton))
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addComponent(btnNewButton)
+											.addGap(84)
+											.addComponent(createButton)))
 									.addPreferredGap(ComponentPlacement.UNRELATED)
 									.addComponent(validAnswer)
 									.addGap(80)))))
@@ -366,7 +377,9 @@ public class SignUpView extends JFrame implements Runnable{
 						.addComponent(answerTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(validAnswer))
 					.addGap(13)
-					.addComponent(createButton)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(createButton)
+						.addComponent(btnNewButton))
 					.addGap(21))
 		);
 		panel_1.setLayout(null);

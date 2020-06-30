@@ -14,24 +14,44 @@ import java.util.Set;
 
 import Controller.Controller;
 
+
 import java.lang.Exception;
 
 public class UserRepositoryImple implements UserRepository {
 	
 	private final String fILENAME= "Users";
-	private Set<customer> users = new HashSet<customer>() ; //Wont return duplicate names
+	private static Set<customer> users = new HashSet<customer>() ; //Wont return duplicate names
 	
+	static ObjectInputStream objectInputStream;
 	
 	@SuppressWarnings("unchecked")
 	public UserRepositoryImple() {
 
 		try {			
-			@SuppressWarnings("resource")
-			ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fILENAME));
+		//	@SuppressWarnings("resource")
+			objectInputStream = new ObjectInputStream(new FileInputStream(fILENAME));
 			this.users = (Set<customer>) objectInputStream.readObject();
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}	
+	}
+	
+	public static Set<customer> getUsers(){
+	//	for (customer custo : users) {
+		//		System.out.println(custo.toString());
+		return users;
+			}
+		
+		
+	
+	public static ObjectInputStream sendFile() {
+		//for (customer custo : users) {
+	//		System.out.println(custo.toString());
+			
+	//	}
+	System.out.println("sendfile");
+	return objectInputStream;
 	}
 	
 	@SuppressWarnings({ "unlikely-arg-type", "unused" })
@@ -46,6 +66,7 @@ public class UserRepositoryImple implements UserRepository {
 			for (customer markoliaUser : users) {
 				if((markoliaUser.getUser_id()).contains(user.getUser_id())) {
 					System.out.println("found");
+					System.out.println(markoliaUser.toString());
 					flag = true;	
 					System.out.println("flag is "+flag);
 									
