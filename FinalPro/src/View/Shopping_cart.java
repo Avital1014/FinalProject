@@ -88,22 +88,22 @@ public class Shopping_cart extends JFrame {
 	private JPanel contentPane;
 	private JTextField pineappleCost;
 	private double pineappleCost_int;
-	private String pineapple_spinner_value;
-	private Object strawberries_spinner_value;
-	private String melon_spinner_value;
-	private String watermelon_spinner_value;
-	private String banana_spinner_value;
-	private String lemon_spinner_value;
-	private String peachPita_spinner_value;
-	private String pinkLady_spinner_value;
-	private String onion_spinner_value;
-	private String purpleOnion_spinner_value;
-	private String tomato_spinner_value;
-	private String cucumber_spinner_value;
-	private String corn_spinner_value;
-	private String eggplant_spinner_value;
-	private String whiteCabbage_spinner_value;
-	private String sweetPotato_spinner_value;
+	private double pineapple_spinner_value;
+	private double strawberries_spinner_value;
+	private double melon_spinner_value;
+	private double watermelon_spinner_value;
+	private double banana_spinner_value;
+	private double lemon_spinner_value;
+	private double peachPita_spinner_value;
+	private double pinkLady_spinner_value;
+	private double onion_spinner_value;
+	private double purpleOnion_spinner_value;
+	private double tomato_spinner_value;
+	private double cucumber_spinner_value;
+	private double corn_spinner_value;
+	private double eggplant_spinner_value;
+	private double whiteCabbage_spinner_value;
+	private double sweetPotato_spinner_value;
 	private static String productName;
 	private static String spinnerValue;
 	private static double productPrice;
@@ -245,7 +245,7 @@ public class Shopping_cart extends JFrame {
 		watermelonButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//cart_productsHashMap.put("00", new productType("Watermelon", watermelon_spinner_value, watermelonCost_int));
-				productslist.add(new products("Watermelon",String.valueOf(watermelonCost_int) , Integer.parseInt(watermelon_spinner_value)));
+				productslist.add(new products("Watermelon",String.valueOf(watermelonCost_int) , watermelon_spinner_value));
 
 			}
 		});
@@ -270,7 +270,7 @@ public class Shopping_cart extends JFrame {
 		melonButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//cart_productsHashMap.put("01", new productType("Melon", melon_spinner_value,melonCost_int));
-				productslist.add(new products("Melon",String.valueOf(melonCost_int) , Integer.parseInt(melon_spinner_value)));
+				productslist.add(new products("Melon",String.valueOf(melonCost_int) , melon_spinner_value));
 			}
 		});
 		
@@ -294,7 +294,7 @@ public class Shopping_cart extends JFrame {
 		pineappleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//cart_productsHashMap.put("02", new productType("Pineapple", pineapple_spinner_value,pineappleCost_int));
-				productslist.add(new products("Pineapple",String.valueOf(pineappleCost_int) , Integer.parseInt(pineapple_spinner_value)));
+				productslist.add(new products("Pineapple",String.valueOf(pineappleCost_int) ,pineapple_spinner_value));
 				
 			}
 		});
@@ -309,7 +309,7 @@ public class Shopping_cart extends JFrame {
 		JSpinner pineappleSpinner = new JSpinner();
 		pineappleSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				 pineapple_spinner_value =  (String) pineappleSpinner.getValue();
+				 pineapple_spinner_value = Double.parseDouble( (String) pineappleSpinner.getValue());
 				
 			}
 		});
@@ -338,11 +338,11 @@ public class Shopping_cart extends JFrame {
 					
 					//cart_productsHashMap.put("03", new productType("Strawberries", strawberries_spinner_value,strawberriesCost_int ));
 					//productslist.add(new products("Strawberries",String.valueOf(strawberriesCost_int) , Integer.parseInt(strawberries_spinner_value.trim())));
-					productslist.add(new products("Strawberries",String.valueOf(strawberriesCost_int) , (double) strawberries_spinner_value ));
-					System.out.println(strawberries_spinner_value);
+					productslist.add(new products("Strawberries",String.valueOf(strawberriesCost_int) , strawberries_spinner_value ));
+					//System.out.println(strawberries_spinner_value);
 					//double x=Double.parseDouble((String) strawberries_spinner_value);
-					 double y= 4.0 * (double)strawberries_spinner_value;
-					 System.out.println(y);
+					 //double y= 4.0 * strawberries_spinner_value;
+					 
 				}
 			});
 			strawberriesbButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -358,6 +358,7 @@ public class Shopping_cart extends JFrame {
 				public void stateChanged(ChangeEvent e) {
 		
 					strawberries_spinner_value = Double.parseDouble((String) strwaberriesSpinner.getValue());
+					
 					
 					
 				
@@ -393,7 +394,7 @@ public class Shopping_cart extends JFrame {
 			peachPitaButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//cart_productsHashMap.put("04", new productType("Peach Pita", peachPita_spinner_value,peachPitaCost_int));
-					productslist.add(new products("Peach Pita",String.valueOf(peachPitaCost_int) , Integer.parseInt(peachPita_spinner_value)));
+					productslist.add(new products("Peach Pita",String.valueOf(peachPitaCost_int) , peachPita_spinner_value));
 				}
 			});
 			peachPitaButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -418,7 +419,7 @@ public class Shopping_cart extends JFrame {
 			pinkLadyButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//cart_productsHashMap.put("05", new productType("Pink Lady Apple", pinkLady_spinner_value,peachPitaCost_int));
-					productslist.add(new products("Pink Lady Apple",String.valueOf(pinkLadyCost_int) , Integer.parseInt(pinkLady_spinner_value)));
+					productslist.add(new products("Pink Lady Apple",String.valueOf(pinkLadyCost_int) , pinkLady_spinner_value));
 				}
 			});
 			pinkLadyButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -443,7 +444,7 @@ public class Shopping_cart extends JFrame {
 			lemonButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//cart_productsHashMap.put("06", new productType("Lemon", lemon_spinner_value,lemonCost_int));
-					productslist.add(new products("Lemon",String.valueOf(lemonCost_int) , Integer.parseInt(lemon_spinner_value)));
+					productslist.add(new products("Lemon",String.valueOf(lemonCost_int) , lemon_spinner_value));
 				}
 			});
 			lemonButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -458,7 +459,7 @@ public class Shopping_cart extends JFrame {
 			bananaButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//cart_productsHashMap.put("07", new productType("Banana", banana_spinner_value,bananaCost_int));
-					productslist.add(new products("Banana",String.valueOf(bananaCost_int) , Integer.parseInt(banana_spinner_value)));
+					productslist.add(new products("Banana",String.valueOf(bananaCost_int) , banana_spinner_value));
 				}
 			});
 			bananaButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -628,7 +629,7 @@ public class Shopping_cart extends JFrame {
 			JSpinner melonSpinner = new JSpinner();
 			melonSpinner.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
-					melon_spinner_value= (String) melonSpinner.getValue();
+					melon_spinner_value= Double.parseDouble((String) melonSpinner.getValue());
 				}
 			});
 			melonSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
@@ -721,7 +722,7 @@ public class Shopping_cart extends JFrame {
 			JSpinner watermelonSpinner = new JSpinner();
 			watermelonSpinner.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
-					watermelon_spinner_value =  (String) watermelonSpinner.getValue();
+					watermelon_spinner_value =  Double.parseDouble((String) watermelonSpinner.getValue());
 					//watermelon_spinner_value = Double.parseDouble((String) watermelonSpinner.getValue());
 				}
 			});
@@ -814,7 +815,7 @@ public class Shopping_cart extends JFrame {
 			JSpinner bananaSpinner = new JSpinner();
 			bananaSpinner.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
-					banana_spinner_value =  (String) bananaSpinner.getValue();
+					banana_spinner_value =  Double.parseDouble((String) bananaSpinner.getValue());
 				}
 				
 			});
@@ -906,7 +907,7 @@ public class Shopping_cart extends JFrame {
 			JSpinner lemonSpinner = new JSpinner();
 			lemonSpinner.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
-					lemon_spinner_value =  (String) lemonSpinner.getValue();
+					lemon_spinner_value =  Double.parseDouble((String) lemonSpinner.getValue());
 				}
 			});
 			lemonSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
@@ -1000,7 +1001,7 @@ public class Shopping_cart extends JFrame {
 			JSpinner pinkLadySpinner = new JSpinner();
 			pinkLadySpinner.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
-					pinkLady_spinner_value =  (String) pinkLadySpinner.getValue();
+					pinkLady_spinner_value =  Double.parseDouble((String) pinkLadySpinner.getValue());
 				}
 			});
 			pinkLadySpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
@@ -1092,7 +1093,7 @@ public class Shopping_cart extends JFrame {
 			JSpinner peachPitaSpinner = new JSpinner();
 			peachPitaSpinner.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
-					peachPita_spinner_value =  (String) peachPitaSpinner.getValue();
+					peachPita_spinner_value =  Double.parseDouble((String) peachPitaSpinner.getValue());
 				}
 			});
 			peachPitaSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
@@ -1287,7 +1288,7 @@ public class Shopping_cart extends JFrame {
 		JSpinner onionSpinner = new JSpinner();
 		onionSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				onion_spinner_value =  (String) onionSpinner.getValue();
+				onion_spinner_value =  Double.parseDouble((String) onionSpinner.getValue());
 
 			}
 		});
@@ -1378,7 +1379,7 @@ public class Shopping_cart extends JFrame {
 		onionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//cart_productsHashMap.put("08", new productType("Onion", onion_spinner_value,onionCost_int));
-				productslist.add(new products("Onion",String.valueOf(onionCost_int) , Integer.parseInt(onion_spinner_value)));
+				productslist.add(new products("Onion",String.valueOf(onionCost_int) , onion_spinner_value));
 			}
 		});
 		onionButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1391,7 +1392,7 @@ public class Shopping_cart extends JFrame {
 		purpleOnionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//cart_productsHashMap.put("15", new productType("Purple Onion", purpleOnion_spinner_value,purpleOnionCost_int));
-				productslist.add(new products("Purple Onion",String.valueOf(purpleOnionCost_int) , Integer.parseInt(purpleOnion_spinner_value)));
+				productslist.add(new products("Purple Onion",String.valueOf(purpleOnionCost_int) , purpleOnion_spinner_value));
 			}
 		});
 		purpleOnionButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1405,7 +1406,7 @@ public class Shopping_cart extends JFrame {
 		JSpinner purpleOnionSpinner = new JSpinner();
 		purpleOnionSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				purpleOnion_spinner_value =  (String) purpleOnionSpinner.getValue();
+				purpleOnion_spinner_value =  Double.parseDouble((String) purpleOnionSpinner.getValue());
 			}
 		});
 		purpleOnionSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
@@ -1496,7 +1497,7 @@ public class Shopping_cart extends JFrame {
 		tomatoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//cart_productsHashMap.put("09", new productType("Tomato", tomato_spinner_value,tomatoCost_int));
-				productslist.add(new products("Tomato",String.valueOf(tomatoCost_int) , Integer.parseInt(tomato_spinner_value)));
+				productslist.add(new products("Tomato",String.valueOf(tomatoCost_int) , tomato_spinner_value));
 			}
 		});
 		tomatoButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1511,7 +1512,7 @@ public class Shopping_cart extends JFrame {
 		JSpinner tomatoSpinner = new JSpinner();
 		tomatoSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				tomato_spinner_value =  (String) tomatoSpinner.getValue();
+				tomato_spinner_value =  Double.parseDouble((String) tomatoSpinner.getValue());
 			}
 		});
 		tomatoSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
@@ -1602,7 +1603,7 @@ public class Shopping_cart extends JFrame {
 		cucumberButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//cart_productsHashMap.put("10", new productType("Cucumber", cucumber_spinner_value,cucumberCost_int));
-				productslist.add(new products("Cucumber",String.valueOf(cucumberCost_int) , Integer.parseInt(cucumber_spinner_value)));
+				productslist.add(new products("Cucumber",String.valueOf(cucumberCost_int) , cucumber_spinner_value));
 			}
 		});
 		cucumberButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1616,7 +1617,7 @@ public class Shopping_cart extends JFrame {
 		JSpinner cucumberSpinner = new JSpinner();
 		cucumberSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				cucumber_spinner_value =  (String) cucumberSpinner.getValue();
+				cucumber_spinner_value =  Double.parseDouble((String) cucumberSpinner.getValue());
 			}
 		});
 		cucumberSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
@@ -1706,7 +1707,7 @@ public class Shopping_cart extends JFrame {
 		cornButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//cart_productsHashMap.put("11", new productType("Corn", corn_spinner_value,cornCost_int));
-				productslist.add(new products("Corn",String.valueOf(cornCost_int) , Integer.parseInt(corn_spinner_value)));
+				productslist.add(new products("Corn",String.valueOf(cornCost_int) , corn_spinner_value));
 			}
 		});
 		cornButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -1720,7 +1721,7 @@ public class Shopping_cart extends JFrame {
 		JSpinner cornSpinner = new JSpinner();
 		cornSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				corn_spinner_value =  (String) cornSpinner.getValue();
+				corn_spinner_value =  Double.parseDouble((String) cornSpinner.getValue());
 
 			}
 			
@@ -1812,7 +1813,7 @@ public class Shopping_cart extends JFrame {
 		JSpinner eggplantSpinner = new JSpinner();
 		eggplantSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				eggplant_spinner_value =  (String) eggplantSpinner.getValue();
+				eggplant_spinner_value =  Double.parseDouble((String) eggplantSpinner.getValue());
 			}
 		});
 		eggplantSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
@@ -1913,7 +1914,7 @@ public class Shopping_cart extends JFrame {
 		eggplantButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//cart_productsHashMap.put("12", new productType("Eggplant", eggplant_spinner_value,eggplantCost_int));
-				productslist.add(new products("Eggplant",String.valueOf(eggplantCost_int) , Integer.parseInt(eggplant_spinner_value)));
+				productslist.add(new products("Eggplant",String.valueOf(eggplantCost_int) , eggplant_spinner_value));
 			}
 		});
 		
@@ -1928,7 +1929,7 @@ public class Shopping_cart extends JFrame {
 		JSpinner whiteCabbageSpinner = new JSpinner();
 		whiteCabbageSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				whiteCabbage_spinner_value =  (String) whiteCabbageSpinner.getValue();
+				whiteCabbage_spinner_value =  Double.parseDouble((String) whiteCabbageSpinner.getValue());
 			}
 		});
 		whiteCabbageSpinner.setModel(new SpinnerListModel(new String[] {"0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7"}));
@@ -2018,7 +2019,7 @@ public class Shopping_cart extends JFrame {
 		whiteCabbageButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//cart_productsHashMap.put("13", new productType("White Cabbage", whiteCabbage_spinner_value,whiteCabbageCost_int));
-				productslist.add(new products("White Cabbage",String.valueOf(whiteCabbageCost_int) , Integer.parseInt(whiteCabbage_spinner_value)));
+				productslist.add(new products("White Cabbage",String.valueOf(whiteCabbageCost_int) , whiteCabbage_spinner_value));
 
 			}
 		});
@@ -2034,7 +2035,7 @@ public class Shopping_cart extends JFrame {
 		JSpinner sweetPotatoSpinner = new JSpinner();
 		sweetPotatoSpinner.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				sweetPotato_spinner_value =  (String) sweetPotatoSpinner.getValue();
+				sweetPotato_spinner_value =  Double.parseDouble((String) sweetPotatoSpinner.getValue());
 
 			}
 		});
@@ -2125,7 +2126,7 @@ public class Shopping_cart extends JFrame {
 		sweetPotatoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//cart_productsHashMap.put("14", new productType("Sweet Potato", sweetPotato_spinner_value,sweetPotatoCost_int));
-				productslist.add(new products("Sweet Potato",String.valueOf(sweetPotatoCost_int) , Integer.parseInt(sweetPotato_spinner_value)));
+				productslist.add(new products("Sweet Potato",String.valueOf(sweetPotatoCost_int) , sweetPotato_spinner_value));
 
 			}
 		});
