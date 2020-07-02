@@ -13,11 +13,11 @@ public class products implements Serializable {
 //	private Set<products> productsList = new HashSet<products>() ; //Wont return duplicate names
 	String productName;
 	String productPrice;
-	int quantity;
+	double quantity;
 	
 	
 	
-	public products(String productName, String productPrice, int spinner_value) {
+	public products(String productName, String productPrice, double quantity) {
 		super();
 		this.productName = productName;
 		this.productPrice = productPrice;
@@ -25,12 +25,12 @@ public class products implements Serializable {
 	}
 
 
-	public int getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
 
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
 

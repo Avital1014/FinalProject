@@ -89,7 +89,7 @@ public class Shopping_cart extends JFrame {
 	private JTextField pineappleCost;
 	private double pineappleCost_int;
 	private String pineapple_spinner_value;
-	private String strawberries_spinner_value;
+	private Object strawberries_spinner_value;
 	private String melon_spinner_value;
 	private String watermelon_spinner_value;
 	private String banana_spinner_value;
@@ -144,6 +144,8 @@ public class Shopping_cart extends JFrame {
 	private Set<products> productslist = new HashSet<products>();
 	private String  temp;
 	JLabel Cart_final = new JLabel("New label");	
+	
+	int check_fast;
 	
 	/**
 	 * Launch the application.
@@ -335,7 +337,12 @@ public class Shopping_cart extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					
 					//cart_productsHashMap.put("03", new productType("Strawberries", strawberries_spinner_value,strawberriesCost_int ));
-					productslist.add(new products("Strawberries",String.valueOf(strawberriesCost_int) , Integer.parseInt(strawberries_spinner_value.trim())));
+					//productslist.add(new products("Strawberries",String.valueOf(strawberriesCost_int) , Integer.parseInt(strawberries_spinner_value.trim())));
+					productslist.add(new products("Strawberries",String.valueOf(strawberriesCost_int) , (double) strawberries_spinner_value ));
+					System.out.println(strawberries_spinner_value);
+					//double x=Double.parseDouble((String) strawberries_spinner_value);
+					 double y= 4.0 * (double)strawberries_spinner_value;
+					 System.out.println(y);
 				}
 			});
 			strawberriesbButton.setFont(new Font("Calibri", Font.BOLD, 18));
@@ -350,7 +357,10 @@ public class Shopping_cart extends JFrame {
 			strwaberriesSpinner.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent e) {
 		
-					strawberries_spinner_value = (String) strwaberriesSpinner.getValue();
+					strawberries_spinner_value = Double.parseDouble((String) strwaberriesSpinner.getValue());
+					
+					
+				
 					//Integer.parseInt(strawberries_spinner_value);
 				}
 			});
