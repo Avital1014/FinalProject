@@ -7,9 +7,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JDateChooserBeanInfo;
+import com.toedter.calendar.JDateChooserCellEditor;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -26,6 +26,8 @@ import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.JFormattedTextField;
+import java.awt.Choice;
+import javax.swing.JButton;
 
 public class PaymentPage extends JFrame {
 
@@ -120,9 +122,9 @@ public class PaymentPage extends JFrame {
 		contentPane.add(apartementText);
 		
 		JLabel lblIsrael = new JLabel("Israel");
-		lblIsrael.setIcon(new ImageIcon(PaymentPage.class.getResource("/View/israel-flag-icon-free-download.jpg")));
+		lblIsrael.setIcon(null);
 		lblIsrael.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblIsrael.setBounds(32, 122, 65, 14);
+		lblIsrael.setBounds(42, 122, 46, 14);
 		contentPane.add(lblIsrael);
 		
 		JLabel lblCity = new JLabel("City: ");
@@ -142,7 +144,7 @@ public class PaymentPage extends JFrame {
 		txtZipCode.setColumns(10);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Set Shipping information as Default to your User");
-		chckbxNewCheckBox.setBounds(32, 153, 286, 23);
+		chckbxNewCheckBox.setBounds(32, 153, 316, 23);
 		contentPane.add(chckbxNewCheckBox);
 		
 		JLabel lblPaymentMethods = new JLabel("Payment Methods");
@@ -172,12 +174,18 @@ public class PaymentPage extends JFrame {
 		txtNameHere.setBounds(366, 227, 154, 20);
 		contentPane.add(txtNameHere);
 		
-		JLabel lblExpires = new JLabel("Expires:");
-		lblExpires.setFont(new Font("Calibri", Font.BOLD, 14));
-		lblExpires.setBounds(22, 264, 93, 14);
-		contentPane.add(lblExpires);
-		
 		 
-		
+		 JDateChooser dateChooser = new JDateChooser();
+		 dateChooser.setBounds(135, 258, 111, 20);
+		 contentPane.add(dateChooser);
+		 
+		 JLabel lblEx = new JLabel("Expiration Date:");
+		 lblEx.setFont(new Font("Calibri", Font.BOLD, 14));
+		 lblEx.setBounds(22, 263, 119, 14);
+		 contentPane.add(lblEx);
+		 
+		 JButton btnNewButton = new JButton("Finish the Purchase");
+		 btnNewButton.setBounds(120, 310, 154, 23);
+		 contentPane.add(btnNewButton);
 	}
 }
