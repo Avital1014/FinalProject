@@ -50,7 +50,7 @@ public class products implements Serializable {
 	}
 	public String printProducts() {
 
-		 return "product [name=" + productName + ", Product quantity= " + quantity +  ", price=" + productPrice + "]" + "\n";
+		 return "product [name=" + productName + ", Product quantity= " + quantity +  ", price= " + productPrice + " Count= " + (quantity * Double.parseDouble(productPrice)) +"]" + "\n";
 		 		
 	}
 
@@ -70,6 +70,7 @@ public class products implements Serializable {
 		System.out.println("new price is " + productPrice);
 		this.productPrice = productPrice;
 	}
+	
 	
 }
 

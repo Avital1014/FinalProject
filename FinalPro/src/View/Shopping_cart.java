@@ -144,7 +144,7 @@ public class Shopping_cart extends JFrame {
 	private Set<products> productslist = new HashSet<products>();
 	private String  temp;
 	JLabel Cart_final = new JLabel("New label");	
-	
+	double priceTotalCount=0 ; 
 	int check_fast;
 	
 	/**
@@ -1248,29 +1248,14 @@ public class Shopping_cart extends JFrame {
 		JButton finishShopButton = new JButton("Finish the shopping,\r\nand proceed to Summary");
 		finishShopButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*for(String keyString : cart_productsHashMap.keySet()) {
-					System.out.println("key" + keyString + "name: " + getProductName(keyString)+ " Price " + getProductPrice(keyString)+ " Value " + getSpinnerValue(keyString));
-					
-				}
-				for (String keyString : cart_productsHashMap.keySet()) {
-					System.out.println("Key is " + keyString);
-					Cart_list.append("Product:" + keyString + "\n");
-					System.out.println("Print");
-					items.add(getProductName(keyString));
-					Cart_list.append("Name:" + getProductName(keyString) + "Proce:" + getProductPrice(keyString) + "Value:" + getSpinnerValue(keyString));
-				}*/
 				for(products products: productslist)
 				{
 					//System.out.println(products.printProducts());
 					Cart_final.setText(products.printProducts());
+					System.out.println(products.printProducts());
 					
 				}
-				//System.out.println("sdfgsdf");
-				//printToJlist();
-				//JPanel newSummaryPanel = new JPanel();
-				//newSummaryPanel.add(new JLabel("your summary page"));
-				//newSummaryPanel.action(, finishShopButton)
-				//tabbedPane.addTab("Summary", newSummaryPanel);
+				System.out.println(calculatePrices());
 				tabbedPane.setSelectedIndex(2);
 				
 				
@@ -2172,4 +2157,13 @@ public class Shopping_cart extends JFrame {
 		
 		return strawberriesCost.getText();
 	}
+
+
+public double calculatePrices() {
+	for (products products : productslist) {
+		priceTotalCount+=(products.getQuantity()* Double.parseDouble(products.getProductPrice()));
+		
+	}
+	return priceTotalCount;
+}
 }
