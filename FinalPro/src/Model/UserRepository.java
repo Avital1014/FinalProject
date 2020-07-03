@@ -19,6 +19,8 @@ public interface UserRepository {
 	
 	Set<MarkoliaUser> findByname(String userName);
 	
+	public String findEmailById(String idString);
+	
 	public String toString(MarkoliaUser user);
 	
 	String findNameById(String idString);

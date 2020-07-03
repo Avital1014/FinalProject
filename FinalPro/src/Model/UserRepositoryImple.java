@@ -83,10 +83,6 @@ public class UserRepositoryImple implements UserRepository {
 			// TODO: handle exception
 		}
 		
-	/*	try(ObjectOutputStream objectOutputStream = new ObjectOutputStream (new FileOutputStream(fILENAME))) {	
-			objectOutputStream.writeObject(users);
-			return true;
-		}*/
 		}
 		return flag;
 			
@@ -136,6 +132,7 @@ public class UserRepositoryImple implements UserRepository {
 	
 	}
 	
+	@Override
 	public String findEmailById(String idString) {
 		for (MarkoliaUser markoliaUser : users) {
 			if(((markoliaUser.getUser_id()).contains(idString)) )	{				

@@ -7,9 +7,11 @@ import java.util.Set;
 
 import Model.MarkoliaUser;
 import Model.Model;
+import Model.NotificationObserver;
 import Model.UserRepositoryImple;
 import Model.customer;
 import Model.managerRepositoryImple;
+import Model.messageObserveManager;
 import Model.products;
 import View.MarkoliaMainView;
 import View.SignUpView;
@@ -18,6 +20,7 @@ import View.signIn;
 
 
 public class Controller {
+	messageObserveManager notification = new messageObserveManager();
 	boolean addUserResult;
 	public static MarkoliaUser currentUser;
 	@SuppressWarnings("unused")	
@@ -37,11 +40,11 @@ public class Controller {
 	}
 
 	public boolean createNewUser(String name, String iD, String email, String password, String question, String answer) throws Exception {	
-		boolean addUserResult = false;	
-		//System.out.println("at controller");
-		customer userTocreate = new customer(name, iD, email, password, question, answer);		
-		System.out.println(userTocreate.toString());
-		addUserResult = userRep.addNewUser(userTocreate);				
+		boolean addUserResult = false;			
+		
+		/*Singelton*/
+		customer instance = (customer) customer.getInstance(name, iD, email, password, question, answer);
+		addUserResult = userRep.addNewUser(instance);				
 		return addUserResult;	
 		}	
 	
@@ -50,8 +53,7 @@ public class Controller {
 		boolean flag = userRep.userLoging(IdString, passString);	
 		System.out.println("flag in main " + flag );
 		if(flag) {
-			createCurrentUser(IdString, passString);
-			
+			createCurrentUser(IdString, passString);			
 		}
 		return flag;
 		}

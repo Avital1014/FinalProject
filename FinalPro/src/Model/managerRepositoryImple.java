@@ -9,12 +9,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
+
 import java.util.Set;
 
 import javax.swing.text.Document;
@@ -27,7 +27,7 @@ import Controller.Controller;
 
 
 
-public class managerRepositoryImple implements managerRepository{
+public class managerRepositoryImple implements managerRepository {
 	
 	private final String fILENAME= "Users";
 	private final String fileListNme = "productList";
@@ -126,7 +126,12 @@ public class managerRepositoryImple implements managerRepository{
 
 	@Override
 	public void writeOrder(String name, String user_id, String emailUser, String value) throws IOException {
-		customer temp = new customer(name, user_id, emailUser, value);
+		/*Builder pattern*/
+		customer temp = customer.builder()
+				.fullName(name).user_id(user_id).emailUser(emailUser).customerOrder(value)
+				.build();
+			
+		
 		boolean Flag = true;
 		for (customer customer : customerOorders) {
 			if((customer.getUser_id()).equals(user_id)) {
@@ -145,9 +150,15 @@ public class managerRepositoryImple implements managerRepository{
 		}
 		
 		writeToObjectFile();
-		System.out.println("i am not here");
-		//System.out.println(temp.printCustomerOrder());
+		
+		
 	
+	}
+
+
+	private userBuilder emailUser(String emailUser) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
@@ -196,6 +207,7 @@ public class managerRepositoryImple implements managerRepository{
 		}
 		
 	}
+
 
 
 

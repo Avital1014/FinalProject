@@ -57,6 +57,7 @@ import com.sun.source.doctree.SummaryTree;
 
 import Controller.Controller;
 import Model.customer;
+import Model.messageObserveManager;
 import Model.products;
 
 import java.awt.Frame;
@@ -73,6 +74,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Set;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -82,7 +85,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-public class Shopping_cart extends JFrame {
+public class Shopping_cart extends JFrame implements Observer{
 
 	/**
 	 * 
@@ -199,7 +202,7 @@ public class Shopping_cart extends JFrame {
 	 * @throws FileNotFoundException 
 	 */
 	
-	public Shopping_cart() throws FileNotFoundException, IOException {
+	public Shopping_cart() 	throws FileNotFoundException, IOException {
 		
 		
 		setType(Type.POPUP);
@@ -693,6 +696,7 @@ public class Shopping_cart extends JFrame {
 			//Super User can Edit melon cost
 			if (flag) {
 				melonCost.setEditable(true);
+				
 			}
 			else {
 				melonCost.setEditable(false);
@@ -2208,5 +2212,10 @@ public double calculatePrices() {
 		
 	}
 	return priceTotalCount;
+}
+
+@Override
+public void update(Observable o, Object arg) {
+	System.out.println("Open to Edit");
 }
 }
