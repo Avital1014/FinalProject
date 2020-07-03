@@ -9,6 +9,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.JTabbedPane;
 import javax.swing.JList;
 import javax.swing.JSlider;
@@ -17,6 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.AbstractListModel;
+import javax.swing.BorderFactory;
+
 import java.awt.Font;
 import javax.swing.JFormattedTextField;
 import javax.swing.JToggleButton;
@@ -50,6 +53,7 @@ import javax.swing.Box;
 //import com.jgoodies.forms.layout.RowSpec;
 import com.sun.source.doctree.SummaryTree;
 //import com.sun.tools.sjavac.comp.dependencies.PublicApiCollector;
+
 
 import Controller.Controller;
 import Model.customer;
@@ -141,11 +145,13 @@ public class Shopping_cart extends JFrame {
 	private double whiteCabbageCost_int;
 	private JTextField sweetPotatoCost;
 	private double sweetPotatoCost_int;
+	JPanel tablePanel = new JPanel();
 	private Set<products> productslist = new HashSet<products>();
 	private String  temp;
-	JLabel Cart_final = new JLabel("New label");	
+	JPanel Summary_Panel = new JPanel();
 	double priceTotalCount=0 ; 
 	int check_fast;
+	private JTextField textField_1;
 	
 	/**
 	 * Launch the application.
@@ -1248,13 +1254,53 @@ public class Shopping_cart extends JFrame {
 		JButton finishShopButton = new JButton("Finish the shopping,\r\nand proceed to Summary");
 		finishShopButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for(products products: productslist)
-				{
-					//System.out.println(products.printProducts());
-					Cart_final.setText(products.printProducts());
-					System.out.println(products.printProducts());
+				
+			    String[] columnsNames = {"Product", "Amount", "Price", "Total"};
+			    String[][] info = new String[16][4];
+			    /*String[][] rec = {
+				           { "Stra", "Steve", "AUS","1" },
+				           { "2", "Virat", "IND" ,"1"},
+				           { "3", "Kane", "NZ" ,"1"},
+				           { "4", "David", "AUS" ,"1"},
+				           { "5", "Ben", "ENG" ,"1"},
+				           { "6", "Eion", "ENG" ,"1"},
+				        };*/
+			    int i, j;
+			    i = j = 0;
+			    
+			  for (products products : productslist) {
+				  System.out.println("size" + productslist.size());
+				//for ( i = 0; i < 16; i++) {
+					for ( j = 0; j <= 3; j++) {
+						if(products.getQuantity() != 0) {
+						info[i][j] = products.getProductName();
+						info[i][++j] = String.valueOf(products.getQuantity());
+						info[i][++j] = products.getProductPrice();						
+						info[i][++j] = String.valueOf(products.returnSum(info[i][2], products.getQuantity()));
+						i++;
+						}
+						else {
+							j=3;
+						}
+						
+					}
 					
-				}
+				//}
+			}
+			    
+	        tablePanel.setBorder(BorderFactory.createTitledBorder( BorderFactory.createEtchedBorder(), "Your Cart", TitledBorder.CENTER, TitledBorder.TOP));
+		
+		        
+	        double temp = calculatePrices();	
+	        textField_1.setText(String.valueOf(temp));
+		       
+		        JTable table1 = new JTable(info, columnsNames);
+		        tablePanel.add(new JScrollPane(table1));
+		        Summary_Panel.add(tablePanel);
+		        Summary_Panel.setSize(700, 896);
+		        Summary_Panel.setVisible(true);
+
+				
 				System.out.println(calculatePrices());
 				tabbedPane.setSelectedIndex(2);
 				
@@ -2119,13 +2165,22 @@ public class Shopping_cart extends JFrame {
 		sweetPotatoButton.setFont(new Font("Calibri", Font.BOLD, 18));
 		sweetPotatoButton.setBounds(935, 597, 145, 24);
 		vegetablesPanel.add(sweetPotatoButton);
-		JPanel Summary_Panel = new JPanel();
+		
 		tabbedPane.addTab("Summaryy", null, Summary_Panel, null);
 		Summary_Panel.setLayout(null);
 		
 		
-		Cart_final.setBounds(81, 94, 443, 250);
-		Summary_Panel.add(Cart_final);
+		tablePanel.setBounds(10, 11, 882, 302);
+		Summary_Panel.add(tablePanel);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(763, 334, 86, 20);
+		Summary_Panel.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel Total = new JLabel("Total");
+		Total.setBounds(700, 337, 46, 14);
+		Summary_Panel.add(Total);
 		tabbedPane.setBackgroundAt(2, Color.WHITE);
 		
 		controller.writeToFIleproductslist(productslist);

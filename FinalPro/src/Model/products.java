@@ -53,7 +53,12 @@ public class products implements Serializable {
 		 return "product [name=" + productName + ", Product quantity= " + quantity +  ", price= " + productPrice + " Count= " + (quantity * Double.parseDouble(productPrice)) +"]" + "\n";
 		 		
 	}
-
+	
+	public double returnSum(String price, double amount) {
+		double sum = amount * Double.parseDouble(price);		
+		return sum;
+	}
+	
 	public String getProductName() {
 		return productName;
 	}
