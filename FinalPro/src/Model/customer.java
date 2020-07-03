@@ -30,11 +30,6 @@ public class customer extends MarkoliaUser{
 				+ this.getEmailUser() + ", Total order =" + customerOrder ;
 	}
 	
-	public customer(String name, String user_id, String emailUser, String customerOrder) {
-		super(name, user_id, emailUser);
-		this.customerOrder = customerOrder; 
-	}
-
 	public static userBuilder builder() {
 		return new userBuilder();
 	}
