@@ -75,7 +75,7 @@ public class MarkoliaMainView extends JFrame{
 				signInView.setVisible(true);
 			}
 		});
-		signInUser.setBounds(47, 106, 89, 48);
+		signInUser.setBounds(74, 106, 89, 48);
 		panel.add(signInUser);
 		
 		JButton signUp = new JButton("Sign Up");
@@ -85,7 +85,7 @@ public class MarkoliaMainView extends JFrame{
 				signUpView.setVisible(true);
 			}
 		});
-		signUp.setBounds(174, 106, 89, 48);
+		signUp.setBounds(193, 106, 89, 48);
 		panel.add(signUp);
 		
 		JLabel welcomLabel = new JLabel("Welcome to Markolia");
@@ -96,13 +96,9 @@ public class MarkoliaMainView extends JFrame{
 		panel.add(welcomLabel);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\350x3001.jpg"));
+		lblNewLabel.setIcon(new ImageIcon(MarkoliaMainView.class.getResource("/View/350x3001.jpg")));
 		lblNewLabel.setBounds(0, 0, 334, 261);
 		panel.add(lblNewLabel);
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(22, 213, 89, 23);
-		panel.add(btnNewButton);
 
 
 		};

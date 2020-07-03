@@ -243,7 +243,7 @@ public class Shopping_cart extends JFrame {
 		lblNewLabel.setFont(new Font("Calibri", Font.BOLD, 24));
 		lblNewLabel.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\download.jpg"));
+		lblNewLabel.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/download.jpg")));
 		lblNewLabel.setBounds(875, 8, 226, 216);
 		fruitPanel.add(lblNewLabel);
 		
@@ -265,7 +265,7 @@ public class Shopping_cart extends JFrame {
 		 */ 
 		
 		JLabel label = new JLabel("Melon");
-		label.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\frt-34-300x300.jpg"));
+		label.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/frt-34-300x300.jpg")));
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -289,7 +289,7 @@ public class Shopping_cart extends JFrame {
 		 */
 		
 		JLabel label_2 = new JLabel("Pineapple");
-		label_2.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\frt-12-300x300.jpg"));
+		label_2.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/frt-12-300x300.jpg")));
 		label_2.setHorizontalTextPosition(SwingConstants.CENTER);
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
 		label_2.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -330,7 +330,7 @@ public class Shopping_cart extends JFrame {
 			 */
 			
 			JLabel label_4 = new JLabel("Strawberries");
-			label_4.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\strawberry-300x300.jpg"));
+			label_4.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/strawberry-300x300.jpg")));
 			label_4.setHorizontalTextPosition(SwingConstants.CENTER);
 			label_4.setHorizontalAlignment(SwingConstants.CENTER);
 			label_4.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -385,7 +385,7 @@ public class Shopping_cart extends JFrame {
 			
 			
 			JLabel lblPeachPita = new JLabel("Peach Pita");
-			lblPeachPita.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\frt-17-300x300.jpg"));
+			lblPeachPita.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/frt-17-300x300.jpg")));
 			lblPeachPita.setHorizontalTextPosition(SwingConstants.CENTER);
 			lblPeachPita.setHorizontalAlignment(SwingConstants.CENTER);
 			lblPeachPita.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -410,7 +410,7 @@ public class Shopping_cart extends JFrame {
 			
 			
 			JLabel lblRedApple = new JLabel("Pink Lady Apple");
-			lblRedApple.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\frt-54-300x300.jpg"));
+			lblRedApple.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/frt-54-300x300.jpg")));
 			lblRedApple.setHorizontalTextPosition(SwingConstants.CENTER);
 			lblRedApple.setHorizontalAlignment(SwingConstants.CENTER);
 			lblRedApple.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -434,7 +434,7 @@ public class Shopping_cart extends JFrame {
 			
 			
 			JLabel lblLemon = new JLabel("Lemon");
-			lblLemon.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\frt-29-300x300.jpg"));
+			lblLemon.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/frt-29-300x300.jpg")));
 			lblLemon.setHorizontalTextPosition(SwingConstants.CENTER);
 			lblLemon.setHorizontalAlignment(SwingConstants.CENTER);
 			lblLemon.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -473,7 +473,7 @@ public class Shopping_cart extends JFrame {
 			fruitPanel.add(bananaButton);
 			
 			JLabel lblBanana = new JLabel("Banana");
-			lblBanana.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\frt-21-300x300.jpg"));
+			lblBanana.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/frt-21-300x300.jpg")));
 			lblBanana.setHorizontalTextPosition(SwingConstants.CENTER);
 			lblBanana.setHorizontalAlignment(SwingConstants.CENTER);
 			lblBanana.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -1190,14 +1190,14 @@ public class Shopping_cart extends JFrame {
 		
 		JLabel lblCucumber = new JLabel("Cucumber");
 		lblCucumber.setBounds(897, 11, 244, 216);
-		lblCucumber.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\veg-34-300x300.jpg"));
+		lblCucumber.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/veg-34-300x300.jpg")));
 		lblCucumber.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblCucumber.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCucumber.setFont(new Font("Calibri", Font.BOLD, 24));
 		vegetablesPanel.add(lblCucumber);
 		
 		JLabel lblTomato = new JLabel("Tomato");
-		lblTomato.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\veg-38-300x300.jpg"));
+		lblTomato.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/veg-38-300x300.jpg")));
 		lblTomato.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblTomato.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTomato.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -1205,7 +1205,7 @@ public class Shopping_cart extends JFrame {
 		vegetablesPanel.add(lblTomato);
 		
 		JLabel lblPurpleOnion = new JLabel("Purple Onion");
-		lblPurpleOnion.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\veg-6-300x300.jpg"));
+		lblPurpleOnion.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/veg-6-300x300.jpg")));
 		lblPurpleOnion.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblPurpleOnion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPurpleOnion.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -1213,7 +1213,7 @@ public class Shopping_cart extends JFrame {
 		vegetablesPanel.add(lblPurpleOnion);
 		
 		JLabel lblOnion = new JLabel("Onion");
-		lblOnion.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\veg-7-300x300.jpg"));
+		lblOnion.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/veg-7-300x300.jpg")));
 		lblOnion.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblOnion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblOnion.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -1221,7 +1221,7 @@ public class Shopping_cart extends JFrame {
 		vegetablesPanel.add(lblOnion);
 		
 		JLabel lblSweetPotato = new JLabel("Sweet Potato");
-		lblSweetPotato.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\veg-10-300x300.jpg"));
+		lblSweetPotato.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/veg-10-300x300.jpg")));
 		lblSweetPotato.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblSweetPotato.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSweetPotato.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -1229,7 +1229,7 @@ public class Shopping_cart extends JFrame {
 		vegetablesPanel.add(lblSweetPotato);
 		
 		JLabel lblWhiteCabbage = new JLabel("White Cabbage");
-		lblWhiteCabbage.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\veg-20-300x300.jpg"));
+		lblWhiteCabbage.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/veg-20-300x300.jpg")));
 		lblWhiteCabbage.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblWhiteCabbage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWhiteCabbage.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -1237,7 +1237,7 @@ public class Shopping_cart extends JFrame {
 		vegetablesPanel.add(lblWhiteCabbage);
 		
 		JLabel lblEggplant = new JLabel("Eggplant");
-		lblEggplant.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\veg-24-300x300.jpg"));
+		lblEggplant.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/veg-24-300x300.jpg")));
 		lblEggplant.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblEggplant.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEggplant.setFont(new Font("Calibri", Font.BOLD, 24));
@@ -1245,7 +1245,7 @@ public class Shopping_cart extends JFrame {
 		vegetablesPanel.add(lblEggplant);
 		
 		JLabel lblCorn = new JLabel("Corn");
-		lblCorn.setIcon(new ImageIcon("C:\\Users\\avital.abramov\\Desktop\\FinalProject\\veg-71-300x300.jpg"));
+		lblCorn.setIcon(new ImageIcon(Shopping_cart.class.getResource("/View/veg-71-300x300.jpg")));
 		lblCorn.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblCorn.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCorn.setFont(new Font("Calibri", Font.BOLD, 24));

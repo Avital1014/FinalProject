@@ -385,7 +385,7 @@ public class SignUpView extends JFrame implements Runnable{
 		panel_1.setLayout(null);
 		
 		lblNewLabel_5 = new JLabel("New label");
-		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\eladb\\git\\FinalProjectV6\\FinalPro\\Git Images\\Screenshot_2.png"));
+		lblNewLabel_5.setIcon(new ImageIcon(SignUpView.class.getResource("/View/Screenshot_2.png")));
 		lblNewLabel_5.setBounds(10, -11, 249, 402);
 		panel_1.add(lblNewLabel_5);
 		contentPane.setLayout(gl_contentPane);
