@@ -84,10 +84,13 @@ public class Controller {
 	}
 	
 	public void exportUsers(File path) {
-		System.out.println("call export");
+		//System.out.println("call export");
 		managerRep.exportUsersList(path);
 	}
 	
+	public void exportOrderToTXT(File path) {
+		managerRep.exportOrderToTXT(path);
+	}
 	/*create and hold current user*/
 	public void createCurrentUser(String id, String pass) {
 		currentUser = new MarkoliaUser(id, pass);
@@ -109,7 +112,12 @@ public class Controller {
 	public void writeToFIleproductslist(Set<products>productslist) throws FileNotFoundException, IOException {
 		managerRep.writeToFIleproductslist(productslist);
 		System.out.println("controller write");
+	}	
+	
+	public void writeOrder(String value) throws IOException {
+		managerRep.writeOrder(userRep.findNameById(currentUser.getUser_id()),currentUser.getUser_id(), userRep.findEmailById(currentUser.getUser_id()), value);
 	}
+	
 }
 
 

@@ -1257,20 +1257,11 @@ public class Shopping_cart extends JFrame {
 				
 			    String[] columnsNames = {"Product", "Amount", "Price", "Total"};
 			    String[][] info = new String[16][4];
-			    /*String[][] rec = {
-				           { "Stra", "Steve", "AUS","1" },
-				           { "2", "Virat", "IND" ,"1"},
-				           { "3", "Kane", "NZ" ,"1"},
-				           { "4", "David", "AUS" ,"1"},
-				           { "5", "Ben", "ENG" ,"1"},
-				           { "6", "Eion", "ENG" ,"1"},
-				        };*/
 			    int i, j;
 			    i = j = 0;
 			    
 			  for (products products : productslist) {
-				  System.out.println("size" + productslist.size());
-				//for ( i = 0; i < 16; i++) {
+				  System.out.println("size" + productslist.size());				
 					for ( j = 0; j <= 3; j++) {
 						if(products.getQuantity() != 0) {
 						info[i][j] = products.getProductName();
@@ -1281,16 +1272,11 @@ public class Shopping_cart extends JFrame {
 						}
 						else {
 							j=3;
-						}
-						
+						}						
 					}
-					
-				//}
 			}
 			    
-	        tablePanel.setBorder(BorderFactory.createTitledBorder( BorderFactory.createEtchedBorder(), "Your Cart", TitledBorder.CENTER, TitledBorder.TOP));
-		
-		        
+	        tablePanel.setBorder(BorderFactory.createTitledBorder( BorderFactory.createEtchedBorder(), "Your Cart", TitledBorder.CENTER, TitledBorder.TOP));		
 	        double temp = calculatePrices();	
 	        textField_1.setText(String.valueOf(temp));
 		       
@@ -1299,12 +1285,14 @@ public class Shopping_cart extends JFrame {
 		        Summary_Panel.add(tablePanel);
 		        Summary_Panel.setSize(700, 896);
 		        Summary_Panel.setVisible(true);
-
-				
-				System.out.println(calculatePrices());
 				tabbedPane.setSelectedIndex(2);
 				
-				
+				try {
+					controller.writeOrder(String.valueOf(temp));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		

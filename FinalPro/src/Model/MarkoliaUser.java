@@ -13,6 +13,8 @@ public class MarkoliaUser implements Serializable{
 				+ emailUser + ", passwordUser=" + passwordUser + "]";
 	}
 	
+
+	
 	
 	@Override
 	public int hashCode() {
@@ -83,6 +85,13 @@ public class MarkoliaUser implements Serializable{
 	public MarkoliaUser(String user_id, String passwordUser) {
 		this.user_id = user_id;
 		this.passwordUser = passwordUser;
+	}
+
+
+	public MarkoliaUser(String name , String user_id , String emailUser) {
+		this.fullName = name;
+		this.user_id = user_id;
+		this.emailUser = emailUser;
 	}
 
 

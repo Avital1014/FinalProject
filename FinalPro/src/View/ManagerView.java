@@ -63,7 +63,7 @@ public class ManagerView extends JFrame implements Runnable {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		JCheckBox totalOrders = new JCheckBox("New check box");
 		JButton btnNewButton = new JButton("Generate Reports");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -75,6 +75,11 @@ public class ManagerView extends JFrame implements Runnable {
 					chooser.showOpenDialog(null);
 					File path = chooser.getSelectedFile();
 					controller.exportUsers(path);
+				}
+				if(totalOrders.isSelected()) {
+					chooser.showOpenDialog(null);
+					File path = chooser.getSelectedFile();
+					controller.exportOrderToTXT(path);
 				}
 			}
 		});
@@ -88,9 +93,9 @@ public class ManagerView extends JFrame implements Runnable {
 		chckbxNewCheckBox.setBounds(303, 197, 97, 23);
 		contentPane.add(chckbxNewCheckBox);
 		
-		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("New check box");
-		chckbxNewCheckBox_1.setBounds(303, 171, 97, 23);
-		contentPane.add(chckbxNewCheckBox_1);
+		
+		totalOrders.setBounds(303, 171, 97, 23);
+		contentPane.add(totalOrders);
 		
 		
 		list_Report.setBounds(303, 145, 121, 23);

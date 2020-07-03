@@ -136,6 +136,16 @@ public class UserRepositoryImple implements UserRepository {
 	
 	}
 	
+	public String findEmailById(String idString) {
+		for (MarkoliaUser markoliaUser : users) {
+			if(((markoliaUser.getUser_id()).contains(idString)) )	{				
+				return markoliaUser.getEmailUser();	
+					}					
+			}
+		return "Name none avilabile";
+	
+	}
+	
 
 	@Override
 	public boolean findID(String id) {
