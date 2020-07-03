@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.FileChooserUI;
 
@@ -21,7 +22,7 @@ import java.io.IOException;
 import javax.swing.JLabel;
 import net.miginfocom.swing.MigLayout;
 
-
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
@@ -29,6 +30,10 @@ import javax.swing.JFileChooser;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Button;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormSpecs;
 
 public class ManagerView extends JFrame implements Runnable {
 
@@ -55,46 +60,13 @@ public class ManagerView extends JFrame implements Runnable {
 	 * Create the frame.
 	 */
 	public ManagerView() {
-		JCheckBox list_Report = new JCheckBox("User's List Report");
 		JFileChooser fileChooser = new JFileChooser();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 452, 303);
+		setBounds(100, 100, 219, 281);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JButton btnNewButton = new JButton("Generate Reports");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			JFileChooser chooser = new JFileChooser();
-			
-			//System.out.println(path.getAbsolutePath());
-				
-				if(list_Report.isSelected()) {
-					chooser.showOpenDialog(null);
-					File path = chooser.getSelectedFile();
-					controller.exportUsers(path);
-				}
-			}
-		});
-		
-		
-	    
-		btnNewButton.setBounds(303, 227, 119, 23);
-		contentPane.add(btnNewButton);
-		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
-		chckbxNewCheckBox.setBounds(303, 197, 97, 23);
-		contentPane.add(chckbxNewCheckBox);
-		
-		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("New check box");
-		chckbxNewCheckBox_1.setBounds(303, 171, 97, 23);
-		contentPane.add(chckbxNewCheckBox_1);
-		
-		
-		list_Report.setBounds(303, 145, 121, 23);
-		contentPane.add(list_Report);
 		
 		Button edit_Prices = new Button("Edit Prices");
 		edit_Prices.addActionListener(new ActionListener() {
@@ -115,8 +87,48 @@ public class ManagerView extends JFrame implements Runnable {
 			
 			}
 		});
-		edit_Prices.setBounds(46, 228, 70, 22);
+		edit_Prices.setBounds(61, 196, 70, 22);
 		contentPane.add(edit_Prices);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 11, 177, 155);
+		contentPane.add(panel);
+		String title = "Generate Report Wizard";
+		Border border = BorderFactory.createTitledBorder(title);
+		panel.setBorder(border);
+		panel.setLayout(null);
+		
+		JCheckBox list_Report = new JCheckBox("User's List Report");
+		list_Report.setBounds(25, 25, 109, 23);
+		panel.add(list_Report);
+		JCheckBox CustomerOrders = new JCheckBox("Customer Orders");
+		CustomerOrders.setBounds(25, 51, 109, 23);
+		panel.add(CustomerOrders);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
+		chckbxNewCheckBox.setBounds(25, 77, 109, 23);
+		panel.add(chckbxNewCheckBox);
+		JButton btnNewButton = new JButton("Generate Reports");
+		btnNewButton.setBounds(10, 121, 155, 23);
+		panel.add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			JFileChooser chooser = new JFileChooser();
+			
+			//System.out.println(path.getAbsolutePath());
+				
+				if(list_Report.isSelected()) {
+					chooser.showOpenDialog(null);
+					File path = chooser.getSelectedFile();
+					controller.exportUsers(path);
+				}
+				if(CustomerOrders.isSelected()) {
+					chooser.showOpenDialog(null);
+					File path = chooser.getSelectedFile();
+					controller.exportOrderToTXT(path);
+				}
+			}
+		});
 	}
 
 	@Override

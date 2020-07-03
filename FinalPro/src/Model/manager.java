@@ -10,6 +10,6 @@ public class manager extends MarkoliaUser {
 	}
 	
 	public void userListOutPut() {
-		System.out.println("asd");
+
 	}
 }

@@ -57,6 +57,7 @@ import com.sun.source.doctree.SummaryTree;
 
 import Controller.Controller;
 import Model.customer;
+import Model.messageObserveManager;
 import Model.products;
 
 import java.awt.Frame;
@@ -73,6 +74,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Set;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -82,7 +85,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-public class Shopping_cart extends JFrame {
+public class Shopping_cart extends JFrame implements Observer{
 
 	/**
 	 * 
@@ -199,7 +202,7 @@ public class Shopping_cart extends JFrame {
 	 * @throws FileNotFoundException 
 	 */
 	
-	public Shopping_cart() throws FileNotFoundException, IOException {
+	public Shopping_cart() 	throws FileNotFoundException, IOException {
 		
 		
 		setType(Type.POPUP);
@@ -693,6 +696,7 @@ public class Shopping_cart extends JFrame {
 			//Super User can Edit melon cost
 			if (flag) {
 				melonCost.setEditable(true);
+				
 			}
 			else {
 				melonCost.setEditable(false);
@@ -1257,20 +1261,11 @@ public class Shopping_cart extends JFrame {
 				
 			    String[] columnsNames = {"Product", "Amount", "Price", "Total"};
 			    String[][] info = new String[16][4];
-			    /*String[][] rec = {
-				           { "Stra", "Steve", "AUS","1" },
-				           { "2", "Virat", "IND" ,"1"},
-				           { "3", "Kane", "NZ" ,"1"},
-				           { "4", "David", "AUS" ,"1"},
-				           { "5", "Ben", "ENG" ,"1"},
-				           { "6", "Eion", "ENG" ,"1"},
-				        };*/
 			    int i, j;
 			    i = j = 0;
 			    
 			  for (products products : productslist) {
-				  System.out.println("size" + productslist.size());
-				//for ( i = 0; i < 16; i++) {
+				  System.out.println("size" + productslist.size());				
 					for ( j = 0; j <= 3; j++) {
 						if(products.getQuantity() != 0) {
 						info[i][j] = products.getProductName();
@@ -1281,16 +1276,11 @@ public class Shopping_cart extends JFrame {
 						}
 						else {
 							j=3;
-						}
-						
+						}						
 					}
-					
-				//}
 			}
 			    
-	        tablePanel.setBorder(BorderFactory.createTitledBorder( BorderFactory.createEtchedBorder(), "Your Cart", TitledBorder.CENTER, TitledBorder.TOP));
-		
-		        
+	        tablePanel.setBorder(BorderFactory.createTitledBorder( BorderFactory.createEtchedBorder(), "Your Cart", TitledBorder.CENTER, TitledBorder.TOP));		
 	        double temp = calculatePrices();	
 	        textField_1.setText(String.valueOf(temp));
 		       
@@ -1299,12 +1289,14 @@ public class Shopping_cart extends JFrame {
 		        Summary_Panel.add(tablePanel);
 		        Summary_Panel.setSize(700, 896);
 		        Summary_Panel.setVisible(true);
-
-				
-				System.out.println(calculatePrices());
 				tabbedPane.setSelectedIndex(2);
 				
-				
+				try {
+					controller.writeOrder(String.valueOf(temp));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
@@ -2231,5 +2223,10 @@ public double calculatePrices() {
 		
 	}
 	return priceTotalCount;
+}
+
+@Override
+public void update(Observable o, Object arg) {
+	System.out.println("Open to Edit");
 }
 }

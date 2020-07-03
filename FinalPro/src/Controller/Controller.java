@@ -7,9 +7,11 @@ import java.util.Set;
 
 import Model.MarkoliaUser;
 import Model.Model;
+import Model.NotificationObserver;
 import Model.UserRepositoryImple;
 import Model.customer;
 import Model.managerRepositoryImple;
+import Model.messageObserveManager;
 import Model.products;
 import View.MarkoliaMainView;
 import View.SignUpView;
@@ -18,6 +20,7 @@ import View.signIn;
 
 
 public class Controller {
+	messageObserveManager notification = new messageObserveManager();
 	boolean addUserResult;
 	public static MarkoliaUser currentUser;
 	@SuppressWarnings("unused")	
@@ -37,11 +40,11 @@ public class Controller {
 	}
 
 	public boolean createNewUser(String name, String iD, String email, String password, String question, String answer) throws Exception {	
-		boolean addUserResult = false;	
-		//System.out.println("at controller");
-		customer userTocreate = new customer(name, iD, email, password, question, answer);		
-		System.out.println(userTocreate.toString());
-		addUserResult = userRep.addNewUser(userTocreate);				
+		boolean addUserResult = false;			
+		
+		/*Singelton*/
+		customer instance = (customer) customer.getInstance(name, iD, email, password, question, answer);
+		addUserResult = userRep.addNewUser(instance);				
 		return addUserResult;	
 		}	
 	
@@ -50,8 +53,7 @@ public class Controller {
 		boolean flag = userRep.userLoging(IdString, passString);	
 		System.out.println("flag in main " + flag );
 		if(flag) {
-			createCurrentUser(IdString, passString);
-			
+			createCurrentUser(IdString, passString);			
 		}
 		return flag;
 		}
@@ -84,10 +86,13 @@ public class Controller {
 	}
 	
 	public void exportUsers(File path) {
-		System.out.println("call export");
+		//System.out.println("call export");
 		managerRep.exportUsersList(path);
 	}
 	
+	public void exportOrderToTXT(File path) {
+		managerRep.exportOrderToTXT(path);
+	}
 	/*create and hold current user*/
 	public void createCurrentUser(String id, String pass) {
 		currentUser = new MarkoliaUser(id, pass);
@@ -109,7 +114,12 @@ public class Controller {
 	public void writeToFIleproductslist(Set<products>productslist) throws FileNotFoundException, IOException {
 		managerRep.writeToFIleproductslist(productslist);
 		System.out.println("controller write");
+	}	
+	
+	public void writeOrder(String value) throws IOException {
+		managerRep.writeOrder(userRep.findNameById(currentUser.getUser_id()),currentUser.getUser_id(), userRep.findEmailById(currentUser.getUser_id()), value);
 	}
+	
 }
 
 

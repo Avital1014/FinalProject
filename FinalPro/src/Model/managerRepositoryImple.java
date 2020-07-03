@@ -62,9 +62,7 @@ public class managerRepositoryImple implements managerRepository{
 		} catch (Exception e) {
 			 System.out.println("An error occurred.");
 		      e.printStackTrace();
-		}
-
-		 
+			}		 
 		}
 
 

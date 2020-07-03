@@ -7,11 +7,61 @@ import java.io.File;
 
 public class MarkoliaUser implements Serializable{
 	
+	
+
+	private static final long serialVersionUID= 1L; 	
+	private String user_id;
+	private String fullName;
+	private String emailUser;
+	private String passwordUser;
+
+	
+	public MarkoliaUser() {
+		
+	}
+		
+	public MarkoliaUser(String user_id) {
+		super();
+		this.user_id = user_id;
+	}
+	
+	
+	public MarkoliaUser(String name, String user_id, String emailUser, String passwordUser) {
+		System.out.println("this is markoliaUser");
+		this.fullName = name;
+		this.user_id = user_id;
+		this.emailUser = emailUser;
+		this.passwordUser = passwordUser;
+	}
+	
+	public MarkoliaUser(String user_id, String passwordUser) {
+		this.user_id = user_id;
+		this.passwordUser = passwordUser;
+	}
+
+
+	public MarkoliaUser(String name , String user_id , String emailUser) {
+		this.fullName = name;
+		this.user_id = user_id;
+		this.emailUser = emailUser;
+	}
+
+	public MarkoliaUser(String name, String user_id, String emailUser, String passwordUser, String qustion,
+			String answer) {
+		this.fullName = name;
+		this.user_id = user_id;
+		this.emailUser = emailUser;
+		this.passwordUser = passwordUser;
+		
+	}
+
 	@Override
 	public String toString() {
 		return "MarkoliaUser [user_id=" + user_id + ", fullName=" + fullName + ", emailUser="
 				+ emailUser + ", passwordUser=" + passwordUser + "]";
 	}
+	
+
 	
 	
 	@Override
@@ -54,35 +104,6 @@ public class MarkoliaUser implements Serializable{
 		} else if (!user_id.equals(other.user_id))
 			return false;
 		return true;
-	}
-
-
-	private static final long serialVersionUID= 1L; 
-	
-	private String user_id;
-	private String fullName;
-	private String emailUser;
-	private String passwordUser;
-//	private String qustion;
-//	private String answer;
-		
-	public MarkoliaUser(String user_id) {
-		super();
-		this.user_id = user_id;
-	}
-	public MarkoliaUser(String name, String user_id, String emailUser, String passwordUser) {
-		System.out.println("this is markoliaUser");
-		this.fullName = name;
-		this.user_id = user_id;
-		this.emailUser = emailUser;
-		this.passwordUser = passwordUser;
-		//this.qustion = qustion;
-		//this.answer = answer;
-	}
-	
-	public MarkoliaUser(String user_id, String passwordUser) {
-		this.user_id = user_id;
-		this.passwordUser = passwordUser;
 	}
 
 
