@@ -2181,6 +2181,17 @@ public class Shopping_cart extends JFrame {
 		JLabel Total = new JLabel("Total");
 		Total.setBounds(700, 337, 46, 14);
 		Summary_Panel.add(Total);
+		
+		JButton paymentButton = new JButton("Payment");
+		paymentButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PaymentPage paymentView = new PaymentPage();
+				paymentView.setVisible(true);
+			}
+		});
+		paymentButton.setFont(new Font("Calibri", Font.BOLD, 18));
+		paymentButton.setBounds(750, 365, 111, 23);
+		Summary_Panel.add(paymentButton);
 		tabbedPane.setBackgroundAt(2, Color.WHITE);
 		
 		controller.writeToFIleproductslist(productslist);
