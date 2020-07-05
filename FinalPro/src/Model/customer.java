@@ -10,6 +10,7 @@ public class customer extends MarkoliaUser{
 	String qustionString;
 	String answerString;
 	String customerOrder;
+	
 	public customer(String name, String user_id, String emailUser, String passwordUser, String qustion, String answer) {
 		
 		super(name, user_id, emailUser, passwordUser);
@@ -17,6 +18,7 @@ public class customer extends MarkoliaUser{
 		this.answerString = answer;
 	}
 	
+	/*Singelton pattern*/
 	public static MarkoliaUser getInstance(String name, String user_id, String emailUser, String passwordUser, String qustion, String answer) {
 		if(INSTANCE == null) {
 			System.out.println("in instance");

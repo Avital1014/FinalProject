@@ -30,10 +30,7 @@ import javax.swing.JFileChooser;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Button;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
+
 
 public class ManagerView extends JFrame implements Runnable {
 
@@ -62,7 +59,7 @@ public class ManagerView extends JFrame implements Runnable {
 	public ManagerView() {
 		JFileChooser fileChooser = new JFileChooser();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 219, 281);
+		setBounds(100, 100, 287, 284);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -91,7 +88,7 @@ public class ManagerView extends JFrame implements Runnable {
 		contentPane.add(edit_Prices);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 177, 155);
+		panel.setBounds(10, 11, 251, 166);
 		contentPane.add(panel);
 		String title = "Generate Report Wizard";
 		Border border = BorderFactory.createTitledBorder(title);
@@ -99,14 +96,14 @@ public class ManagerView extends JFrame implements Runnable {
 		panel.setLayout(null);
 		
 		JCheckBox list_Report = new JCheckBox("User's List Report");
-		list_Report.setBounds(25, 25, 109, 23);
+		list_Report.setBounds(25, 25, 155, 23);
 		panel.add(list_Report);
 		JCheckBox CustomerOrders = new JCheckBox("Customer Orders");
-		CustomerOrders.setBounds(25, 51, 109, 23);
+		CustomerOrders.setBounds(25, 51, 155, 23);
 		panel.add(CustomerOrders);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
-		chckbxNewCheckBox.setBounds(25, 77, 109, 23);
+		chckbxNewCheckBox.setBounds(25, 77, 155, 23);
 		panel.add(chckbxNewCheckBox);
 		JButton btnNewButton = new JButton("Generate Reports");
 		btnNewButton.setBounds(10, 121, 155, 23);

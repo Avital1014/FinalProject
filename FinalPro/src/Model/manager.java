@@ -9,7 +9,5 @@ public class manager extends MarkoliaUser {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void userListOutPut() {
 
-	}
 }

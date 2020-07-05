@@ -28,10 +28,7 @@ public class userBuilder {
 		this.fullName = fullName;
 		return this;
 	}
-	
-	
-	
-	
+		
 	public userBuilder e(String email) {
 		return this.email(email);
 	}

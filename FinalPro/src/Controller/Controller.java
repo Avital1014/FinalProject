@@ -7,11 +7,11 @@ import java.util.Set;
 
 import Model.MarkoliaUser;
 import Model.Model;
-import Model.NotificationObserver;
+
 import Model.UserRepositoryImple;
 import Model.customer;
 import Model.managerRepositoryImple;
-import Model.messageObserveManager;
+
 import Model.products;
 import View.MarkoliaMainView;
 import View.SignUpView;
@@ -20,7 +20,7 @@ import View.signIn;
 
 
 public class Controller {
-	messageObserveManager notification = new messageObserveManager();
+	
 	boolean addUserResult;
 	public static MarkoliaUser currentUser;
 	@SuppressWarnings("unused")	
