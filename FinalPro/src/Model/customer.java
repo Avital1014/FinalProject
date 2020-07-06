@@ -56,8 +56,8 @@ public class customer extends MarkoliaUser{
 	public String toString() {
 		
 		return "MarkoliaUser [user_id= " + this.getUser_id() + ", fullName= " + this.getFullName() + ", emailUser="
-				+ this.getEmailUser() +  ", Customer Phone= " + this.getPhone() + ", Customer Address= " + this.getAddress() +  ", City= " + this.city + ", Apartment= " + this.apartement + ", Zip code- " + this.zipCode +  ", Card holder- " + 
-				this.cardHolder + ", Credit Card= " + this.creditCard + "]";
+				+ this.getEmailUser() +  ", Customer Phone- " + this.getPhone() + ", Customer Address- " + this.getAddress() +  ", City- " + this.city + ", Apartment" + this.apartement + ", Zip code- " + this.zipCode +  ", Card holder- " + 
+				this.cardHolder + ", Credit Card- " + this.creditCard + "]";
 	}
 
 	public String getQustionString() {
