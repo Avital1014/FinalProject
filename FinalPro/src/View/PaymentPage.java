@@ -10,6 +10,9 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JDateChooserBeanInfo;
 import com.toedter.calendar.JDateChooserCellEditor;
+
+import Controller.Controller;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -27,7 +30,16 @@ import javax.swing.SwingConstants;
 import javax.swing.JFormattedTextField;
 import java.awt.Choice;
 import javax.swing.JButton;
+<<<<<<< HEAD
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.awt.event.ActionEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+
+=======
 import org.jdesktop.swingx.prompt.PromptSupport;
+>>>>>>> 6a67f348319bdc1c99a0b65c9d40dfe6675a1d0e
 public class PaymentPage extends JFrame {
 
 	private JPanel contentPane;
@@ -59,6 +71,14 @@ public class PaymentPage extends JFrame {
 	 * Create the frame.
 	 */
 	public PaymentPage() {
+		Controller controller = new Controller();	
+		try {
+			controller.addUserInfo();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
 		setForeground(Color.BLACK);
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PaymentPage.class.getResource("/View/computer-icons-credit-card-png-favpng-DyPKKiNGxPkpeBLHDdXsfcYJV.jpg")));
@@ -153,6 +173,7 @@ public class PaymentPage extends JFrame {
 		txtZipCode.setColumns(10);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Set Shipping information as Default to your User");
+
 		chckbxNewCheckBox.setBounds(32, 153, 316, 23);
 		contentPane.add(chckbxNewCheckBox);
 		
@@ -198,7 +219,87 @@ public class PaymentPage extends JFrame {
 		 contentPane.add(lblEx);
 		 
 		 JButton btnNewButton = new JButton("Finish the Purchase");
+		 btnNewButton.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent e) {
+		 		System.out.println("blabla");
+		 		String temp;
+		 		temp = comboBoxNumbers.getSelectedItem()  + "-" + phoneNumberText.getText() ;
+		 		System.out.println("phone is " + temp);
+		 		
+		 		Controller.currentUser.setCardHolder(txtNameHere.getText());
+		 		Controller.currentUser.setPhone(temp);
+		 		System.out.println("card number s " + textField.getText());
+		 		Controller.currentUser.setCreditCard(textField.getText());
+		 			 		/*Save payment information to File*/		 		
+		 		Controller.currentUser.setAddress(txtStreet.getText());
+		 		System.out.println("get text address " + txtStreet.getText());
+		 		Controller.currentUser.setCity(comboBoxCities.getSelectedItem().toString());
+		 		Controller.currentUser.setZipCode(txtZipCode.getText());
+		 		Controller.currentUser.setApartement(apartementText.getText());
+				try {
+					controller.saveTofile();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					System.out.println("faild to save");
+					e1.printStackTrace();
+				}
+				System.out.println("address " + txtStreet.getText());
+				//Controller.currentUser.setCreditCard(txtNameHere.getText());
+				System.out.println("Holder " + txtNameHere.getText());
+				//Controller.currentUser.setPhone(phoneNumberText.getText());
+				System.out.println("phone " + phoneNumberText.getText());
+				System.out.println(Controller.currentUser.toString());
+		 	}
+		 });
 		 btnNewButton.setBounds(120, 310, 154, 23);
 		 contentPane.add(btnNewButton);
+		 
+		 JButton btnNewButton_1 = new JButton("New button");
+		 btnNewButton_1.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent e) {
+				
+					System.out.println("state change");
+				
+						System.out.println("print current");
+						System.out.println(Controller.currentUser.toString());
+						String t = Controller.currentUser.getAddress();
+						System.out.println(Controller.currentUser.toString());
+						System.out.println(Controller.currentUser.getAddress());
+						
+						if(!(Controller.currentUser.getAddress()).equals(null)) {							
+							txtStreet.setText(Controller.currentUser.getAddress());							
+						}
+						if(!(Controller.currentUser.getPhone()).equals(null)) {							
+							phoneNumberText.setText(Controller.currentUser.getPhone());		
+							String s = (Controller.currentUser.getPhone()).substring(0,3);
+							String s1 = (Controller.currentUser.getPhone()).substring(4,10);
+							System.out.println(s);
+							comboBoxNumbers.setSelectedItem(s);
+							phoneNumberText.setText(s1);
+						}
+						if(!(Controller.currentUser.getCreditCard()).equals(null)) {							
+							textField.setText(Controller.currentUser.getCreditCard());							
+						}
+						if(!(Controller.currentUser.getCardHolder()).equals(null)) {							
+							txtNameHere.setText(Controller.currentUser.getCardHolder());							
+						}
+						if(!(Controller.currentUser.getCity()).equals(null)) {		
+							comboBoxCities.setSelectedItem(Controller.currentUser.getCity());													
+						}
+						if(!(Controller.currentUser.getZipCode()).equals(null)) {		
+						txtZipCode.setText(Controller.currentUser.getZipCode());				
+						}
+						if(!(Controller.currentUser.getApartement()).equals(null)) {		
+							apartementText.setText(Controller.currentUser.getApartement());				
+						}
+						
+						
+						
+					
+				
+		 	}
+		 });
+		 btnNewButton_1.setBounds(387, 153, 89, 23);
+		 contentPane.add(btnNewButton_1);
 	}
 }

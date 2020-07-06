@@ -36,7 +36,7 @@ public class managerRepositoryImple implements managerRepository {
 		public managerRepositoryImple() {
 			
 			for (customer customer : customerOorders) {
-				System.out.println("1");
+				
 				customer.printCustomerOrder();
 			}
 			
@@ -119,6 +119,12 @@ public class managerRepositoryImple implements managerRepository {
 
 
 	@Override
+	public void exportSpecifcUser(File path, String id) {
+		
+	}
+
+
+	@Override
 	public void writeOrder(String name, String user_id, String emailUser, String value) throws IOException {
 		/*Builder pattern*/
 		customer temp = customer.builder()
@@ -130,11 +136,10 @@ public class managerRepositoryImple implements managerRepository {
 		for (customer customer : customerOorders) {
 			if((customer.getUser_id()).equals(user_id)) {
 				String string = customer.getCustomerOrder(); 
-				double one = Double.parseDouble(string);
-				
+				double one = Double.parseDouble(string);				
 				double two = Double.parseDouble(value);
 				double doublevString = one + two;
-				customer.customerOrder = String.valueOf(doublevString);
+				customer.setCustomerOrder(String.valueOf(doublevString));
 				Flag = false;
 			}
 		}
@@ -203,7 +208,17 @@ public class managerRepositoryImple implements managerRepository {
 	}
 
 
+	@Override
+	public void writeOrder(String name, String user_id, String emailUser, String value, String creditCard, String exp,
+			String address, String cardHolder) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	}
 
 
 
-}
+
+
