@@ -37,7 +37,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> bf0280c4affce21a942bcbd9f883aa21e778da5a
 import org.jdesktop.swingx.prompt.PromptSupport;
 
 public class PaymentPage extends JFrame {

@@ -49,14 +49,26 @@ public class Controller {
 		}	
 	
 	public boolean userLogin(String IdString, String passString) {
-		System.out.println("flag in main "  );
-		boolean flag = userRep.userLoging(IdString, passString);	
-		System.out.println("flag in main " + flag );
-		if(flag) {
-			createCurrentUser(IdString, passString);			
+		
+		boolean session = false;
+		//boolean flag = userRep.userLoging(IdString.trim(), passString.trim());	
+		if(IdString == null || IdString.trim().equals("") || passString == null || passString.trim().equals("")) {
+			throw new IllegalArgumentException("Username or password must not be null");
 		}
-		return flag;
+		 session = userRep.userLoging(IdString, passString);
+		if(session == true ) {
+			createCurrentUser(IdString, passString);
+			
 		}
+		return session;
+		/*if(flag) {
+			createCurrentUser(IdString, passString);	
+			
+		}
+	
+		return flag;*/
+		}
+
 	
 	public String findNameById(String idString) {
 		return userRep.findNameById(idString);
