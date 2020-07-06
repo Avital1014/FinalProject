@@ -35,6 +35,9 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
+
+import org.jdesktop.swingx.prompt.PromptSupport;
+
 import javax.swing.event.ChangeEvent;
 
 

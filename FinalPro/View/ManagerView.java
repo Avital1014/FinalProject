@@ -20,7 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.JLabel;
-import net.miginfocom.swing.MigLayout;
+
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -134,7 +134,7 @@ public class ManagerView extends JFrame implements Runnable {
 				if(userdetails.isSelected()) {
 					chooser.showOpenDialog(null);
 					File path = chooser.getSelectedFile();
-					controller.exportSpecifcUser(path,userdetails.getText());
+					controller.exportSpecifcUser(path,userid.getText());
 				}
 			}
 		});

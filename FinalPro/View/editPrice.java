@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextField;
 
 public class editPrice extends JFrame {
