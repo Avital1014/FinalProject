@@ -2158,7 +2158,7 @@ public class Shopping_cart extends JFrame implements Observer{
 		sweetPotatoButton.setBounds(935, 597, 145, 24);
 		vegetablesPanel.add(sweetPotatoButton);
 		
-		tabbedPane.addTab("Summaryy", null, Summary_Panel, null);
+		tabbedPane.addTab("Summary", null, Summary_Panel, null);
 		Summary_Panel.setLayout(null);
 		
 		

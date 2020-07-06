@@ -25,18 +25,21 @@ import java.awt.Toolkit;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Window.Type;
 import java.util.Date;
-
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.JFormattedTextField;
 import java.awt.Choice;
 import javax.swing.JButton;
+<<<<<<< HEAD
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
+=======
+import org.jdesktop.swingx.prompt.PromptSupport;
+>>>>>>> 6a67f348319bdc1c99a0b65c9d40dfe6675a1d0e
 public class PaymentPage extends JFrame {
 
 	private JPanel contentPane;
@@ -104,7 +107,9 @@ public class PaymentPage extends JFrame {
 		contentPane.add(comboBoxNumbers);
 		
 		phoneNumberText = new JTextField();
-		phoneNumberText.setText("xxx-xxxx");
+		//phoneNumberText.setText("xxx-xxxx");
+		PromptSupport.setPrompt("xxx-xxxx", phoneNumberText);
+		PromptSupport.setFocusBehavior(PromptSupport.FocusBehavior.SHOW_PROMPT, phoneNumberText);
 		phoneNumberText.setBounds(440, 44, 86, 20);
 		contentPane.add(phoneNumberText);
 		phoneNumberText.setColumns(10);
@@ -115,7 +120,9 @@ public class PaymentPage extends JFrame {
 		contentPane.add(lblContact);
 		
 		txtEnterFullName = new JTextField();
-		txtEnterFullName.setText("Enter Full Name");
+		//txtEnterFullName.setText("Enter Full Name");
+		PromptSupport.setPrompt("Enter Full Name", txtEnterFullName);
+		PromptSupport.setFocusBehavior(PromptSupport.FocusBehavior.SHOW_PROMPT, txtEnterFullName);
 		txtEnterFullName.setBounds(92, 44, 154, 20);
 		contentPane.add(txtEnterFullName);
 		txtEnterFullName.setColumns(10);
@@ -126,13 +133,17 @@ public class PaymentPage extends JFrame {
 		contentPane.add(lblAddress);
 		
 		txtStreet = new JTextField();
-		txtStreet.setText("Street");
+		//txtStreet.setText("Street");
+		PromptSupport.setPrompt("Street", txtStreet);
+		PromptSupport.setFocusBehavior(PromptSupport.FocusBehavior.SHOW_PROMPT, txtStreet);
 		txtStreet.setColumns(10);
 		txtStreet.setBounds(92, 81, 154, 20);
 		contentPane.add(txtStreet);
 		
 		apartementText = new JTextField();
-		apartementText.setText("Apartment, Unit, etc");
+		//apartementText.setText("Apartment, Unit, etc");
+		PromptSupport.setPrompt("Apartment, Unit, etc", apartementText);
+		PromptSupport.setFocusBehavior(PromptSupport.FocusBehavior.SHOW_PROMPT, apartementText);
 		apartementText.setColumns(10);
 		apartementText.setBounds(279, 81, 154, 20);
 		contentPane.add(apartementText);
@@ -154,7 +165,9 @@ public class PaymentPage extends JFrame {
 		contentPane.add(comboBoxCities);
 		
 		txtZipCode = new JTextField();
-		txtZipCode.setText("Zip Code");
+		//txtZipCode.setText("Zip Code");
+		PromptSupport.setPrompt("Zip Code", txtZipCode);
+		PromptSupport.setFocusBehavior(PromptSupport.FocusBehavior.SHOW_PROMPT, txtZipCode);
 		txtZipCode.setBounds(279, 117, 86, 20);
 		contentPane.add(txtZipCode);
 		txtZipCode.setColumns(10);
@@ -175,18 +188,22 @@ public class PaymentPage extends JFrame {
 		contentPane.add(lblCreditCard);
 		
 		textField = new JTextField();
-		textField.setText("0000 0000 0000 0000");
+		//textField.setText("0000 0000 0000 0000");
+		PromptSupport.setPrompt("0000 0000 0000 0000", textField);
+		PromptSupport.setFocusBehavior(PromptSupport.FocusBehavior.SHOW_PROMPT, textField);
 		textField.setColumns(10);
 		textField.setBounds(92, 227, 154, 20);
 		contentPane.add(textField);
 		
-		JLabel lblCreditHolder = new JLabel("Credit Holder:");
+		JLabel lblCreditHolder = new JLabel("Card Holder:");
 		lblCreditHolder.setFont(new Font("Calibri", Font.BOLD, 14));
 		lblCreditHolder.setBounds(279, 232, 93, 14);
 		contentPane.add(lblCreditHolder);
 		
 		txtNameHere = new JTextField();
-		txtNameHere.setText("Name Here");
+		//txtNameHere.setText("Name Here");
+		PromptSupport.setPrompt("Name Here", txtNameHere);
+		PromptSupport.setFocusBehavior(PromptSupport.FocusBehavior.SHOW_PROMPT, txtNameHere);
 		txtNameHere.setColumns(10);
 		txtNameHere.setBounds(366, 227, 154, 20);
 		contentPane.add(txtNameHere);
