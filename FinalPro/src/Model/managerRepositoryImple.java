@@ -120,6 +120,27 @@ public class managerRepositoryImple implements managerRepository {
 
 	@Override
 	public void exportSpecifcUser(File path, String id) {
+		try {
+			 DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+			 Calendar calobj = Calendar.getInstance();			 
+			 FileWriter myWriter = new FileWriter(path+".txt");
+			 myWriter.write("User Details update for " + df.format(calobj.getTime()) + "\n");
+			 for (customer customer : users) {
+				 if(customer.getUser_id().equals(id)) {
+				 myWriter.write(customer.toString() + "\n");
+				 break;
+				 }
+			}
+			 myWriter.write("Total Users orders = " + customerOorders.size());
+		      myWriter.close();
+		      System.out.println("Successfully wrote to the file.");
+		    
+		      
+		} catch (Exception e) {
+			 System.out.println("An error occurred.");
+		      e.printStackTrace();
+		}
+
 		
 	}
 

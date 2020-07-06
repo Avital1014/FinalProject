@@ -30,16 +30,16 @@ import javax.swing.SwingConstants;
 import javax.swing.JFormattedTextField;
 import java.awt.Choice;
 import javax.swing.JButton;
-<<<<<<< HEAD
+
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
-=======
+
 import org.jdesktop.swingx.prompt.PromptSupport;
->>>>>>> 6a67f348319bdc1c99a0b65c9d40dfe6675a1d0e
+
 public class PaymentPage extends JFrame {
 
 	private JPanel contentPane;
@@ -77,8 +77,7 @@ public class PaymentPage extends JFrame {
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-		}
-		
+		}		
 		setForeground(Color.BLACK);
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PaymentPage.class.getResource("/View/computer-icons-credit-card-png-favpng-DyPKKiNGxPkpeBLHDdXsfcYJV.jpg")));
@@ -172,11 +171,6 @@ public class PaymentPage extends JFrame {
 		contentPane.add(txtZipCode);
 		txtZipCode.setColumns(10);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Set Shipping information as Default to your User");
-
-		chckbxNewCheckBox.setBounds(32, 153, 316, 23);
-		contentPane.add(chckbxNewCheckBox);
-		
 		JLabel lblPaymentMethods = new JLabel("Payment Methods");
 		lblPaymentMethods.setFont(new Font("Calibri", Font.BOLD, 18));
 		lblPaymentMethods.setBounds(22, 198, 180, 23);
@@ -254,7 +248,7 @@ public class PaymentPage extends JFrame {
 		 btnNewButton.setBounds(120, 310, 154, 23);
 		 contentPane.add(btnNewButton);
 		 
-		 JButton btnNewButton_1 = new JButton("New button");
+		 JButton btnNewButton_1 = new JButton("Set Shipping information as Default to your User");
 		 btnNewButton_1.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
 				
@@ -299,7 +293,7 @@ public class PaymentPage extends JFrame {
 				
 		 	}
 		 });
-		 btnNewButton_1.setBounds(387, 153, 89, 23);
+		 btnNewButton_1.setBounds(52, 147, 468, 23);
 		 contentPane.add(btnNewButton_1);
 	}
 }
