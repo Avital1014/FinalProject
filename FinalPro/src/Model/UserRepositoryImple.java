@@ -75,7 +75,7 @@ public class UserRepositoryImple implements UserRepository {
 			
 		if(flag == true)return false;
 		else {
-		this.users.add(user);		
+		UserRepositoryImple.users.add(user);		
 		try {
 			writeToFile();
 			return true;
@@ -92,7 +92,7 @@ public class UserRepositoryImple implements UserRepository {
 	public boolean findUser(String user_id) throws Exception {
 		
 		if(users.contains(new MarkoliaUser(user_id))) {
-			for(MarkoliaUser user: users) {
+			for(customer user: users) {
 				System.out.println(user.getUser_id());
 				if(user.getUser_id()==user_id)
 					return true;
@@ -106,11 +106,9 @@ public class UserRepositoryImple implements UserRepository {
 	@Override
 	public boolean userLoging(String iDString, String passString) {
 		boolean flag;
-		System.out.println("infunctino");
-		for (MarkoliaUser markoliaUser : users) {
-			System.out.println("inlop");
-			if((markoliaUser.getUser_id()).contains(iDString)) {
-				if((markoliaUser.getPasswordUser()).contains(passString)) {
+		for (customer markoliaUser : users) {
+			if((markoliaUser.getUser_id()).equals(iDString)) {
+				if((markoliaUser.getPasswordUser()).equals(passString)) {					
 					System.out.println("find");
 					return true;
 				}
@@ -173,7 +171,7 @@ public class UserRepositoryImple implements UserRepository {
 	@Override
 	public void printAllUser() {
 		for (MarkoliaUser markoliaUser : users) {
-		markoliaUser.toString();	
+		System.out.println(markoliaUser.toString());	
 		}
 		
 	}
@@ -191,15 +189,13 @@ public class UserRepositoryImple implements UserRepository {
 	public String forgotPassword(String qustion, String answer, String id) throws IOException {
 		for (MarkoliaUser markoliaUser : users) {
 			if(((markoliaUser.getUser_id()).contains(id))) {
-			//if(((markoliaUser.getQustion()).contains(qustion)) )	{					
-			//	if((markoliaUser.getAnswer()).contains(answer)) {
+		
 					writeToFile();
 					return(markoliaUser.getPasswordUser());										
 				}
 				
 				}					
-			//}
-		//}
+
 		return null;
 	}
 
@@ -220,6 +216,44 @@ public class UserRepositoryImple implements UserRepository {
 	public String toString(MarkoliaUser user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void addUserInfo() throws IOException {
+		for (customer customerToEdit : users) {
+			if(((customerToEdit.getUser_id()).contains(Controller.currentUser.getUser_id())) )	{					
+				Controller.currentUser.setCreditCard(customerToEdit.getCreditCard());
+				Controller.currentUser.setExp(customerToEdit.getExp());
+				Controller.currentUser.setCardHolder(customerToEdit.getCardHolder());
+				Controller.currentUser.setPhone(customerToEdit.getPhone());
+				Controller.currentUser.setCity(customerToEdit.getCity());
+				Controller.currentUser.setApartement(customerToEdit.getApartement());
+				Controller.currentUser.setZipCode(customerToEdit.getZipCode());
+				Controller.currentUser.setAddress(customerToEdit.getAddress());
+				writeToFile();				
+					}					
+			}
+		
+		
+	}
+
+	@Override
+	public void saveCurrentTofile() throws IOException {
+		for (customer customer : users) {
+			if(((customer.getUser_id()).contains(Controller.currentUser.getUser_id()))) {
+				customer.setAddress(Controller.currentUser.getAddress());
+				customer.setCardHolder(Controller.currentUser.getCardHolder());
+				customer.setPhone(Controller.currentUser.getPhone());
+				customer.setCreditCard(Controller.currentUser.getCreditCard());
+				customer.setCity(Controller.currentUser.getCity());
+				customer.setZipCode(Controller.currentUser.getZipCode());
+				customer.setApartement(Controller.currentUser.getApartement());
+				writeToFile();
+															
+				}
+				
+				}				
+		
 	}
 
 

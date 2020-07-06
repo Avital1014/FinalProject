@@ -54,15 +54,16 @@ public class MarkoliaUser implements Serializable{
 		this.passwordUser = passwordUser;
 		
 	}
-
+/*
 	@Override
 	public String toString() {
 		return "MarkoliaUser [user_id=" + user_id + ", fullName=" + fullName + ", emailUser="
 				+ emailUser + ", passwordUser=" + passwordUser + "]";
 	}
+	*/
+	
 	
 
-	
 	
 	@Override
 	public int hashCode() {

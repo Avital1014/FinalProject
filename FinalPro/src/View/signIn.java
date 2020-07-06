@@ -76,18 +76,15 @@ public class signIn extends JFrame {
 					//System.out.println("flag is " + flag);
 					if((flag == true) && loginIDString.equals("root") && loginPasswordString.equals("root")) {
 						ManagerView managerview = new ManagerView();
-						managerview.setVisible(true);
-						
+						managerview.setVisible(true);						
 					}
 					else if (flag) {
 						Shopping_cart shopping_cart = new Shopping_cart();
-						shopping_cart.setVisible(true);
-						
+						shopping_cart.setVisible(true);						
 					}
 					else {
 						JOptionPane.showMessageDialog(null, "ID/Password worng!");
-					}
-					
+					}					
 				} catch (Exception e2) {
 					// TODO: handle exception
 				}

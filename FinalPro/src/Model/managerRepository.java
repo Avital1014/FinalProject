@@ -22,4 +22,9 @@ public interface managerRepository {
 	void writeToObjectFile(List list) throws IOException;
 	
 	void exportOrderToTXT(File path);
+	
+	void exportSpecifcUser(File path, String id);
+
+	void writeOrder(String name, String user_id, String emailUser, String value, String creditCard, String exp,
+			String address, String cardHolder) throws IOException;
 }

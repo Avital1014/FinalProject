@@ -22,7 +22,7 @@ import View.signIn;
 public class Controller {
 	
 	boolean addUserResult;
-	public static MarkoliaUser currentUser;
+	public static customer currentUser;
 	@SuppressWarnings("unused")	
 	private Model model = new Model();	
 	private UserRepositoryImple userRep = new UserRepositoryImple(); 	
@@ -86,16 +86,21 @@ public class Controller {
 	}
 	
 	public void exportUsers(File path) {
-		//System.out.println("call export");
 		managerRep.exportUsersList(path);
 	}
 	
 	public void exportOrderToTXT(File path) {
 		managerRep.exportOrderToTXT(path);
 	}
+	
+	public void exportSpecifcUser(File path, String id) {
+		managerRep.exportSpecifcUser(path, id);
+	}
+	
 	/*create and hold current user*/
 	public void createCurrentUser(String id, String pass) {
-		currentUser = new MarkoliaUser(id, pass);
+		/*Design pattern*/
+		currentUser = customer.builder().user_id(id).passwordUser(pass).build();
 		System.out.println("current id "+currentUser.getUser_id() + "pass" + currentUser.getPasswordUser());
 	}
 	
@@ -118,6 +123,14 @@ public class Controller {
 	
 	public void writeOrder(String value) throws IOException {
 		managerRep.writeOrder(userRep.findNameById(currentUser.getUser_id()),currentUser.getUser_id(), userRep.findEmailById(currentUser.getUser_id()), value);
+	}
+	
+	public void addUserInfo() throws IOException {
+		userRep.addUserInfo();
+	}
+	
+	public void saveTofile() throws IOException {
+		userRep.saveCurrentTofile();
 	}
 	
 }

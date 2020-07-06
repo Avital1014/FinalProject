@@ -33,4 +33,7 @@ public interface UserRepository {
 	
 	String forgotPassword(String qustion, String answer, String id) throws IOException;
 	
+	public void addUserInfo() throws IOException;
+	
+	public void saveCurrentTofile() throws IOException;
 }

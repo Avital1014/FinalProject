@@ -30,6 +30,7 @@ import javax.swing.JFileChooser;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Button;
+import javax.swing.JTextField;
 
 
 public class ManagerView extends JFrame implements Runnable {
@@ -37,6 +38,7 @@ public class ManagerView extends JFrame implements Runnable {
 	private JPanel contentPane;
 	
 	Controller controller = new Controller();
+	private JTextField userid;
 	/**
 	 * Launch the application.
 	 */
@@ -59,7 +61,7 @@ public class ManagerView extends JFrame implements Runnable {
 	public ManagerView() {
 		JFileChooser fileChooser = new JFileChooser();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 287, 284);
+		setBounds(100, 100, 408, 287);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -102,12 +104,17 @@ public class ManagerView extends JFrame implements Runnable {
 		CustomerOrders.setBounds(25, 51, 155, 23);
 		panel.add(CustomerOrders);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
-		chckbxNewCheckBox.setBounds(25, 77, 155, 23);
-		panel.add(chckbxNewCheckBox);
+		JCheckBox userdetails = new JCheckBox("User Detais");
+		userdetails.setBounds(25, 77, 114, 23);
+		panel.add(userdetails);
 		JButton btnNewButton = new JButton("Generate Reports");
 		btnNewButton.setBounds(10, 121, 155, 23);
 		panel.add(btnNewButton);
+		
+		userid = new JTextField();
+		userid.setBounds(155, 78, 86, 20);
+		panel.add(userid);
+		userid.setColumns(10);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			JFileChooser chooser = new JFileChooser();
@@ -123,6 +130,11 @@ public class ManagerView extends JFrame implements Runnable {
 					chooser.showOpenDialog(null);
 					File path = chooser.getSelectedFile();
 					controller.exportOrderToTXT(path);
+				}
+				if(userdetails.isSelected()) {
+					chooser.showOpenDialog(null);
+					File path = chooser.getSelectedFile();
+					controller.exportSpecifcUser(path,userdetails.getText());
 				}
 			}
 		});
