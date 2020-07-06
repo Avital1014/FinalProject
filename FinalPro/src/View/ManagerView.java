@@ -134,7 +134,7 @@ public class ManagerView extends JFrame implements Runnable {
 				if(userdetails.isSelected()) {
 					chooser.showOpenDialog(null);
 					File path = chooser.getSelectedFile();
-					controller.exportSpecifcUser(path, userid.getText());
+					controller.exportSpecifcUser(path,userdetails.getText());
 				}
 			}
 		});

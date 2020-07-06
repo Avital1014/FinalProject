@@ -38,7 +38,8 @@ public class UserRepositoryImple implements UserRepository {
 	}
 	
 	public static Set<customer> getUsers(){
-	
+	//	for (customer custo : users) {
+		//		System.out.println(custo.toString());
 		return users;
 			}
 		

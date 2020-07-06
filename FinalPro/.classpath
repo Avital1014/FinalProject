@@ -10,9 +10,12 @@
 	<classpathentry kind="lib" path="jcalendar-1.4.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
 	<classpathentry kind="lib" path="swingx-1.6.1.jar"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="src/View/swingx-1.6.1.jar"/>
 =======
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 >>>>>>> bf0280c4affce21a942bcbd9f883aa21e778da5a
+=======
+>>>>>>> parent of e60381d... new report
 	<classpathentry kind="output" path="bin"/>
 </classpath>

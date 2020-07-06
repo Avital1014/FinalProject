@@ -37,11 +37,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> bf0280c4affce21a942bcbd9f883aa21e778da5a
-import org.jdesktop.swingx.prompt.PromptSupport;
+//import org.jdesktop.swingx.prompt.PromptSupport;
 
 public class PaymentPage extends JFrame {
 
@@ -80,7 +77,8 @@ public class PaymentPage extends JFrame {
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-		}		
+		}
+		
 		setForeground(Color.BLACK);
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PaymentPage.class.getResource("/View/computer-icons-credit-card-png-favpng-DyPKKiNGxPkpeBLHDdXsfcYJV.jpg")));
@@ -174,6 +172,11 @@ public class PaymentPage extends JFrame {
 		contentPane.add(txtZipCode);
 		txtZipCode.setColumns(10);
 		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("Set Shipping information as Default to your User");
+
+		chckbxNewCheckBox.setBounds(32, 153, 316, 23);
+		contentPane.add(chckbxNewCheckBox);
+		
 		JLabel lblPaymentMethods = new JLabel("Payment Methods");
 		lblPaymentMethods.setFont(new Font("Calibri", Font.BOLD, 18));
 		lblPaymentMethods.setBounds(22, 198, 180, 23);
@@ -251,7 +254,7 @@ public class PaymentPage extends JFrame {
 		 btnNewButton.setBounds(120, 310, 154, 23);
 		 contentPane.add(btnNewButton);
 		 
-		 JButton btnNewButton_1 = new JButton("Set Shipping information as Default to your User");
+		 JButton btnNewButton_1 = new JButton("New button");
 		 btnNewButton_1.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
 				
@@ -296,7 +299,7 @@ public class PaymentPage extends JFrame {
 				
 		 	}
 		 });
-		 btnNewButton_1.setBounds(52, 147, 468, 23);
+		 btnNewButton_1.setBounds(387, 153, 89, 23);
 		 contentPane.add(btnNewButton_1);
 	}
 }
