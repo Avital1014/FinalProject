@@ -542,7 +542,7 @@ public class Shopping_cart extends JFrame implements Observer{
 			pineappleCost.setBackground(Color.WHITE);
 			pineappleCost.setFont(new Font("Calibri", Font.BOLD, 24));
 			pineappleCost.setText(temp);
-			pineappleCost.setBounds(439, 255, 69, 29);
+			pineappleCost.setBounds(449, 256, 69, 29);
 			fruitPanel.add(pineappleCost);
 			pineappleCost.setColumns(10);
 			
@@ -551,7 +551,7 @@ public class Shopping_cart extends JFrame implements Observer{
 			 
 			JLabel label_3 = new JLabel("\u20AA");
 			label_3.setFont(new Font("Tahoma", Font.BOLD, 14));
-			label_3.setBounds(510, 267, 35, 17);
+			label_3.setBounds(520, 268, 35, 17);
 			fruitPanel.add(label_3);
 			
 			/**
@@ -1185,6 +1185,11 @@ public class Shopping_cart extends JFrame implements Observer{
 			label_25.setFont(new Font("Tahoma", Font.BOLD, 14));
 			label_25.setBounds(1077, 572, 35, 17);
 			fruitPanel.add(label_25);
+			
+			JLabel label_34 = new JLabel("kg");
+			label_34.setFont(new Font("Tahoma", Font.BOLD, 14));
+			label_34.setBounds(428, 263, 46, 28);
+			fruitPanel.add(label_34);
 		
 		JPanel vegetablesPanel = new JPanel();
 		vegetablesPanel.setBackground(Color.WHITE);
@@ -2166,7 +2171,7 @@ public class Shopping_cart extends JFrame implements Observer{
 		tablePanel.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 14));
 		
 		
-		tablePanel.setBounds(10, 11, 882, 302);
+		tablePanel.setBounds(10, 11, 1131, 302);
 		Summary_Panel.add(tablePanel);
 		
 		textField_1 = new JTextField();

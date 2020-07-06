@@ -30,16 +30,15 @@ import javax.swing.SwingConstants;
 import javax.swing.JFormattedTextField;
 import java.awt.Choice;
 import javax.swing.JButton;
-<<<<<<< HEAD
+
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
-=======
 import org.jdesktop.swingx.prompt.PromptSupport;
->>>>>>> 6a67f348319bdc1c99a0b65c9d40dfe6675a1d0e
+
 public class PaymentPage extends JFrame {
 
 	private JPanel contentPane;

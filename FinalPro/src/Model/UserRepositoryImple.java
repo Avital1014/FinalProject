@@ -106,17 +106,16 @@ public class UserRepositoryImple implements UserRepository {
 	@Override
 	public boolean userLoging(String iDString, String passString) {
 		boolean flag;
-<<<<<<< HEAD
-		System.out.println("infunctino");
-		for (MarkoliaUser markoliaUser : users) {
-			System.out.println("inlop");
-			if((markoliaUser.getUser_id()).equals(iDString)) {
-				if((markoliaUser.getPasswordUser()).equals(passString)) {
-=======
+
+	//	System.out.println("infunctino");
+	//	for (MarkoliaUser markoliaUser : users) {
+		//	System.out.println("inlop");
+			//if((markoliaUser.getUser_id()).equals(iDString)) {
+
 		for (customer markoliaUser : users) {
 			if((markoliaUser.getUser_id()).equals(iDString)) {
 				if((markoliaUser.getPasswordUser()).equals(passString)) {					
->>>>>>> d4d2fe51bd71359d5d48d63647c144729837ba8b
+
 					System.out.println("find");
 					return true;
 				}
