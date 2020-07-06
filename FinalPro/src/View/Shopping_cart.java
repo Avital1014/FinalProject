@@ -1280,7 +1280,8 @@ public class Shopping_cart extends JFrame implements Observer{
 					}
 			}
 			    
-	        tablePanel.setBorder(BorderFactory.createTitledBorder( BorderFactory.createEtchedBorder(), "Your Cart", TitledBorder.CENTER, TitledBorder.TOP));		
+	        tablePanel.setBorder(BorderFactory.createTitledBorder( BorderFactory.createEtchedBorder(), "Your Cart", TitledBorder.CENTER, TitledBorder.TOP));
+	        tablePanel.setFont(new Font("Serif", Font.BOLD, 20));
 	        double temp = calculatePrices();	
 	        textField_1.setText(String.valueOf(temp));
 		       
@@ -2157,9 +2158,12 @@ public class Shopping_cart extends JFrame implements Observer{
 		sweetPotatoButton.setFont(new Font("Calibri", Font.BOLD, 18));
 		sweetPotatoButton.setBounds(935, 597, 145, 24);
 		vegetablesPanel.add(sweetPotatoButton);
+		Summary_Panel.setBackground(Color.GRAY);
 		
 		tabbedPane.addTab("Summary", null, Summary_Panel, null);
 		Summary_Panel.setLayout(null);
+		tablePanel.setBackground(Color.GRAY);
+		tablePanel.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 14));
 		
 		
 		tablePanel.setBounds(10, 11, 882, 302);
@@ -2171,7 +2175,8 @@ public class Shopping_cart extends JFrame implements Observer{
 		textField_1.setColumns(10);
 		
 		JLabel Total = new JLabel("Total");
-		Total.setBounds(700, 337, 46, 14);
+		Total.setFont(new Font("Calibri", Font.BOLD, 16));
+		Total.setBounds(703, 331, 56, 30);
 		Summary_Panel.add(Total);
 		
 		JButton paymentButton = new JButton("Payment");

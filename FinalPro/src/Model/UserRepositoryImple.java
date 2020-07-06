@@ -109,8 +109,8 @@ public class UserRepositoryImple implements UserRepository {
 		System.out.println("infunctino");
 		for (MarkoliaUser markoliaUser : users) {
 			System.out.println("inlop");
-			if((markoliaUser.getUser_id()).contains(iDString)) {
-				if((markoliaUser.getPasswordUser()).contains(passString)) {
+			if((markoliaUser.getUser_id()).equals(iDString)) {
+				if((markoliaUser.getPasswordUser()).equals(passString)) {
 					System.out.println("find");
 					return true;
 				}
