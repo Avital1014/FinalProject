@@ -51,7 +51,7 @@ public class Controller {
 	public boolean userLogin(String IdString, String passString) {
 		
 		boolean session = false;
-		//boolean flag = userRep.userLoging(IdString.trim(), passString.trim());	
+	
 		if(IdString == null || IdString.trim().equals("") || passString == null || passString.trim().equals("")) {
 			throw new IllegalArgumentException("Username or password must not be null");
 		}
@@ -61,16 +61,11 @@ public class Controller {
 			
 		}
 		return session;
-		/*if(flag) {
-			createCurrentUser(IdString, passString);	
-			
-		}
-	
-		return flag;*/
+
 		}
 
 	
-	public String findNameById(String idString) {
+	public String findNameById(String idString) throws Exception {
 		return userRep.findNameById(idString);
 		
 	}
@@ -113,7 +108,7 @@ public class Controller {
 	public void createCurrentUser(String id, String pass) {
 		/*Design pattern*/
 		currentUser = customer.builder().user_id(id).passwordUser(pass).build();
-		System.out.println("current id "+currentUser.getUser_id() + "pass" + currentUser.getPasswordUser());
+
 	}
 	
 	public boolean isCurrenIsRoot(String name, String pass) {
@@ -133,7 +128,7 @@ public class Controller {
 		System.out.println("controller write");
 	}	
 	
-	public void writeOrder(String value) throws IOException {
+	public void writeOrder(String value) throws Exception {
 		managerRep.writeOrder(userRep.findNameById(currentUser.getUser_id()),currentUser.getUser_id(), userRep.findEmailById(currentUser.getUser_id()), value);
 	}
 	

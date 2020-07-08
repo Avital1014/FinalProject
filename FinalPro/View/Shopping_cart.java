@@ -1299,7 +1299,7 @@ public class Shopping_cart extends JFrame implements Observer{
 				
 				try {
 					controller.writeOrder(String.valueOf(temp));
-				} catch (IOException e1) {
+				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}

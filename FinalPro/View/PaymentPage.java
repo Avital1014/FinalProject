@@ -16,6 +16,8 @@ import Controller.Controller;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Frame;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
@@ -32,6 +34,7 @@ import java.awt.Choice;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeListener;
@@ -58,11 +61,14 @@ public class PaymentPage extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					PaymentPage frame = new PaymentPage();
 					frame.setVisible(true);
+					
+					frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -81,7 +87,7 @@ public class PaymentPage extends JFrame {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		
+		//PaymentPage frame = new PaymentPage();
 		setForeground(Color.BLACK);
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PaymentPage.class.getResource("/View/computer-icons-credit-card-png-favpng-DyPKKiNGxPkpeBLHDdXsfcYJV.jpg")));
@@ -175,11 +181,6 @@ public class PaymentPage extends JFrame {
 		contentPane.add(txtZipCode);
 		txtZipCode.setColumns(10);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Set Shipping information as Default to your User");
-
-		chckbxNewCheckBox.setBounds(32, 153, 316, 23);
-		contentPane.add(chckbxNewCheckBox);
-		
 		JLabel lblPaymentMethods = new JLabel("Payment Methods");
 		lblPaymentMethods.setFont(new Font("Calibri", Font.BOLD, 18));
 		lblPaymentMethods.setBounds(22, 198, 180, 23);
@@ -221,7 +222,7 @@ public class PaymentPage extends JFrame {
 		 lblEx.setBounds(22, 263, 119, 14);
 		 contentPane.add(lblEx);
 		 
-		 JButton btnNewButton = new JButton("Finish the Purchase");
+		 JButton btnNewButton = new JButton("Save information");
 		 btnNewButton.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
 		 		System.out.println("blabla");
@@ -252,12 +253,13 @@ public class PaymentPage extends JFrame {
 				//Controller.currentUser.setPhone(phoneNumberText.getText());
 				System.out.println("phone " + phoneNumberText.getText());
 				System.out.println(Controller.currentUser.toString());
+				PaymentPage.DISPOSE_ON_CLOSE();
 		 	}
 		 });
 		 btnNewButton.setBounds(120, 310, 154, 23);
 		 contentPane.add(btnNewButton);
 		 
-		 JButton btnNewButton_1 = new JButton("New button");
+		 JButton btnNewButton_1 = new JButton("Set Shipping & Payment information as Default to your User");
 		 btnNewButton_1.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
 				
@@ -302,7 +304,14 @@ public class PaymentPage extends JFrame {
 				
 		 	}
 		 });
-		 btnNewButton_1.setBounds(387, 153, 89, 23);
+		 btnNewButton_1.setBounds(74, 153, 402, 23);
 		 contentPane.add(btnNewButton_1);
 	}
+
+	protected static void DISPOSE_ON_CLOSE() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
+

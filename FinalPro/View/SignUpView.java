@@ -159,6 +159,7 @@ public class SignUpView extends JFrame implements Runnable{
 										if(flag) 
 											JOptionPane.showMessageDialog(null, "User registered successfully");	
 										else {
+											System.out.println("flag is " + flag);
 											JOptionPane.showMessageDialog(null, "User Already Exist");									
 										}	
 								} catch (Exception e2) {

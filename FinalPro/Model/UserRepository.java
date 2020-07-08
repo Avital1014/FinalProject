@@ -23,7 +23,7 @@ public interface UserRepository {
 	
 	public String toString(MarkoliaUser user);
 	
-	String findNameById(String idString);
+	String findNameById(String idString) throws Exception;
 	
 	boolean findID(String id);
 	

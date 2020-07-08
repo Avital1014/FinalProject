@@ -61,7 +61,7 @@ public class UserRepositoryImple implements UserRepository {
 		
 		
 			for (customer markoliaUser : users) {
-				if((markoliaUser.getUser_id()).contains(user.getUser_id())) {
+				if((markoliaUser.getUser_id()).equals(user.getUser_id())) {
 					System.out.println("found");
 					System.out.println(markoliaUser.toString());
 					flag = true;	
@@ -107,10 +107,6 @@ public class UserRepositoryImple implements UserRepository {
 	public boolean userLoging(String iDString, String passString) {
 		boolean flag;
 
-	//	System.out.println("infunctino");
-	//	for (MarkoliaUser markoliaUser : users) {
-		//	System.out.println("inlop");
-			//if((markoliaUser.getUser_id()).equals(iDString)) {
 
 		for (customer markoliaUser : users) {
 			if((markoliaUser.getUser_id()).equals(iDString)) {
@@ -127,13 +123,15 @@ public class UserRepositoryImple implements UserRepository {
 	}
 
 	@Override
-	public String findNameById(String idString) {
-		for (MarkoliaUser markoliaUser : users) {
-			if(((markoliaUser.getUser_id()).contains(idString)) )	{				
-				return markoliaUser.getFullName();	
-					}					
-			}
-		return "Name none avilabile";
+	public String findNameById(String idString) throws Exception {
+		
+			for (MarkoliaUser markoliaUser : users) {
+				if(((markoliaUser.getUser_id()).contains(idString)) )	{				
+					return markoliaUser.getFullName();	
+						}					
+				}
+		throw new Exception("Name none avilabile") ;
+		
 	
 	}
 	
