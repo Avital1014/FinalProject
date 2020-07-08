@@ -277,7 +277,7 @@ public class PaymentPage extends JFrame {
 						if(!(Controller.currentUser.getPhone()).equals(null)) {							
 							phoneNumberText.setText(Controller.currentUser.getPhone());		
 							String s = (Controller.currentUser.getPhone()).substring(0,3);
-							String s1 = (Controller.currentUser.getPhone()).substring(4,10);
+							String s1 = (Controller.currentUser.getPhone()).substring(4);
 							System.out.println(s);
 							comboBoxNumbers.setSelectedItem(s);
 							phoneNumberText.setText(s1);
